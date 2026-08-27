@@ -1,0 +1,17 @@
+{
+  "name": "Provodka — 30 kunlik kurs",
+  "short_name": "Provodka",
+  "description": "Buxgalteriya provodkalarini o'rganish uchun 30 kunlik kurs: nazariya va mashqlar.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EFF3EA",
+  "theme_color": "#EFF3EA",
+  "lang": "uz",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
