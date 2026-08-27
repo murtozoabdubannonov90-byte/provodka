@@ -1,0 +1,35 @@
+{
+  "tin": "312386763",
+  "org_name": "\"SOLIDUM\" MChJ",
+
+  "keys_dir": "E:\\DSKEYS",
+  "docs_dir": "C:\\Users\\user\\Ish\\Soludim\\Hujjatlar",
+  "out_dir": "C:\\Users\\user\\Ish\\Soludim\\Hujjatlar\\_m2",
+  "keys_md": "C:\\Users\\user\\Ish\\Soludim\\Hujjatlar\\kalitlar.md",
+
+  "eimzo": {
+    "ws_url": "ws://127.0.0.1:64646/service/cryptapi",
+    "timeout": 20,
+    "apikey_arguments": []
+  },
+
+  "didox": {
+    "base_url": "https://api-partners.didox.uz",
+    "token": "",
+    "extra_headers": {},
+    "endpoints": {
+      "documents": "/v1/documents",
+      "document_by_id": "/v1/documents/{id}",
+      "create": "/v1/documents",
+      "sign": "/v1/documents/{id}/sign"
+    },
+    "doc_type_doverennost": "doverennost"
+  },
+
+  "m2": {
+    "receiver_tin": "304390390",
+    "receiver_name": "\"Grand Super Montaj\"",
+    "valid_days": 30,
+    "goods_text": "Metall mahsulotlari"
+  }
+}

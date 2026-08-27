@@ -1,0 +1,5 @@
+config.json
+state.json
+out/
+templates/*.json
+__pycache__/

@@ -1,0 +1,6 @@
+requests>=2.31
+websocket-client>=1.7
+python-docx>=1.1
+openpyxl>=3.1
+pypdf>=4.2
+cryptography>=41.0
