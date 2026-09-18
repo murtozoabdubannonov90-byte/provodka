@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Buxgalter safari</title>
+<meta name="theme-color" content="#7C5CFF">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2FF; --dot:#E0D8FF; --card:#FFFFFF; --line:#E4DCFF; --shade:#D9CFFF;
+  --ink:#4B2FD6; --text:#241F40; --muted:#6F6796;
+  --coral:#FF6B5A; --amber:#FFB020; --teal:#0FB8A1; --violet:#7C5CFF; --pink:#FF5FA2; --lime:#4CC14B; --sky:#2FA8FF; --plum:#B054FF;
+  --ok:#0FA25C; --ok-bg:#E0F8EC; --bad:#E8433B; --bad-bg:#FFE6E3; --gold:#FFB020;
+  --display:"Baloo 2","Segoe UI",system-ui,sans-serif;
+  --ui:"Nunito","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#15123A; --dot:#241F55; --card:#1F1B4A; --line:#332C6B; --shade:#120F30;
+    --ink:#C6B6FF; --text:#F0EDFF; --muted:#A49CD1;
+    --ok:#3EDD8C; --ok-bg:#12372A; --bad:#FF7E72; --bad-bg:#3D1C24; --gold:#FFC44D;
+  }
+}
+:root[data-theme="dark"]{--bg:#15123A;--dot:#241F55;--card:#1F1B4A;--line:#332C6B;--shade:#120F30;--ink:#C6B6FF;--text:#F0EDFF;--muted:#A49CD1;--ok:#3EDD8C;--ok-bg:#12372A;--bad:#FF7E72;--bad-bg:#3D1C24;}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg);
+  background-image:radial-gradient(var(--dot) 1.6px, transparent 1.6px);
+  background-size:20px 20px;
+  color:var(--text); font-family:var(--ui); font-size:17px; line-height:1.5; min-height:100vh;
+  -webkit-tap-highlight-color:transparent;
+}
+.wrap{max-width:560px; margin:0 auto; padding:12px 14px 124px}
+.appbar{position:sticky; top:8px; z-index:5; display:flex; align-items:center; gap:11px; background:var(--card); border-radius:20px; padding:9px 13px; margin-bottom:14px; box-shadow:0 4px 0 var(--shade)}
+.ava{width:42px; height:42px; border-radius:14px; background:linear-gradient(140deg,var(--violet),var(--sky)); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:800; font-size:19px}
+.ttl b{display:block; font-family:var(--display); font-size:18px; line-height:1.15}
+.ttl i{font-style:normal; font-size:13px; color:var(--muted); font-weight:600}
+.xpchip{margin-left:auto; background:linear-gradient(135deg,var(--amber),var(--coral)); color:#fff; font-weight:800; border-radius:999px; padding:6px 13px; font-size:15px; white-space:nowrap}
+.nav{max-width:532px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; background:var(--card); border-radius:22px; padding:8px 6px; box-shadow:0 4px 0 var(--shade)}
+.nav button{border:0; background:none; border-radius:16px; padding:7px 2px; font-size:12px; font-weight:700; color:var(--muted); display:grid; gap:3px; justify-items:center}
+.nav button span{font-size:21px; line-height:1}
+.nav button.on{background:linear-gradient(135deg,var(--violet),var(--sky)); color:#fff}
+.dl{display:flex; align-items:center; gap:12px; border-radius:22px; padding:14px 16px; color:#fff; box-shadow:0 5px 0 rgba(0,0,0,.16); margin-bottom:14px}
+.dl.open{background:linear-gradient(135deg,#FF8A3D,var(--coral))}
+.dl.done{background:linear-gradient(135deg,var(--lime),var(--teal))}
+.dl.missed{background:linear-gradient(135deg,#8B87A6,#5A5674)}
+.dl.off{background:linear-gradient(135deg,var(--sky),var(--violet))}
+.dl-l b{display:block; font-family:var(--display); font-size:19px}
+.dl-l i{font-style:normal; font-size:14px; opacity:.95; font-weight:600}
+.dl-r{margin-left:auto; text-align:center; font-family:var(--display); font-size:34px; line-height:1}
+.dl-r span{display:block; font-size:12px; font-family:var(--ui); opacity:.92; font-weight:700}
+.acts{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px}
+.act{background:var(--bg); border:0; border-radius:16px; padding:11px 8px; font-weight:700; font-size:14px; line-height:1.25; box-shadow:0 4px 0 var(--line); display:grid; gap:2px; justify-items:center; text-align:center}
+.act span{font-size:24px} .act i{font-style:normal; font-size:12px; color:var(--muted); font-weight:600}
+.act:active{transform:translateY(3px); box-shadow:0 1px 0 var(--line)}
+.act.dim{opacity:.5} .act.gift{background:linear-gradient(140deg,var(--amber),var(--coral)); color:#fff; box-shadow:0 4px 0 #c9500f}
+.act.gift i{color:rgba(255,255,255,.9)}
+.goal{background:rgba(255,255,255,.18); border-radius:16px; padding:12px; text-align:center}
+.goal-n{font-family:var(--display); font-size:30px; line-height:1.1}
+.goal-bar{height:12px; background:rgba(0,0,0,.18); border-radius:8px; margin:8px 0 6px; overflow:hidden}
+.goal-bar i{display:block; height:100%; background:#fff; border-radius:8px; transition:width .6s}
+.goal-t{font-size:14px; font-weight:700}
+.tmr{background:linear-gradient(135deg,var(--coral),var(--pink)); color:#fff; font-weight:800; border-radius:999px; padding:5px 13px}
+.week7{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; text-align:center}
+.week7 span{border-radius:12px; padding:10px 0; font-size:12px; font-weight:800; background:var(--bg); color:var(--muted)}
+.week7 .d{background:var(--ok); color:#fff} .week7 .m{background:var(--bad); color:#fff}
+.week7 .s{background:var(--violet); color:#fff} .week7 .b{background:var(--amber); color:#fff}
+.shop{display:flex; align-items:center; gap:10px; background:var(--bg); border-radius:16px; padding:11px 13px; margin-bottom:10px}
+.shop b{display:block; font-family:var(--display); font-size:17px} .shop i{font-style:normal; font-size:13px; color:var(--muted); font-weight:600}
+.buy{margin-left:auto; border:0; border-radius:999px; padding:9px 16px; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--violet),var(--sky)); box-shadow:0 3px 0 #3f2bb5; white-space:nowrap}
+.rules{padding-left:20px; margin:0} .rules li{margin-bottom:9px; font-size:15px}
+.reg{margin-top:18px} .reglogo{font-size:58px; text-align:center} .reg h2{text-align:center}
+button{font-family:inherit; font-size:inherit; color:inherit; cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--violet); outline-offset:3px}
+h1,h2,h3{margin:0; line-height:1.1; font-family:var(--display); font-weight:800}
+.small{font-size:14px; color:var(--muted); line-height:1.4}
+
+.bar{display:flex; align-items:center; gap:10px; padding:4px 0 12px}
+.bar .back{border:0; background:var(--card); box-shadow:0 3px 0 var(--shade); border-radius:14px; font-size:22px; width:42px; height:42px; line-height:1}
+.pill{display:inline-flex; align-items:center; gap:6px; background:var(--card); border-radius:999px; padding:5px 14px; font-weight:700; font-size:15px; box-shadow:0 3px 0 var(--shade)}
+.spacer{flex:1}
+
+.hero{padding:10px 4px 2px}
+.hero h1{font-size:46px; color:var(--ink); letter-spacing:-.5px}
+.hero h1 span{display:inline-block; animation:wiggle 3s ease-in-out infinite}
+@keyframes wiggle{0%,92%,100%{transform:rotate(0)}95%{transform:rotate(-14deg)}98%{transform:rotate(12deg)}}
+.hero p{margin:6px 0 0; color:var(--muted); max-width:38ch}
+
+.card{background:var(--card); border-radius:22px; padding:16px; margin:14px 0 0; box-shadow:0 5px 0 var(--shade)}
+.card h3{font-size:19px; margin-bottom:10px; color:var(--ink)}
+.rank-top{display:flex; justify-content:space-between; align-items:center; gap:8px}
+.rank-top b{font-family:var(--display); font-size:24px; color:var(--ink)}
+.meter{height:14px; background:var(--bg); border-radius:10px; margin-top:12px; overflow:hidden}
+.meter i{display:block; height:100%; border-radius:10px; background:linear-gradient(90deg,var(--amber),var(--coral)); transition:width .6s cubic-bezier(.3,1.4,.5,1)}
+
+.lb{display:grid; gap:8px}
+.row{display:grid; grid-template-columns:36px 1fr auto; gap:10px; align-items:center; padding:9px 11px; border-radius:16px; background:var(--bg)}
+.row.me{background:linear-gradient(90deg,rgba(124,92,255,.18),rgba(47,168,255,.14)); box-shadow:inset 0 0 0 2.5px var(--violet)}
+.row .pos{font-size:22px; text-align:center}
+.row .who{font-weight:700}
+.row .who i{display:block; font-style:normal; font-size:13px; color:var(--muted); font-weight:400}
+.row .xp{font-weight:800; color:var(--ink); white-space:nowrap}
+.gap{margin-top:10px; font-size:15px; font-weight:600}
+.gap.up{color:var(--ok)} .gap.down{color:var(--coral)}
+.alert{background:linear-gradient(135deg,var(--coral),var(--pink)); color:#fff; border-radius:18px; padding:13px 15px; margin-top:14px; font-weight:700; box-shadow:0 5px 0 rgba(0,0,0,.14)}
+
+.duo{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px}
+.duo>div{border-radius:22px; padding:14px 10px; text-align:center; color:#fff; box-shadow:0 5px 0 rgba(0,0,0,.15)}
+.duo>div:first-child{background:linear-gradient(140deg,#FF8A3D,var(--coral))}
+.duo>div:last-child{background:linear-gradient(140deg,var(--teal),#2FA8FF)}
+.duo .n{font-family:var(--display); font-size:44px; line-height:1}
+.duo .small{color:rgba(255,255,255,.92); font-weight:600}
+
+.league{background:linear-gradient(140deg,#7C5CFF,#B054FF 55%,#FF5FA2); color:#fff; border-radius:22px; padding:16px; margin-top:14px; box-shadow:0 5px 0 rgba(0,0,0,.18)}
+.league h3{font-size:20px; color:#fff}
+.lg-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:8px}
+.lg-timer{background:rgba(255,255,255,.22); border-radius:999px; padding:4px 12px; font-weight:800; font-size:14px; white-space:nowrap}
+.league .row{background:rgba(255,255,255,.16)}
+.league .row.me{background:rgba(255,255,255,.34); box-shadow:inset 0 0 0 2.5px #fff}
+.league .row .xp,.league .row .who{color:#fff}
+.league .gap{color:#fff !important; font-weight:700}
+.privacy{margin:10px 2px 0; font-size:13px; color:var(--muted); font-weight:600}
+.lg-note{background:rgba(255,255,255,.16); border-radius:12px; padding:7px 10px; font-size:13px; font-weight:700; margin-bottom:10px}
+.prizes+.lg-note{margin:8px 0 0}
+.prizes{margin-top:10px; font-size:14px; font-weight:700; background:rgba(255,255,255,.18); border-radius:12px; padding:8px 10px; text-align:center}
+.cups{display:flex; gap:14px; align-items:center; flex-wrap:wrap; font-family:var(--display); font-size:24px; color:var(--ink)}
+.cups .small{font-family:var(--ui); font-size:14px}
+.steps{padding-left:22px; margin:0} .steps li{margin-bottom:10px; font-weight:600}
+.badges{display:flex; flex-wrap:wrap; gap:9px}
+.badge{width:50px; height:50px; border-radius:16px; background:linear-gradient(140deg,var(--amber),var(--coral)); display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 4px 0 rgba(0,0,0,.14)}
+.badge.off{background:var(--bg); filter:grayscale(1); opacity:.45; box-shadow:none}
+
+.path{list-style:none; margin:16px 0 0; padding:0}
+.stage{display:grid; grid-template-columns:52px 1fr; gap:10px; align-items:center; margin-bottom:10px}
+.stage .num{width:44px; height:44px; margin:0 auto; border-radius:16px; color:#fff; font-family:var(--display); font-size:24px; display:flex; align-items:center; justify-content:center; background:var(--c); box-shadow:0 4px 0 rgba(0,0,0,.16)}
+.stage button{text-align:left; background:var(--card); border:0; border-radius:20px; padding:13px 15px; width:100%; box-shadow:0 5px 0 var(--shade); border-left:7px solid var(--c)}
+.stage button:active{transform:translateY(3px); box-shadow:0 2px 0 var(--shade)}
+.stage button:disabled{opacity:.5; transform:none; box-shadow:0 5px 0 var(--shade)}
+.stage:nth-child(8n+1){--c:var(--coral)} .stage:nth-child(8n+2){--c:var(--amber)}
+.stage:nth-child(8n+3){--c:var(--teal)} .stage:nth-child(8n+4){--c:var(--violet)}
+.stage:nth-child(8n+5){--c:var(--pink)} .stage:nth-child(8n+6){--c:var(--lime)}
+.stage:nth-child(8n+7){--c:var(--sky)} .stage:nth-child(8n+8){--c:var(--plum)}
+.stage h3{font-size:19px}
+.stage .meta{display:flex; justify-content:space-between; margin-top:3px; font-size:14px; color:var(--muted)}
+.stars{color:var(--gold); letter-spacing:2px; font-size:16px}
+.linkbtn{background:var(--card); border:0; border-radius:14px; box-shadow:0 3px 0 var(--shade); color:var(--ink); font-weight:700; font-size:15px; padding:10px 14px; margin:16px 8px 0 0}
+
+.sheet{background:var(--card); border-radius:24px; padding:18px; box-shadow:0 6px 0 var(--shade)}
+.sheet h2{font-size:28px; color:var(--ink); margin-bottom:8px}
+.story{background:linear-gradient(135deg,var(--violet),var(--sky)); color:#fff; border-radius:18px; padding:13px 15px; font-weight:700; font-size:17px; line-height:1.4; margin:8px 0 14px}
+.theory p{margin:0 0 10px} .theory ul{margin:0 0 10px; padding-left:22px}
+.theory b{color:var(--ink)}
+.example{background:var(--bg); border-radius:16px; padding:12px 14px; margin:12px 0}
+.example .r{display:flex; gap:12px; margin:6px 0}
+.example .r span{flex:1; text-align:center; font-family:var(--display); font-size:22px; color:#fff; background:var(--violet); border-radius:12px; padding:4px}
+.example .r span:last-child{background:var(--coral)}
+
+.btn{display:block; width:100%; border:0; border-radius:20px; padding:15px; font-weight:800; font-size:18px; font-family:var(--display);
+  background:linear-gradient(135deg,var(--violet),var(--sky)); color:#fff; box-shadow:0 5px 0 #3f2bb5; margin-top:14px}
+.btn:active{transform:translateY(4px); box-shadow:0 1px 0 #3f2bb5}
+.btn.ghost{background:var(--card); color:var(--ink); box-shadow:0 5px 0 var(--shade)}
+.btn.ghost:active{box-shadow:0 1px 0 var(--shade)}
+.btn:disabled{opacity:.45; transform:none}
+
+.progress{display:flex; gap:5px; margin-bottom:14px}
+.progress span{flex:1; height:9px; border-radius:6px; background:var(--card)}
+.progress span.ok{background:var(--ok)} .progress span.bad{background:var(--bad)} .progress span.now{background:var(--violet)}
+.hearts{font-size:19px} .combo{color:#fff; background:linear-gradient(135deg,var(--amber),var(--coral)); border-radius:999px; padding:4px 12px; font-weight:800; box-shadow:0 3px 0 rgba(0,0,0,.14)}
+.task{position:relative; overflow:hidden}
+.kind{font-size:14px; color:var(--muted); font-weight:700; margin-bottom:6px}
+.q{font-size:20px; font-weight:700; margin:0 0 16px}
+.opts{display:grid; gap:11px}
+.opt{text-align:left; background:var(--bg); border:0; border-radius:16px; padding:13px 15px; width:100%; font-weight:600; box-shadow:0 4px 0 var(--line)}
+.opt:active{transform:translateY(3px); box-shadow:0 1px 0 var(--line)}
+.opt.sel{background:rgba(124,92,255,.16); box-shadow:0 4px 0 var(--violet)}
+.opt.right{background:var(--ok-bg); box-shadow:0 4px 0 var(--ok)}
+.opt.wrong{background:var(--bad-bg); box-shadow:0 4px 0 var(--bad)}
+
+.ledger{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px}
+.ledger .h{text-align:center; font-family:var(--display); font-size:18px; color:#fff; border-radius:12px 12px 0 0; padding:5px; margin-bottom:-8px; position:relative; z-index:1}
+.ledger .h:first-child{background:var(--violet)} .ledger .h:nth-child(2){background:var(--coral)}
+.slot{min-height:86px; border:0; background:var(--bg); border-radius:0 0 16px 16px; padding:10px 8px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-size:13px; color:var(--muted); font-weight:600; box-shadow:0 4px 0 var(--line)}
+.slot.active{box-shadow:0 4px 0 var(--gold), inset 0 0 0 3px var(--gold)}
+.slot .hw{font-family:var(--display); font-size:34px; color:var(--ink); line-height:1.1}
+.slot.right{background:var(--ok-bg); box-shadow:0 4px 0 var(--ok)}
+.slot.wrong{background:var(--bad-bg); box-shadow:0 4px 0 var(--bad)}
+.accs{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.acc{text-align:left; background:var(--bg); border:0; border-radius:14px; padding:9px 11px; font-size:13.5px; line-height:1.25; font-weight:600; box-shadow:0 4px 0 var(--line)}
+.acc:active{transform:translateY(3px); box-shadow:0 1px 0 var(--line)}
+.acc code{display:block; font-family:var(--display); font-size:20px; color:var(--ink)}
+.acc.used{opacity:.3}
+
+.calc input{width:100%; font-family:var(--display); font-size:40px; font-weight:800; color:var(--ink); background:var(--bg); border:0; border-radius:16px; padding:8px 12px; box-shadow:0 4px 0 var(--line); text-align:center}
+.calc .unit{font-size:14px; color:var(--muted); margin-top:8px; text-align:center; font-weight:600}
+
+.stamp{position:absolute; right:12px; top:12px; transform:rotate(-12deg); pointer-events:none; border-radius:14px; padding:6px 14px; font-family:var(--display); font-weight:800; font-size:24px; color:#fff; animation:slam .4s cubic-bezier(.2,1.7,.4,1) both}
+.stamp.ok{background:var(--ok)} .stamp.bad{background:var(--bad)}
+@keyframes slam{from{transform:rotate(-12deg) scale(2.4); opacity:0} to{transform:rotate(-12deg) scale(1); opacity:1}}
+.explain{margin-top:16px; border-radius:16px; padding:13px 15px; font-weight:600}
+.explain.ok{background:var(--ok-bg); box-shadow:0 4px 0 var(--ok)}
+.explain.bad{background:var(--bad-bg); box-shadow:0 4px 0 var(--bad)}
+.explain b{display:block; margin-bottom:5px; font-family:var(--display); font-size:19px}
+.explain.ok b{color:var(--ok)} .explain.bad b{color:var(--bad)}
+
+.dock{position:fixed; left:0; right:0; bottom:0; padding:12px 14px calc(12px + env(safe-area-inset-bottom)); background:linear-gradient(to top,var(--bg) 62%,transparent)}
+.dock .btn{max-width:532px; margin:0 auto}
+.dock .two{max-width:532px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.dock .two .btn{margin-top:0; font-size:16px; padding:14px 8px}
+
+.result{text-align:center}
+.big-stars{font-size:56px; color:var(--gold); letter-spacing:6px; margin:4px 0}
+.result h2{font-size:34px; color:var(--ink)}
+.stats{display:flex; justify-content:center; gap:9px; flex-wrap:wrap; margin:14px 0}
+.toast{position:fixed; left:50%; top:14px; transform:translateX(-50%); background:linear-gradient(135deg,var(--amber),var(--coral)); color:#fff; font-weight:800; padding:10px 18px; border-radius:999px; animation:pop 2.1s ease both; z-index:10; max-width:92vw; text-align:center; box-shadow:0 5px 0 rgba(0,0,0,.16)}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-14px) scale(.9)}12%,80%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0}}
+.coin{position:fixed; top:-30px; font-size:28px; animation:fall linear forwards; pointer-events:none; z-index:9}
+@keyframes fall{to{transform:translateY(112vh) rotate(560deg)}}
+
+.cert{background:var(--card); border-radius:24px; padding:22px; text-align:center; box-shadow:0 6px 0 var(--shade); border:5px dashed var(--violet)}
+.cert h2{font-size:36px; color:var(--ink)}
+.cert .nm{font-family:var(--display); font-size:34px; color:var(--coral); display:inline-block; padding:0 14px; border-bottom:3px solid var(--line)}
+.set label{display:block; margin:14px 0 5px; font-weight:700}
+.set input[type=time],.set input[type=text]{width:100%; padding:12px; font-size:17px; font-family:inherit; font-weight:700; border:0; border-radius:14px; background:var(--bg); color:var(--text); box-shadow:0 4px 0 var(--line)}
+@media (prefers-reduced-motion:reduce){.stamp,.toast,.coin,.hero h1 span{animation:none}.coin{display:none}.btn:active,.opt:active,.acc:active,.stage button:active{transform:none}}
+@media (max-width:380px){.hero h1{font-size:38px}.accs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="dock" id="dock" hidden></div>
+<script>
+/* ---------- bitta fayldan ilova: ikonka va manifest shu yerda yasaladi ---------- */
+function makeIcon(size){
+  try{
+  const c=document.createElement("canvas"); c.width=c.height=size;
+  const x=c.getContext("2d"), g=x.createLinearGradient(0,0,size,size);
+  g.addColorStop(0,"#7C5CFF"); g.addColorStop(1,"#2FA8FF");
+  x.fillStyle=g; x.fillRect(0,0,size,size);
+  const p=size*0.17, r=size*0.11, w=size-2*p;
+  x.fillStyle="#FFFFFF"; x.beginPath();
+  if(x.roundRect) x.roundRect(p,p,w,w,r); else x.rect(p,p,w,w);
+  x.fill();
+  x.strokeStyle="#FF6B5A"; x.lineWidth=size*0.028;
+  x.beginPath(); x.moveTo(size/2,p+size*0.07); x.lineTo(size/2,size-p-size*0.07); x.stroke();
+  x.fillStyle="#4B2FD6"; x.textAlign="center"; x.textBaseline="middle";
+  x.font="800 "+Math.round(size*0.21)+"px 'Baloo 2', system-ui, sans-serif";
+  x.fillText("Dt",size*0.32,size*0.5); x.fillText("Kt",size*0.68,size*0.5);
+  x.font=Math.round(size*0.12)+"px sans-serif"; x.fillText("⭐",size*0.5,size*0.83);
+  return c.toDataURL("image/png");
+  }catch(e){ return ""; }
+}
+const ICON192=makeIcon(192), ICON512=makeIcon(512);
+(function(){ try{
+  const mf={name:"Buxgalter safari — provodka o'yini",short_name:"Buxgalter safari",
+    description:"Provodka, QQS, ish haqi va amortizatsiyani bosqichma-bosqich o'rgatadigan o'yin",
+    start_url:location.href.split("#")[0],scope:"./",display:"standalone",orientation:"portrait",
+    background_color:"#F5F2FF",theme_color:"#7C5CFF",lang:"uz",
+    icons:[{src:ICON192,sizes:"192x192",type:"image/png",purpose:"any"},
+           {src:ICON512,sizes:"512x512",type:"image/png",purpose:"any"},
+           {src:ICON512,sizes:"512x512",type:"image/png",purpose:"maskable"}]};
+  let url=""; try{ url=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:"application/manifest+json"})); }catch(e){}
+  if(url){ const l=document.createElement("link"); l.rel="manifest"; l.href=url; document.head.appendChild(l); }
+  const a=document.createElement("link"); a.rel="apple-touch-icon"; a.href=ICON192; document.head.appendChild(a);
+  const f=document.createElement("link"); f.rel="icon"; f.href=ICON192; document.head.appendChild(f);
+  }catch(e){}
+})();
+let deferredPrompt=null;
+addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); deferredPrompt=e; });
+
+/* ---------------- hisobvaraqlar ---------------- */
+const A={
+"0130":"Mashina va uskunalar","0230":"Mashina va uskunalar eskirishi","0820":"Asosiy vositalarni xarid qilish",
+"1010":"Xomashyo va materiallar","2010":"Asosiy ishlab chiqarish","2810":"Ombordagi tayyor mahsulot","2910":"Ombordagi tovarlar",
+"4010":"Xaridorlardan olinadigan schyotlar","4410":"Budjetga bo'naklar (kirim QQS)","4610":"Ta'sischilar qarzi (ustav kapital)",
+"5010":"Kassa (so'm)","5110":"Hisob-kitob schyoti","5210":"Valyuta schyoti",
+"6010":"Mol yetkazib beruvchilarga qarz","6310":"Xaridorlardan olingan bo'naklar","6410":"Budjetga to'lovlar bo'yicha qarz",
+"6610":"Dividendlar bo'yicha qarz","6710":"Xodimlar bilan mehnat haqi hisobi","6810":"Sug'urta va boshqa ushlanmalar",
+"6910":"Boshqa kreditorlik qarzlari","7810":"Uzoq muddatli bank kreditlari","6810k":"",
+"8330":"Ustav kapital (ulushlar)","8710":"Taqsimlanmagan foyda",
+"9020":"Tovar sotishdan daromad","9120":"Sotilgan tovarlar tannarxi","9310":"Asosiy vositalarni sotishdan daromad",
+"9410":"Sotish xarajatlari","9420":"Ma'muriy xarajatlar","9430":"Boshqa operatsion xarajatlar",
+"9810":"Foyda solig'i xarajati","9910":"Yakuniy moliyaviy natija"};
+delete A["6810k"];
+const fmt=n=>n.toLocaleString("ru-RU").replace(/\u00a0/g," ");
+
+/* ---------------- bosqichlar ---------------- */
+const STAGES=[
+{title:"Birinchi ish kuni",icon:"☕",
+ story:"Siz «Omad Savdo» MCHJga buxgalter bo'lib keldingiz. Direktor stolga qalin papka qo'ydi: «Avval hisobvaraqlarni tanib ol».",
+ theory:`<p>Har bir narsaning o'z <b>hisobvarag'i</b> (schyoti) bor — javonning raqamli tortmalari kabi.</p>
+ <ul><li><b>Aktiv</b> — firmada bor narsa: pul, tovar, uskuna, sizga qarzdorlar.</li>
+ <li><b>Passiv</b> — u qayerdan kelgani: ustav kapital va sizning qarzlaringiz.</li></ul>
+ <p>Birinchi raqam guruhni bildiradi: <b>0</b> uzoq muddatli aktivlar, <b>1</b> materiallar, <b>2</b> tovar-zaxiralar, <b>4</b> debitorlar, <b>5</b> pul, <b>6</b> majburiyatlar, <b>8</b> kapital, <b>9</b> daromad va xarajat.</p>`,
+ example:null,
+ tasks:[
+ {t:"mc",q:"Firma kassasidagi naqd so'm qaysi hisobvaraqda turadi?",o:["5110","5010","6010","2910"],a:1,e:"5010 — milliy valyutadagi kassa. 5110 esa bankdagi hisob-kitob schyoti."},
+ {t:"mc",q:"Bankdagi hisob raqamingizdagi pul qaysi hisobvaraqda?",o:["5010","4010","5110","8330"],a:2,e:"5110 — hisob-kitob schyoti. Bank ko'chirmasidagi har bir harakat shu yerda."},
+ {t:"mc",q:"Sotish uchun omborda turgan tovarlar qaysi hisobvaraqda?",o:["2910","0130","9120","6010"],a:0,e:"2910 — ombordagi tovarlar. 9120 esa tovar sotilgandan keyingi tannarx."},
+ {t:"mc",q:"Tovar oldingiz, pulini hali to'lamadingiz. Bu qarz qayerda?",o:["4010","6410","6010","5110"],a:2,e:"6010 — mol yetkazib beruvchilarga qarz. Passiv: siz to'lashingiz kerak."},
+ {t:"mc",q:"Xaridor tovarni oldi, pulini keyin beradi. Uning qarzi qayerda?",o:["6010","4010","6310","9020"],a:1,e:"4010 — xaridorlardan olinadigan schyotlar. Aktiv: pul sizga keladi."},
+ {t:"mc",q:"Qaysi biri AKTIV hisobvaraq?",o:["8330 Ustav kapital","6010 Yetkazib beruvchiga qarz","5010 Kassa","6410 Budjetga qarz"],a:2,e:"Kassadagi pul — firmada bor narsa, demak aktiv. Qolganlari passiv."},
+ {t:"mc",q:"«9» bilan boshlanadigan hisobvaraqlar nima haqida?",o:["Pul mablag'lari","Daromad va xarajatlar","Uskunalar","Kapital"],a:1,e:"9-guruh — daromad va xarajatlar: 9020, 9120, 9420 va hokazo."},
+ {t:"mc",q:"Ishlab chiqarish uchun olingan xomashyo qayerda hisobga olinadi?",o:["2910","1010","0130","9420"],a:1,e:"1010 — xomashyo va materiallar. 2910 esa qayta sotish uchun tovar."},
+ {t:"mc",q:"Xodimga hisoblangan, lekin hali to'lanmagan oylik qaysi hisobvaraqda?",o:["9420","6710","5110","6410"],a:1,e:"6710 — xodimlar bilan mehnat haqi bo'yicha hisob. Bu firmaning xodim oldidagi qarzi."},
+ {t:"mc",q:"Ustav kapital qaysi hisobvaraqda turadi?",o:["8710","8330","4610","7810"],a:1,e:"8330 — ta'sischilar ulushlari, ya'ni ustav kapital. 8710 esa taqsimlanmagan foyda."},
+ {t:"mc",q:"Balans tenglamasi qanday?",o:["Aktiv = Majburiyat + Kapital","Aktiv = Daromad − Xarajat","Kapital = Aktiv + Majburiyat","Aktiv = Kassa + Bank"],a:0,e:"Aktiv = Majburiyat + Kapital. Bu tenglama hech qachon buzilmaydi."},
+ {t:"mc",q:"Bank krediti (2 yilga olingan) qayerda aks etadi?",o:["Aktivda","Majburiyatlarda","Kapitalda","Daromadda"],a:1,e:"Kredit — qaytariladigan qarz, demak majburiyat (7810 — uzoq muddatli kredit)."}
+]},
+{title:"Firma tug'iladi",icon:"🏢",
+ story:"Ta'sischi 100 million so'm ustav kapital e'lon qildi. Pul hali bankka tushmagan. Birinchi provodkangizni yozish vaqti!",
+ theory:`<p><b>Provodka</b> — bitta muomalani ikki hisobvaraqda yozish: <b>Debet (Dt)</b> va <b>Kredit (Kt)</b>, summa bir xil. Bu — <b>ikki yoqlama yozuv</b>.</p>
+ <ul><li>Aktiv <b>ko'paysa</b> — Debet, <b>kamaysa</b> — Kredit.</li><li>Passiv <b>ko'paysa</b> — Kredit, <b>kamaysa</b> — Debet.</li></ul>
+ <p>O'zingizga savol bering: «Nima keldi?» — Debetga. «Qayerdan keldi?» — Kreditga.</p>`,
+ example:{t:"Ta'sischi ulush qo'shishi kerak, kapital shakllandi:",dt:"4610",kt:"8330"},
+ tasks:[
+ {t:"pv",q:"Ustav kapital e'lon qilindi — ta'sischi 100 mln so'm qo'shishi shart.",dt:"4610",kt:"8330",o:["4610","8330","5110","6010","4010","5010"],e:"Ta'sischining qarzi paydo bo'ldi (Dt 4610), ustav kapital shakllandi (Kt 8330)."},
+ {t:"pv",q:"Ta'sischi 100 mln so'mni bank hisob raqamiga o'tkazdi.",dt:"5110",kt:"4610",o:["5110","4610","8330","5010","6010","4010"],e:"Bankda pul ko'paydi (Dt 5110), ta'sischining qarzi yopildi (Kt 4610)."},
+ {t:"pv",q:"Bankdan kassaga 3 mln so'm naqd olindi.",dt:"5010",kt:"5110",o:["5010","5110","4010","6710","8330","6010"],e:"Kassa ko'paydi (Dt 5010), bank kamaydi (Kt 5110)."},
+ {t:"mc",q:"Ikki yoqlama yozuvning asosiy qoidasi nima?",o:["Debet doim Kreditdan katta","Bir summa bir vaqtda Dt va Kt ga yoziladi","Faqat pul harakati yoziladi","Kredit — doim xarajat"],a:1,e:"Har muomala bir xil summada bir hisobvaraq debetiga va boshqasining kreditiga tushadi."},
+ {t:"calc",q:"Bankda 100 000 000 so'm edi, kassaga 3 000 000 olindi. Bankda qancha qoldi?",a:97000000,e:"100 000 000 − 3 000 000 = 97 000 000 so'm."},
+ {t:"mc",q:"Passiv hisobvaraq qoldig'i odatda qaysi tomonda?",o:["Debetda","Kreditda","Ikkalasida","Qoldiq bo'lmaydi"],a:1,e:"Passivlar kreditda ko'payadi, qoldig'i ham kreditda. Aktivlarniki — debetda."},
+ {t:"pv",q:"Ta'sischi ulush o'rniga 20 mln so'mlik uskuna berdi (foydalanishga tayyor).",dt:"0130",kt:"4610",o:["0130","4610","8330","0820","5110","2910"],e:"Asosiy vosita keldi (Dt 0130), ta'sischi qarzi shu summaga yopildi (Kt 4610)."},
+ {t:"mc",q:"Firmada 100 mln aktiv, 0 majburiyat bor. Kapital qancha?",o:["0","50 mln","100 mln","Aniqlab bo'lmaydi"],a:2,e:"Aktiv = Majburiyat + Kapital → 100 − 0 = 100 mln."},
+ {t:"pv",q:"Bankdan 50 mln so'mlik ikki yillik kredit olindi.",dt:"5110",kt:"7810",o:["5110","7810","8330","6010","5010","4610"],e:"Bankda pul ko'paydi (Dt 5110), uzoq muddatli qarz paydo bo'ldi (Kt 7810)."},
+ {t:"calc",q:"Aktiv 170 mln, ustav kapital 100 mln, boshqa kapital yo'q. Majburiyatlar qancha?",a:70000000,e:"170 − 100 = 70 mln so'm majburiyat."},
+ {t:"mc",q:"«Dt 5010 — Kt 5110» provodkasi nimani anglatadi?",o:["Bankka pul topshirildi","Bankdan naqd pul olindi","Oylik to'landi","Tovar sotildi"],a:1,e:"Kassa debetlandi — pul kassaga kirdi, bank kreditlandi — u yerdan chiqdi."}
+]},
+{title:"Tovar keldi",icon:"📦",
+ story:"«Mega Opt» dan 10 mln so'mlik tovar keldi, ustiga 12% QQS. Faktura imzolandi. Endi uni hisobga oling.",
+ theory:`<p>Xaridda ikki narsa yoziladi: <b>tovarning o'zi</b> (QQSsiz) va <b>kirim QQS</b> (keyin budjetdan hisobga olinadi).</p>
+ <p>QQS = summa × 12%. Jami to'lov = summa + QQS.</p>
+ <p>Pul to'langanda: Dt 6010 — Kt 5110.</p>`,
+ example:{t:"Tovar omborga kirdi, qarz paydo bo'ldi:",dt:"2910",kt:"6010"},
+ tasks:[
+ {t:"calc",q:"Tovar QQSsiz 10 000 000 so'm, QQS 12%. QQS summasi qancha?",a:1200000,e:"10 000 000 × 12% = 1 200 000 so'm."},
+ {t:"calc",q:"Shu faktura bo'yicha jami to'lov qancha?",a:11200000,e:"10 000 000 + 1 200 000 = 11 200 000 so'm."},
+ {t:"pv",q:"Tovar omborga kirim qilindi (QQSsiz summa).",dt:"2910",kt:"6010",o:["2910","6010","4010","9020","5110","9120"],e:"Tovar ko'paydi (Dt 2910), yetkazib beruvchiga qarz paydo bo'ldi (Kt 6010)."},
+ {t:"pv",q:"Faktura bo'yicha kirim QQS aks ettirildi.",dt:"4410",kt:"6010",o:["4410","6410","6010","2910","9420","5110"],e:"Kirim QQS — hisobga olinadigan summa (Dt 4410), u ham qarzning bir qismi (Kt 6010)."},
+ {t:"pv",q:"Bankdan yetkazib beruvchiga 11,2 mln so'm to'landi.",dt:"6010",kt:"5110",o:["6010","5110","2910","4010","5010","6410"],e:"Qarz yopildi (Dt 6010), bank kamaydi (Kt 5110)."},
+ {t:"mc",q:"Tovar bor, faktura bor, to'lanmagan. 6010 dagi qoldiq qancha?",o:["0","10 000 000","11 200 000","1 200 000"],a:2,e:"Qarz tovar summasi va QQS bilan birga — 11 200 000 so'm."},
+ {t:"pv",q:"Tovarni omborga keltirish uchun transport xizmatiga 500 ming to'landi (tovar tannarxiga qo'shiladi).",dt:"2910",kt:"6010",o:["2910","6010","9410","5110","4410","9420"],e:"Yetkazish xarajati tovar tannarxini oshiradi (Dt 2910), transport firmasiga qarz (Kt 6010)."},
+ {t:"calc",q:"Tovar 10 000 000, transport 500 000. 100 dona bo'lsa, 1 dona tannarxi qancha?",a:105000,unit:"so'm",e:"(10 000 000 + 500 000) ÷ 100 = 105 000 so'm."},
+ {t:"pv",q:"Ishlab chiqarish uchun xomashyo keldi, pul keyin to'lanadi.",dt:"1010",kt:"6010",o:["1010","6010","2910","2010","5110","4410"],e:"Xomashyo — 1010. Qarz esa 6010 da."},
+ {t:"mc",q:"Kirim QQS (4410) nima uchun kerak?",o:["Budjetga to'lanadigan QQSni kamaytirish uchun","Foydani oshirish uchun","Tovar narxini oshirish uchun","Hech narsa uchun"],a:0,e:"To'lanadigan QQS = chiqim QQS − kirim QQS. Shuning uchun kirim QQS aniq hisobga olinadi."},
+ {t:"calc",q:"Yetkazib beruvchiga 11 200 000 dan 7 000 000 to'landi. 6010 da qancha qoldi?",a:4200000,e:"11 200 000 − 7 000 000 = 4 200 000 so'm."},
+ {t:"pv",q:"Yetkazib beruvchiga tovar kelishidan oldin kassadan bo'nak to'landi.",dt:"6010",kt:"5010",o:["6010","5010","5110","4010","2910","6310"],e:"6010 debet qoldiq beradi — endi yetkazib beruvchi sizga qarzdor. Kassa kamaydi (Kt 5010)."}
+]},
+{title:"Birinchi savdo",icon:"🛒",
+ story:"«Baraka Market» sizdan tovar oldi: 5 600 000 so'm (QQS bilan). Tannarxi 3 500 000 so'm edi. Daromadni to'g'ri ko'rsating!",
+ theory:`<p>Sotuvda uchta yozuv:</p>
+ <ul><li>Daromad (QQSsiz): Dt 4010 — Kt 9020</li><li>Chiqim QQS: Dt 4010 — Kt 6410</li><li>Tannarx: Dt 9120 — Kt 2910</li></ul>
+ <p>Summa QQS bilan berilsa: <b>QQS = jami × 12 / 112</b>.</p>`,
+ example:{t:"Tovar ombordan chiqdi, qiymati xarajatga o'tdi:",dt:"9120",kt:"2910"},
+ tasks:[
+ {t:"calc",q:"Sotuv QQS bilan 5 600 000 so'm (12%). Ichidagi QQS qancha?",a:600000,e:"5 600 000 × 12 / 112 = 600 000 so'm."},
+ {t:"calc",q:"QQSsiz daromad qancha?",a:5000000,e:"5 600 000 − 600 000 = 5 000 000 so'm."},
+ {t:"pv",q:"Tovar jo'natildi — QQSsiz daromad aks ettirildi.",dt:"4010",kt:"9020",o:["4010","9020","2910","6010","9120","5110"],e:"Xaridor qarzdor bo'ldi (Dt 4010), daromad tan olindi (Kt 9020)."},
+ {t:"pv",q:"Sotuv QQSi budjetga qarz sifatida yozildi.",dt:"4010",kt:"6410",o:["4010","6410","4410","9020","6010","9420"],e:"Xaridor QQSni ham to'laydi (Dt 4010), lekin bu pul davlatniki (Kt 6410)."},
+ {t:"pv",q:"Sotilgan tovar tannarxi hisobdan chiqarildi.",dt:"9120",kt:"2910",o:["9120","2910","9020","4010","0130","6010"],e:"Ombordagi tovar kamaydi (Kt 2910), tannarx xarajat bo'ldi (Dt 9120)."},
+ {t:"calc",q:"Yalpi foyda qancha? (QQSsiz daromad − tannarx)",a:1500000,e:"5 000 000 − 3 500 000 = 1 500 000 so'm."},
+ {t:"pv",q:"«Baraka Market» 5,6 mln so'mni bankka o'tkazdi.",dt:"5110",kt:"4010",o:["5110","4010","9020","6310","5010","6410"],e:"Bank ko'paydi (Dt 5110), xaridor qarzi yopildi (Kt 4010)."},
+ {t:"pv",q:"Boshqa xaridor tovar olishdan oldin bankka 2 mln bo'nak to'ladi.",dt:"5110",kt:"6310",o:["5110","6310","4010","9020","6010","5010"],e:"Oldindan olingan pul — majburiyat, xaridor tovar kutmoqda (Kt 6310)."},
+ {t:"pv",q:"Tovarni xaridorga yetkazish uchun transportga to'landi (sotish xarajati).",dt:"9410",kt:"5110",o:["9410","5110","9420","2910","9120","6010"],e:"Sotish bilan bog'liq xarajat — 9410. Bank kamaydi (Kt 5110)."},
+ {t:"calc",q:"Marja 25% bo'lishi kerak. Tannarx 3 500 000 bo'lsa, QQSsiz sotuv narxi qancha?",a:4375000,e:"3 500 000 × 1,25 = 4 375 000 so'm."},
+ {t:"mc",q:"Xaridor tovarni qaytardi. Daromad provodkasi qanday tuzatiladi?",o:["Hech narsa qilinmaydi","Teskari yozuv: Dt 9020 — Kt 4010","Dt 4010 — Kt 9020 takrorlanadi","Dt 9120 — Kt 2910"],a:1,e:"Qaytarishda daromad kamayadi: teskari (storno) yozuv beriladi."},
+ {t:"calc",q:"Oyda 12 ta savdo, har biri QQSsiz 5 000 000 so'mdan. Oylik daromad qancha?",a:60000000,e:"5 000 000 × 12 = 60 000 000 so'm."}
+]},
+{title:"Ish haqi kuni",icon:"💸",
+ story:"Oy oxiri. Menejer Dilnozaning oyligi 8 000 000 so'm. Xodimlar kutyapti — xato qilmang!",
+ theory:`<p>Ish haqi uch bosqichda:</p>
+ <ul><li><b>Hisoblash</b>: Dt 9420 — Kt 6710</li><li><b>JShDS ushlash</b>: Dt 6710 — Kt 6410</li><li><b>To'lash</b>: Dt 6710 — Kt 5110</li></ul>
+ <p>Qo'lga tegadigan summa = hisoblangan − ushlanmalar.</p>`,
+ example:{t:"Oylik hisoblandi (ma'muriy xodim):",dt:"9420",kt:"6710"},
+ tasks:[
+ {t:"pv",q:"Menejerga 8 mln so'm ish haqi hisoblandi.",dt:"9420",kt:"6710",o:["9420","6710","5110","6410","9120","4010"],e:"Ma'muriy xarajat (Dt 9420), xodim oldida qarz (Kt 6710)."},
+ {t:"calc",q:"JShDS 12%. 8 000 000 so'mdan qancha ushlanadi?",a:960000,e:"8 000 000 × 12% = 960 000 so'm."},
+ {t:"pv",q:"Ish haqidan JShDS ushlandi.",dt:"6710",kt:"6410",o:["6710","6410","9420","5110","4410","6010"],e:"Xodimga qarz kamaydi (Dt 6710), budjetga qarz ko'paydi (Kt 6410)."},
+ {t:"calc",q:"Kartaga qancha tushadi? (boshqa ushlanma yo'q)",a:7040000,e:"8 000 000 − 960 000 = 7 040 000 so'm."},
+ {t:"pv",q:"Ish haqi bankdan kartaga o'tkazildi.",dt:"6710",kt:"5110",o:["6710","5110","9420","5010","6410","4010"],e:"Qarz yopildi (Dt 6710), bank kamaydi (Kt 5110)."},
+ {t:"pv",q:"Ushlangan JShDS budjetga to'landi.",dt:"6410",kt:"5110",o:["6410","5110","4410","6710","9420","5010"],e:"Budjetga qarz yopildi (Dt 6410), bank kamaydi (Kt 5110)."},
+ {t:"mc",q:"Hisoblangan, lekin to'lanmagan oylik 6710 da qanday qoldiq beradi?",o:["Debet qoldiq","Kredit qoldiq","Qoldiq bo'lmaydi","Faqat JShDS summasi"],a:1,e:"6710 — passiv, qoldig'i kreditda."},
+ {t:"calc",q:"Oylik 8 000 000, ustiga 12% ijtimoiy soliq. Firmaning jami xarajati qancha?",a:8960000,e:"8 000 000 + 960 000 = 8 960 000 so'm (soliq firma hisobidan)."},
+ {t:"pv",q:"Xodimga kassadan avans berildi.",dt:"6710",kt:"5010",o:["6710","5010","9420","5110","6410","6910"],e:"Avans — qarzning oldindan to'langan qismi (Dt 6710), kassadan chiqdi (Kt 5010)."},
+ {t:"calc",q:"5 ta xodim, har biriga 6 000 000. JShDS 12%. Jami ushlanma qancha?",a:3600000,e:"5 × 6 000 000 = 30 000 000; 30 000 000 × 12% = 3 600 000 so'm."},
+ {t:"mc",q:"Ishlab chiqarish ishchisining ish haqi qaysi hisobvaraqqa yoziladi?",o:["9420","2010","9120","9410"],a:1,e:"Ishchi mehnati mahsulot tannarxiga kiradi: Dt 2010 — Kt 6710."},
+ {t:"calc",q:"Oylik 8 000 000, JShDS 960 000, sud qarori bo'yicha 500 000 ushlandi. Qo'lga qancha?",a:6540000,e:"8 000 000 − 960 000 − 500 000 = 6 540 000 so'm."}
+]},
+{title:"Yangi uskuna",icon:"⚙️",
+ story:"Firma 60 mln so'mga qadoqlash uskunasi sotib oldi. Uni ishga tushiring va eskirishini hisoblang.",
+ theory:`<p>Asosiy vosita avval <b>0820</b> da yig'iladi (narx, yetkazish, o'rnatish), foydalanishga topshirilganda <b>0130</b> ga o'tadi.</p>
+ <div class="example">Yillik amortizatsiya = (boshlang'ich qiymat − qoldiq qiymat) ÷ foydalanish yillari</div>
+ <p>Oylik = yillik ÷ 12. Provodka: Dt 9420 — Kt 0230.</p>`,
+ example:{t:"Uskuna xarid qilindi, pul keyin to'lanadi:",dt:"0820",kt:"6010"},
+ tasks:[
+ {t:"pv",q:"Uskuna keldi, faktura olindi (QQSsiz 60 mln).",dt:"0820",kt:"6010",o:["0820","6010","0130","2910","5110","0230"],e:"Kapital qo'yilma yig'ildi (Dt 0820), qarz paydo bo'ldi (Kt 6010)."},
+ {t:"pv",q:"Uskuna o'rnatildi va foydalanishga topshirildi.",dt:"0130",kt:"0820",o:["0130","0820","0230","2910","9420","6010"],e:"Asosiy vosita tayyor (Dt 0130), xarid hisobvarag'i yopildi (Kt 0820)."},
+ {t:"calc",q:"60 000 000 so'm, muddat 5 yil, qoldiq qiymat 0. Yillik amortizatsiya?",a:12000000,e:"60 000 000 ÷ 5 = 12 000 000 so'm."},
+ {t:"calc",q:"Oylik amortizatsiya qancha?",a:1000000,e:"12 000 000 ÷ 12 = 1 000 000 so'm."},
+ {t:"pv",q:"Oylik amortizatsiya hisoblandi (ma'muriy uskuna).",dt:"9420",kt:"0230",o:["9420","0230","0130","0820","9120","6010"],e:"Xarajat (Dt 9420), eskirish to'plandi (Kt 0230) — kontr-aktiv, kreditda ko'payadi."},
+ {t:"calc",q:"Ikki yildan keyin qoldiq (balans) qiymati qancha?",a:36000000,e:"60 000 000 − 12 000 000 × 2 = 36 000 000 so'm."},
+ {t:"calc",q:"Uskuna 48 000 000, qoldiq qiymati 6 000 000, muddat 7 yil. Yillik amortizatsiya?",a:6000000,e:"(48 000 000 − 6 000 000) ÷ 7 = 6 000 000 so'm."},
+ {t:"pv",q:"Uskunani o'rnatish ishlariga pudratchiga to'lanadigan summa qo'shildi.",dt:"0820",kt:"6010",o:["0820","6010","9420","0130","0230","5110"],e:"O'rnatish xarajati ham asosiy vosita qiymatiga kiradi (Dt 0820)."},
+ {t:"mc",q:"0230 hisobvarag'i balansda qanday ko'rinadi?",o:["Aktivni oshiradi","Aktivdan ayriladi","Majburiyat sifatida","Daromad sifatida"],a:1,e:"To'plangan eskirish asosiy vosita qiymatidan ayriladi — qoldiq qiymat chiqadi."},
+ {t:"calc",q:"Uskuna 3 yil ishlatildi (yillik 12 mln). To'plangan eskirish qancha?",a:36000000,e:"12 000 000 × 3 = 36 000 000 so'm — bu 0230 ning kredit qoldig'i."},
+ {t:"pv",q:"Uskuna ta'mirlandi, ta'mir xarajati joriy xarajatga yozildi.",dt:"9430",kt:"6010",o:["9430","6010","0820","0130","0230","9120"],e:"Oddiy ta'mir asosiy vosita qiymatini oshirmaydi — joriy xarajat (Dt 9430)."},
+ {t:"mc",q:"Uskuna to'liq amortizatsiya qilindi, lekin hali ishlayapti. Nima bo'ladi?",o:["Hisobdan chiqariladi","Amortizatsiya to'xtaydi, uskuna balansda qoladi","Yana amortizatsiya boshlanadi","Daromad yoziladi"],a:1,e:"Qoldiq qiymat nolga yetgach, amortizatsiya to'xtaydi, aktiv esa foydalanishda turaveradi."}
+]},
+{title:"Yil yakuni",icon:"🎆",
+ story:"31-dekabr. Direktor so'raydi: «Xo'sh, foyda qildikmi?» Hisobvaraqlarni yopib, javob bering.",
+ theory:`<p>Yil oxirida 9-guruh <b>9910 — Yakuniy moliyaviy natija</b> ga yopiladi:</p>
+ <ul><li>Daromad: Dt 9020 — Kt 9910</li><li>Xarajatlar: Dt 9910 — Kt 9120, 9410, 9420</li></ul>
+ <p>Foyda solig'i: Dt 9810 — Kt 6410. Sof foyda: Dt 9910 — Kt 8710. Dividend: Dt 8710 — Kt 6610.</p>`,
+ example:{t:"Daromad yakuniy natijaga yopildi:",dt:"9020",kt:"9910"},
+ tasks:[
+ {t:"pv",q:"Yillik tovar sotishdan daromad yopildi.",dt:"9020",kt:"9910",o:["9020","9910","8710","4010","9120","6410"],e:"Daromad hisobvarag'i nolga tushdi (Dt 9020), natijaga o'tdi (Kt 9910)."},
+ {t:"pv",q:"Sotilgan tovarlar tannarxi yopildi.",dt:"9910",kt:"9120",o:["9910","9120","2910","9020","8710","9420"],e:"Xarajat natijani kamaytiradi (Dt 9910), 9120 yopildi."},
+ {t:"calc",q:"Daromad 90 mln, tannarx 55 mln, ma'muriy xarajat 15 mln. Soliqqacha foyda?",a:20000000,e:"90 − 55 − 15 = 20 mln so'm."},
+ {t:"calc",q:"Foyda solig'i 15%. 20 000 000 so'mdan qancha?",a:3000000,e:"20 000 000 × 15% = 3 000 000 so'm."},
+ {t:"pv",q:"Foyda solig'i hisoblandi.",dt:"9810",kt:"6410",o:["9810","6410","9910","8710","5110","4410"],e:"Soliq xarajati (Dt 9810), budjetga qarz (Kt 6410)."},
+ {t:"calc",q:"Soliqdan keyingi sof foyda qancha?",a:17000000,e:"20 000 000 − 3 000 000 = 17 000 000 so'm."},
+ {t:"pv",q:"Sof foyda taqsimlanmagan foydaga o'tkazildi.",dt:"9910",kt:"8710",o:["9910","8710","8330","9020","6610","9810"],e:"Natija yopildi (Dt 9910), foyda kapitalga qo'shildi (Kt 8710)."},
+ {t:"pv",q:"Ta'sischilar 10 mln so'm dividend taqsimlashga qaror qildi.",dt:"8710",kt:"6610",o:["8710","6610","8330","5110","9910","6710"],e:"Taqsimlanmagan foyda kamaydi (Dt 8710), ta'sischiga qarz (Kt 6610)."},
+ {t:"calc",q:"Dividenddan 5% soliq ushlanadi. Ta'sischi 10 mln dan qancha oladi?",a:9500000,e:"10 000 000 − 500 000 = 9 500 000 so'm."},
+ {t:"pv",q:"Dividend solig'i ushlandi.",dt:"6610",kt:"6410",o:["6610","6410","8710","5110","9810","4410"],e:"Ta'sischiga qarz kamaydi (Dt 6610), budjetga qarz ko'paydi (Kt 6410)."},
+ {t:"pv",q:"Ma'muriy xarajatlar yil yakunida yopildi.",dt:"9910",kt:"9420",o:["9910","9420","9120","8710","6710","9410"],e:"Barcha xarajatlar 9910 debetiga yig'iladi."},
+ {t:"mc",q:"9910 da kredit qoldiq chiqdi. Bu nimani bildiradi?",o:["Zarar","Foyda","Xato","Soliq qarzi"],a:1,e:"Kredit qoldiq — daromad xarajatdan ko'p, ya'ni foyda."},
+ {t:"calc",q:"Daromad 40 mln, xarajatlar 47 mln. Natija qancha? (zarar summasini raqamda yozing)",a:7000000,e:"47 − 40 = 7 mln so'm zarar. 9910 da debet qoldiq bo'ladi."}
+]},
+{title:"Boss: soliq tekshiruvi",icon:"🕵️",
+ story:"Eshik taqilladi. Soliq inspektori: «Hujjatlaringizni ko'rsak bo'ladimi?» Hamma bilimingiz kerak. Faqat 3 ta jon!",
+ theory:`<p>Yakuniy sinov — barcha bosqichlardan aralash savollar. Esda tuting:</p>
+ <ul><li>Aktiv = Majburiyat + Kapital.</li><li>Aktiv qoldiq = boshlang'ich + Dt oborot − Kt oborot.</li><li>Tovar astatkasi = boshlang'ich + kirim − chiqim.</li><li>To'lanadigan QQS = chiqim QQS − kirim QQS.</li></ul>`,
+ example:null,
+ tasks:[
+ {t:"calc",q:"Aktivlar 50 mln, majburiyatlar 18 mln. Kapital qancha?",a:32000000,e:"50 − 18 = 32 mln so'm."},
+ {t:"calc",q:"5110: boshlang'ich 4 000 000, Dt oborot 9 000 000, Kt oborot 6 500 000. Oxirgi qoldiq?",a:6500000,e:"4 000 000 + 9 000 000 − 6 500 000 = 6 500 000 so'm."},
+ {t:"calc",q:"Oy boshida 120 dona tovar, kirim 300, chiqim 270. Astatka (dona)?",a:150,unit:"dona",e:"120 + 300 − 270 = 150 dona."},
+ {t:"pv",q:"Xaridordan olingan bo'nak hisobiga tovar jo'natildi.",dt:"6310",kt:"4010",o:["6310","4010","9020","5110","6010","6410"],e:"Bo'nak majburiyati yopiladi (Dt 6310), xaridor qarzi kamayadi (Kt 4010)."},
+ {t:"mc",q:"6010 da DEBET qoldiq bor. Bu nimani anglatadi?",o:["Xato — bunday bo'lmaydi","Yetkazib beruvchiga oldindan to'langan","Tovar sotilgan","Soliq ortiqcha to'langan"],a:1,e:"Debet qoldiq — siz oldindan to'lagansiz, yetkazib beruvchi qarzdor."},
+ {t:"pv",q:"Kassadan bankka 5 mln topshirildi.",dt:"5110",kt:"5010",o:["5110","5010","4010","6010","9020","6710"],e:"Bank ko'paydi (Dt 5110), kassa kamaydi (Kt 5010)."},
+ {t:"calc",q:"Chiqim QQS 7 200 000, kirim QQS 4 800 000. Budjetga qancha to'lanadi?",a:2400000,e:"7 200 000 − 4 800 000 = 2 400 000 so'm."},
+ {t:"mc",q:"Qaysi provodka XATO?",o:["Dt 2910 — Kt 6010 (tovar keldi)","Dt 5110 — Kt 4010 (xaridor to'ladi)","Dt 9020 — Kt 4010 (tovar sotildi)","Dt 6710 — Kt 5110 (oylik to'landi)"],a:2,e:"To'g'risi: Dt 4010 — Kt 9020. Daromad kreditda paydo bo'ladi."},
+ {t:"pv",q:"Yil yakuni: sof foyda taqsimlanmagan foydaga o'tkazildi.",dt:"9910",kt:"8710",o:["9910","8710","8330","9020","6610","9810"],e:"Natija yopildi (Dt 9910), foyda kapitalga qo'shildi (Kt 8710)."},
+ {t:"calc",q:"Tovar QQS bilan 22 400 000 so'mga sotildi (12%). QQSsiz daromad qancha?",a:20000000,e:"22 400 000 ÷ 1,12 = 20 000 000 so'm."},
+ {t:"mc",q:"Inspektor: «Kassada 12 mln naqd, hujjatda 9 mln». Bu nima?",o:["Kassada ortiqcha (izlash kerak)","Normal holat","Foyda","Zarar"],a:0,e:"Haqiqiy va hisob qoldig'i farqi — inventarizatsiya natijasi, sababi aniqlanib rasmiylashtiriladi."},
+ {t:"calc",q:"Uskuna 84 000 000, muddat 7 yil, qoldiq qiymat 0. 4 yildan keyin balans qiymati?",a:36000000,e:"Yillik 12 mln; 84 − 48 = 36 mln so'm."},
+ {t:"pv",q:"Ishlab chiqarish ishchisining ish haqi hisoblandi.",dt:"2010",kt:"6710",o:["2010","6710","9420","9120","5110","6410"],e:"Ishchi mehnati mahsulot tannarxiga kiradi (Dt 2010)."},
+ {t:"calc",q:"Daromad 120 mln, tannarx 70 mln, xarajatlar 20 mln, foyda solig'i 15%. Sof foyda qancha?",a:25500000,e:"Foyda 30 mln; soliq 4,5 mln; sof foyda 25 500 000 so'm."}
+]}];
+
+const RANKS=[[0,"Stajyor"],[200,"Kichik hisobchi"],[500,"Hisobchi"],[900,"Bosh hisobchi o'rinbosari"],[1400,"Bosh buxgalter"],[2000,"Moliya direktori"],[2800,"Provodka ustozi"]];
+const RIVALS=[];   // jonli sheriklar qo'shilganda shu yerga tushadi
+const TASKMAP={};
+STAGES.forEach((st,si)=>st.tasks.forEach((t,k)=>{ t.id=si+"-"+k; TASKMAP[t.id]=t; }));
+const WEEK_GOAL=600;   // haftalik maqsad (XP)
+const ACH=[
+ {id:"first",i:"🎓",n:"Birinchi bosqich",d:"Bitta bosqichni yakunlash"},
+ {id:"perfect",i:"💎",n:"Xatosiz",d:"Bosqichni 3 yulduz bilan o'tish"},
+ {id:"combo5",i:"🔥",n:"5 ketma-ket",d:"5 ta to'g'ri javob ketma-ket"},
+ {id:"combo10",i:"⚡",n:"10 ketma-ket",d:"10 ta to'g'ri javob ketma-ket"},
+ {id:"streak3",i:"📅",n:"3 kun",d:"3 kunlik seriya"},
+ {id:"streak7",i:"🗓️",n:"7 kun",d:"7 kunlik seriya"},
+ {id:"lead",i:"👑",n:"Yetakchi",d:"Reytingda 1-o'rin"},
+ {id:"half",i:"⛳",n:"Yarim yo'l",d:"4 ta bosqich"},
+ {id:"daily5",i:"🎯",n:"Mashqchi",d:"5 marta kunlik mashq"},
+ {id:"comeback",i:"💪",n:"Qaytish",d:"Yiqilgan bosqichni qayta o'tish"},
+ {id:"all",i:"🎓",n:"Bosh buxgalter",d:"Barcha 8 bosqich"},
+ {id:"league",i:"🏆",n:"Liga g'olibi",d:"Haftalik ligada 1-o'rin"}];
+
+/* ---------------- server (7 kishilik liga) ---------------- */
+const SUPA_URL="https://bopzjxboembvcqycfwin.supabase.co";
+const DEFAULT_KEY="sb_publishable_DWSUYhML5IH5cOksXdlCDA_SNt6c9Dm";
+const MAXP=7;
+let players=[];
+let syncing=false, lastPull=0;
+function sHead(){ return {apikey:S.key,Authorization:"Bearer "+S.key,"Content-Type":"application/json"}; }
+async function apiGet(q){
+  const r=await fetch(SUPA_URL+"/rest/v1/safari_players?"+q,{headers:sHead()});
+  if(!r.ok) throw new Error(await r.text()); return r.json();
+}
+async function apiPost(body){
+  const r=await fetch(SUPA_URL+"/rest/v1/safari_players",{method:"POST",
+    headers:Object.assign(sHead(),{Prefer:"return=representation"}),body:JSON.stringify(body)});
+  if(!r.ok) throw new Error(await r.text()); return r.json();
+}
+async function apiPatch(id,body){
+  const r=await fetch(SUPA_URL+"/rest/v1/safari_players?id=eq."+id,{method:"PATCH",
+    headers:Object.assign(sHead(),{Prefer:"return=representation"}),body:JSON.stringify(body)});
+  if(!r.ok) throw new Error(await r.text()); return r.json();
+}
+async function joinServer(){
+  if(!S.key) return {ok:false,msg:"Server kaliti kiritilmagan"};
+  try{
+    const ex=await apiGet("select=*&phone=eq."+encodeURIComponent(S.user.phone));
+    if(ex.length){ S.pid=ex[0].id; persist(); await pushMe(); return {ok:true,msg:"Hisobingiz tiklandi"}; }
+    const all=await apiGet("select=id");
+    if(all.length>=MAXP) return {ok:false,msg:"Joylar to'ldi ("+MAXP+"/"+MAXP+")"};
+    const row=await apiPost({first_name:S.user.first,last_name:S.user.last,phone:S.user.phone,
+      xp:S.xp,week_xp:S.week.my,week_id:S.week.id,stages:Object.keys(S.stars).length,streak:S.streak});
+    S.pid=row[0].id; persist(); return {ok:true,msg:"Ligaga qo'shildingiz"};
+  }catch(e){ return {ok:false,msg:/safari_full/.test(e.message)?"Joylar to'ldi (7/7)":"Serverga ulanmadi"}; }
+}
+async function pushMe(){
+  if(!S.key||!S.pid) return;
+  try{ await apiPatch(S.pid,{xp:S.xp,week_xp:S.week.my,week_id:S.week.id,
+    stages:Object.keys(S.stars).length,streak:S.streak,last_active:new Date().toISOString(),
+    first_name:S.user.first,last_name:S.user.last}); }catch(e){}
+}
+async function pullPlayers(force){
+  if(!S.key) return;
+  if(!force&&Date.now()-lastPull<45000) return;
+  lastPull=Date.now();
+  try{ players=await apiGet("select=*&order=xp.desc"); S.pcount=players.length; persist();
+    if(TAB==="main") scrMain(); else if(TAB==="rate") scrRating(); }catch(e){}
+}
+async function sync(){ if(syncing)return; syncing=true; await pushMe(); await pullPlayers(true); syncing=false; }
+
+/* ---------------- saqlash ---------------- */
+const KEY="bux-safari-v2";
+const today=()=>new Date().toISOString().slice(0,10);
+let S={xp:0,stars:{},streak:0,last:"",sim:0,riv:{},ach:[],daily:{d:"",n:0,got:false},dailyRuns:0,failed:{},name:"",rem:"",notif:false,
+  user:{first:"",last:"",phone:""},days:{},errs:{},gift:"",shield:0,blitz:0,lastWeekXp:0,key:"",pid:"",pcount:1,
+  week:{id:"",my:0,riv:{}},cups:[0,0,0],leagues:0,pending:null};
+try{const o=JSON.parse(localStorage.getItem(KEY)); if(o&&typeof o.xp==="number") S=Object.assign(S,o);}catch(e){}
+RIVALS.forEach(r=>{ if(typeof S.riv[r.id]!=="number") S.riv[r.id]=0; });
+if(!S.week||!S.week.riv) S.week={id:"",my:0,riv:{}};
+RIVALS.forEach(r=>{ if(typeof S.week.riv[r.id]!=="number") S.week.riv[r.id]=0; });
+if(!Array.isArray(S.cups)) S.cups=[0,0,0];
+if(!S.user) S.user={first:"",last:"",phone:""};
+if(!S.days) S.days={};
+if(!S.errs) S.errs={};
+if(typeof S.shield!=="number") S.shield=0;
+if(typeof S.blitz!=="number") S.blitz=0;
+if(!S.key) S.key=DEFAULT_KEY;                       // liga serveri tayyor holda ulangan
+function persist(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} syncSW(); }
+
+/* ---------------- haftalik liga: juma kuni tugaydi ---------------- */
+const PRIZE=[{xp:400,cup:"🏆",txt:"Liga g'olibi"},{xp:200,cup:"🥈",txt:"Ikkinchi o'rin"},{xp:100,cup:"🥉",txt:"Uchinchi o'rin"},{xp:40,cup:"🎗️",txt:"Ishtirok"}];
+function goalPrize(xp){
+  if(xp>=WEEK_GOAL) return {xp:400,cup:"🏆",txt:"Haftalik maqsad bajarildi"};
+  if(xp>=WEEK_GOAL*0.6) return {xp:150,cup:"🥈",txt:"Maqsadga yaqin keldingiz"};
+  if(xp>0) return {xp:50,cup:"🎗️",txt:"Ishtirok"};
+  return {xp:0,cup:"😴",txt:"Bu hafta mashq bo'lmadi"};
+}
+function weekEnd(d){ // joriy liganing tugash vaqti: juma 12:00
+  const t=new Date(d||new Date()), f=new Date(t);
+  f.setHours(12,0,0,0);
+  f.setDate(f.getDate()+((5-t.getDay()+7)%7));
+  if(f<=t) f.setDate(f.getDate()+7);
+  return f;
+}
+function weekId(d){ return weekEnd(d).toISOString().slice(0,16); }
+function timeLeft(){
+  const ms=weekEnd()-new Date();
+  const d=Math.floor(ms/86400000), h=Math.floor(ms%86400000/3600000), m=Math.floor(ms%3600000/60000);
+  return d>0?d+" kun "+h+" soat":(h>0?h+" soat "+m+" daq":m+" daqiqa");
+}
+function weekendNow(){ const n=new Date(), d=n.getDay();
+  return d===6||d===0||(d===5&&n.getHours()>=12); }
+function weekBoard(){
+  if(players.length) return players.map(p=>({name:p.first_name+" "+(p.last_name||"").slice(0,1)+".",
+    emoji:p.id===S.pid?"🧑":"👤",xp:(p.week_id===S.week.id?p.week_xp:0),me:p.id===S.pid}))
+    .sort((a,b)=>b.xp-a.xp);
+  return [{name:S.name||"Siz",emoji:"🧑",xp:S.week.my,me:true}];
+}
+function online(){ return players.length>1; }
+function addXP(n){ S.xp+=n; S.week.my+=n; }
+function d0(p){ return p+"-o'rin"; }
+function checkWeek(){
+  const id=weekId();
+  if(!S.week.id){ S.week.id=id; persist(); return; }
+  if(S.week.id===id) return;
+  const wb=weekBoard(), pos=wb.findIndex(x=>x.me)+1;
+  const pr=online()?PRIZE[Math.min(pos,4)-1]:goalPrize(S.week.my);
+  S.lastWeekXp=S.week.my;
+  S.pending={pos,xp:pr.xp,cup:pr.cup,txt:pr.txt,goal:!online(),my:S.week.my,
+    board:wb.map(x=>({n:x.emoji+" "+x.name,x:x.xp,me:!!x.me}))};
+  S.xp+=pr.xp;
+  if(online()?pos<=3:S.week.my>=WEEK_GOAL*0.6) S.cups[(online()?pos:(S.week.my>=WEEK_GOAL?1:2))-1]++;
+  S.leagues=(S.leagues||0)+1;
+  if(online()?pos===1:S.week.my>=WEEK_GOAL) award("league");
+  notify("🏁 Haftalik liga yakunlandi! "+pr.txt+" — +"+pr.xp+" XP. Yangi liga dushanbadan.");
+  S.week={id,my:0,riv:{}}; RIVALS.forEach(r=>S.week.riv[r.id]=0);
+  persist();
+}
+
+/* raqobatchilar o'sishi: har o'tgan kun uchun */
+function simulate(){
+  const now=Date.now();
+  if(!S.sim){ S.sim=now; persist(); return []; }
+  const days=Math.min(Math.floor((now-S.sim)/86400000),10);
+  if(days<1) return [];
+  const before=place();
+  RIVALS.forEach(r=>{ for(let d=0;d<days;d++){ const g=Math.round(r.min+Math.random()*(r.max-r.min));
+    S.riv[r.id]+=g; S.week.riv[r.id]=(S.week.riv[r.id]||0)+g; } });
+  S.sim+=days*86400000;
+  const after=place();
+  persist();
+  return after>before?[before,after]:[];
+}
+function board(){
+  if(players.length) return players.map(p=>({id:p.id,name:p.first_name+" "+(p.last_name||"").slice(0,1)+".",
+    emoji:p.id===S.pid?"🧑":"👤",tag:p.stages+" bosqich · "+p.streak+" kun seriya",xp:p.xp,me:p.id===S.pid}))
+    .sort((a,b)=>b.xp-a.xp);
+  return [{id:"me",name:S.name||"Siz",emoji:"🧑",tag:"Bu — siz",xp:S.xp,me:true}];
+}
+function place(){ return board().findIndex(x=>x.me)+1; }
+
+/* ---------------- yordamchilar ---------------- */
+const app=document.getElementById("app"), dock=document.getElementById("dock");
+const rankOf=xp=>{let c=RANKS[0],n=null; RANKS.forEach((r,k)=>{if(xp>=r[0]){c=r;n=RANKS[k+1]||null;}}); return {cur:c,next:n};};
+const unlocked=i=>i===0||(S.stars[i-1]||0)>0;
+const starStr=n=>"★".repeat(n)+"☆".repeat(3-n);
+function setDock(h){ if(!h){dock.hidden=true;dock.innerHTML="";} else {dock.hidden=false;dock.innerHTML=h;} }
+function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2100);}
+function coins(){ try{ if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return; }catch(e){}
+  for(let k=0;k<26;k++){const c=document.createElement("div");c.className="coin";c.textContent=["🪙","⭐","💰","📗"][k%4];
+  c.style.left=Math.random()*100+"vw";c.style.animationDuration=(1.8+Math.random()*1.6)+"s";c.style.animationDelay=(Math.random()*.6)+"s";
+  document.body.appendChild(c);setTimeout(()=>c.remove(),4200);} }
+function award(id){ if(S.ach.includes(id))return; S.ach.push(id); addXP(60); persist();
+  const a=ACH.find(x=>x.id===id); toast(a.i+" Yangi yutuq: "+a.n+" (+60 XP)"); }
+const DEADLINE=17;                          // har kuni soat 17:00 gacha
+const dstr=d=>d.toISOString().slice(0,10);
+const isWorkday=d=>d.getDay()>=1&&d.getDay()<=5;
+function deadlineLeft(){
+  const n=new Date(), t=new Date(); t.setHours(DEADLINE,0,0,0);
+  const ms=t-n; if(ms<=0) return null;
+  const h=Math.floor(ms/3600000), m=Math.floor(ms%3600000/60000);
+  return h>0?h+" soat "+m+" daqiqa":m+" daqiqa";
+}
+function recalcStreak(){
+  let n=0; const d=new Date();
+  for(let i=0;i<90;i++){
+    if(isWorkday(d)){ const v=S.days[dstr(d)]; if(v==="done"||v==="shield") n++; else break; }
+    d.setDate(d.getDate()-1);
+  }
+  S.streak=n;
+}
+function sweepDays(){                        // bajarilmagan kunlarni "qoldirilgan" deb belgilash
+  const now=new Date(), t=today();
+  for(let i=1;i<=21;i++){
+    const d=new Date(); d.setDate(d.getDate()-i);
+    if(isWorkday(d)&&!S.days[dstr(d)]) S.days[dstr(d)]="missed";
+  }
+  if(isWorkday(now)&&!S.days[t]&&now.getHours()>=DEADLINE) S.days[t]="missed";
+  Object.keys(S.days).forEach(k=>{                       // qalqon ishlatilsa kun saqlanadi
+    if(S.days[k]==="missed"&&S.shield>0){ S.days[k]="shield"; S.shield--; toast("🛡️ Qalqon ishladi — seriya saqlandi"); }
+  });
+  recalcStreak(); persist();
+}
+function dayState(){                         // bugungi holat
+  const now=new Date(), t=today();
+  if(!isWorkday(now)) return {k:"off",txt:"Dam olish kuni — mashq ixtiyoriy"};
+  const st=S.days[t];
+  if(st==="done") return {k:"done",txt:"Bugungi mashq bajarildi ✅"};
+  if(st==="shield") return {k:"done",txt:"🛡️ Qalqon ishlatildi — seriya saqlandi"};
+  if(st==="missed"||st==="late"||now.getHours()>=DEADLINE) return {k:"missed",txt:"Bugungi mashq qoldirib yuborildi — 17:00 o'tdi"};
+  return {k:"open",txt:"17:00 gacha "+deadlineLeft()+" qoldi"};
+}
+function markDay(){
+  const t=today(), now=new Date();
+  if(S.days[t]==="done") return 0;
+  if(!isWorkday(now)){ S.days[t]="bonus"; S.last=t; persist(); return 0; }
+  if(now.getHours()>=DEADLINE){ S.days[t]="late"; S.last=t; persist(); return 0; }
+  S.days[t]="done"; S.last=t; recalcStreak();
+  const bonus=Math.min(120,S.streak*12);
+  addXP(bonus);
+  if(S.streak>=3) award("streak3");
+  if(S.streak>=7) award("streak7");
+  persist();
+  return bonus;
+}
+function dailyTick(ok){
+  const t=today();
+  if(S.daily.d!==t) S.daily={d:t,n:0,got:false};
+  if(ok) S.daily.n++;
+  if(S.daily.n>=15&&!S.daily.got){ S.daily.got=true; addXP(120); toast("🎯 Kunlik maqsad bajarildi! +120 XP"); }
+  persist();
+}
+/* eslatma matni */
+function remText(){
+  const b=board(), p=place(), lead=b[0];
+  return p===1 ? "Siz 1-o'rindasiz ("+S.xp+" XP). Ortdagilar yaqinlashyapti — bugun ham mashq qiling!"
+    : lead.name+" 1-o'rinda ("+lead.xp+" XP), siz "+p+"-o'rindasiz ("+S.xp+" XP). Farq: "+(lead.xp-S.xp)+" XP.";
+}
+function syncSW(){}
+function notify(body){
+  if(!("Notification" in window)||Notification.permission!=="granted") return false;
+  try{ const n=new Notification("Buxgalter safari 🔥",{body,icon:ICON192,badge:ICON192,tag:"bux-daily"});
+    n.onclick=()=>{window.focus();n.close();}; return true; }catch(e){ return false; }
+}
+/* juma 12:00 da liga yakuni */
+let lgTimer=null;
+function scheduleLeague(){
+  clearTimeout(lgTimer);
+  const ms=weekEnd()-new Date();
+  if(ms>0&&ms<7*86400000) lgTimer=setTimeout(()=>{ checkWeek(); if(S.pending) leagueResult(); scheduleLeague(); }, ms+2000);
+}
+
+/* eslatma vaqti kelganda (ilova ochiq yoki fonda bo'lsa) */
+let remTimer=null;
+function scheduleReminder(){
+  clearTimeout(remTimer);
+  if(!S.rem) return;
+  const [h,m]=S.rem.split(":").map(Number);
+  const now=new Date(), t=new Date();
+  t.setHours(h,m,0,0);
+  if(S.last!==today() && now>=t){ notify(remText()); }
+  if(now>=t) t.setDate(t.getDate()+1);
+  remTimer=setTimeout(()=>{ if(S.last!==today()) notify(remText()); scheduleReminder(); }, t-now);
+}
+
+/* ---------------- bosh ekran ---------------- */
+let overtake=[];
+let TAB="main";
+const NAVS=[["main","🏠","Asosiy"],["rate","🏆","Reyting"],["stage","📚","Bosqich"],["prof","👤","Profil"]];
+function shell(html,tab){
+  TAB=tab; run=null;
+  const u=S.user, ini=(((u.first||"?")[0]||"?")+((u.last||"")[0]||"")).toUpperCase();
+  app.innerHTML=`<div class="appbar"><div class="ava">${ini}</div>
+    <div class="ttl"><b>${u.first||"Buxgalter"} ${(u.last||"").slice(0,1)}${u.last?".":""}</b><i>${rankOf(S.xp).cur[1]}</i></div>
+    <span class="xpchip">⚡ ${S.xp}</span></div>${html}`;
+  setDock(`<nav class="nav">${NAVS.map(n=>`<button data-t="${n[0]}" class="${tab===n[0]?"on":""}"><span>${n[1]}</span>${n[2]}</button>`).join("")}</nav>`);
+  dock.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>({main:scrMain,rate:scrRating,stage:scrStages,prof:scrProfile})[b.dataset.t]());
+  window.scrollTo(0,0);
+}
+function lbHTML(list){
+  const m=["🥇","🥈","🥉","4","5","6","7","8","9"];
+  return `<div class="lb">${list.map((x,k)=>`<div class="row ${x.me?"me":""}"><span class="pos">${m[k]}</span>
+    <span class="who">${x.emoji} ${x.name}${x.tag?`<i>${x.tag}</i>`:""}</span><span class="xp">${x.xp} XP</span></div>`).join("")}</div>`;
+}
+/* ---------- ro'yxatdan o'tish ---------- */
+function register(){
+  setDock(null);
+  app.innerHTML=`<section class="sheet set reg">
+    <div class="reglogo">📗</div>
+    <h2>Buxgalter safari</h2>
+    <p class="small">Ligada qatnashish uchun ro'yxatdan o'ting.</p>
+    <label for="f">Ism</label><input id="f" type="text" placeholder="Ismingiz" autocomplete="given-name">
+    <label for="l">Familiya</label><input id="l" type="text" placeholder="Familiyangiz" autocomplete="family-name">
+    <label for="p">Telefon raqam</label><input id="p" type="tel" inputmode="tel" placeholder="+998 90 123 45 67" autocomplete="tel">
+    <p class="small" id="err" style="color:var(--bad); min-height:22px"></p>
+  </section>`;
+  setDock(`<button class="btn" id="go">Ro'yxatdan o'tish</button>`);
+  document.getElementById("go").onclick=()=>{
+    const f=document.getElementById("f").value.trim(), l=document.getElementById("l").value.trim();
+    let p=document.getElementById("p").value.replace(/[^\d+]/g,"");
+    const err=document.getElementById("err");
+    if(f.length<2) return err.textContent="Ismni kiriting";
+    if(l.length<2) return err.textContent="Familiyani kiriting";
+    if(/^9\d{8}$/.test(p)) p="+998"+p;
+    if(/^998\d{9}$/.test(p)) p="+"+p;
+    if(!/^\+998\d{9}$/.test(p)) return err.textContent="Telefon raqam: +998 XX XXX XX XX";
+    S.user={first:f,last:l,phone:p}; S.name=f; persist();
+    toast("Xush kelibsiz, "+f+"!"); coins(); scrMain();
+    if(S.key) joinServer().then(r=>{ toast(r.msg); pullPlayers(true); });
+  };
+  window.scrollTo(0,0);
+}
+/* ---------- asosiy oyna ---------- */
+function leagueCard(){
+  const wb=weekBoard(), wp=wb.findIndex(x=>x.me)+1, my=S.week.my;
+  const pct=Math.min(100,Math.round(my/WEEK_GOAL*100));
+  return `<section class="league"><div class="lg-top"><h3>🏆 Haftalik liga</h3><span class="lg-timer">${timeLeft()}</span></div>
+    <div class="lg-note">${weekendNow()?"Yangi liga dushanbada boshlanadi":"Dushanba–juma 12:00 · natijalar juma 12:00 da"}</div>
+    ${online()?lbHTML(wb)+`<div class="gap ${wp===1?"up":"down"}">${wp===1?"Siz yetakchisiz — ushlab turing!":`Birinchi o'ringacha ${wb[0].xp-wb[wp-1].xp} XP`}</div>`
+    :`<div class="goal"><div class="goal-n">${my} / ${WEEK_GOAL} XP</div>
+       <div class="goal-bar"><i style="width:${pct}%"></i></div>
+       <div class="goal-t">${my>=WEEK_GOAL?"Maqsad bajarildi — juma kuni 🏆 +400 XP":"Haftalik maqsadgacha "+(WEEK_GOAL-my)+" XP"}</div></div>
+     <div class="lg-note">${S.lastWeekXp?`O'tgan hafta: ${S.lastWeekXp} XP — ${my>S.lastWeekXp?"hozir oldindasiz 💪":"hozir orqadasiz"}`:"👥 Sheriklar qo'shilganda shu yerda ular bilan poyga bo'ladi"}</div>`}
+  </section>`;
+}
+function scrMain(){
+  const d=dayState(), wb=weekBoard(), wp=wb.findIndex(x=>x.me)+1;
+  const dm=S.daily.d===today()?S.daily.n:0, ns=nextStage();
+  const cta=ns!==null?`${STAGES[ns].icon} ${ns+1}-bosqich: ${STAGES[ns].title}`:"🎯 Kunlik mashq";
+  shell(`
+  ${overtake.length?`<div class="alert">⚠️ Siz ${overtake[0]}-o'rindan ${overtake[1]}-o'ringa tushdingiz. Raqobatchilar siz yo'qligingizda ishladi!</div>`:""}
+  <section class="dl ${d.k}"><div class="dl-l"><b>${d.k==="done"?"✅ Bugun bajarildi":d.k==="missed"?"❌ Qoldirib yuborildi":d.k==="off"?"☕ Dam olish kuni":"⏰ Bugungi mashq"}</b>
+    <i>${d.txt}</i></div><div class="dl-r">${S.streak}<span>kun</span></div></section>
+  ${leagueCard()}
+  <div class="duo">
+    <div><div class="n">${dm}/15</div><div class="small">bugungi to'g'ri javob${S.daily.got?"<br>🎯 +120 olindi":"<br>maqsad: +120 XP"}</div></div>
+    <div><div class="n">${Object.keys(S.stars).length}/${STAGES.length}</div><div class="small">yakunlangan bosqich</div></div>
+  </div>
+  <div class="privacy">🔒 Kunlik natijalar faqat sizga ko'rinadi · 👥 juma 12:00 dagi liga natijasi hammaga</div>
+  <section class="card cta"><h3>${d.k==="open"?"Bugungi mashqni bajaring":"Davom eting"}</h3>
+    <button class="btn" id="go">${cta}</button>
+    <div class="acts">
+      <button class="act" id="dly"><span>🎯</span>Kunlik mashq<i>10 savol</i></button>
+      <button class="act" id="blz"><span>⚡</span>Blits<i>60 soniya · rekord ${S.blitz||0}</i></button>
+      <button class="act ${Object.keys(S.errs).length?"":"dim"}" id="err"><span>📕</span>Xato daftari<i>${Object.keys(S.errs).length} ta savol</i></button>
+      <button class="act ${giftReady()?"gift":"dim"}" id="gft"><span>🎁</span>Kunlik sovg'a<i>${giftDone()?"ertaga yana":giftReady()?"savolga javob bering":giftCorrect()+"/"+GIFT_NEED+" to'g'ri javob"}</i></button>
+    </div></section>`,"main");
+  const open=STAGES.map((x,i)=>i).filter(unlocked);
+  document.getElementById("go").onclick=()=>ns!==null?intro(ns):startDaily(open);
+  document.getElementById("dly").onclick=()=>startDaily(open);
+  document.getElementById("blz").onclick=()=>startBlitz(open);
+  document.getElementById("err").onclick=startErrs;
+  document.getElementById("gft").onclick=openGift;
+  overtake=[];
+}
+/* ---------- reyting ---------- */
+function scrRating(){
+  const wb=weekBoard(), wp=wb.findIndex(x=>x.me)+1, b=board(), p=place();
+  shell(`
+  ${leagueCard()}
+  <section class="card"><h3>Haftalik sovrinlar</h3>
+    <div class="prizes">${online()?"🏆 1-o'rin +400 XP · 🥈 +200 · 🥉 +100 · 🎗️ +40"
+      :"🏆 600 XP maqsad +400 · 🥈 360 XP dan +150 · 🎗️ ishtirok +50"}</div>
+    <p class="small" style="margin-top:10px">Sheriklar qo'shilgach sovrinlar o'rin bo'yicha beriladi.</p></section>
+  <section class="card"><h3>Shaxsiy natijalar</h3>${lbHTML(b)}
+    <div class="duo" style="margin-top:12px"><div><div class="n">${S.blitz||0}</div><div class="small">blits rekordi</div></div>
+    <div><div class="n">${S.lastWeekXp||0}</div><div class="small">o'tgan hafta XP</div></div></div></section>
+  <section class="card"><h3>Kuboklar</h3><div class="cups"><span>🏆 ${S.cups[0]}</span><span>🥈 ${S.cups[1]}</span><span>🥉 ${S.cups[2]}</span>
+    <span class="small">${S.leagues||0} ta liga o'ynaldi</span></div></section>
+  <section class="card"><h3>Liga qoidalari</h3><ul class="rules">
+    <li>Liga dushanba kuni boshlanadi, <b>juma soat 12:00</b> da tugaydi.</li>
+    <li>Har kuni mashq <b>17:00 gacha</b> bajarilishi kerak — keyin kun qoldirilgan hisoblanadi va seriya uziladi.</li>
+    <li>Kunlik natijalar faqat o'zingizga ko'rinadi.</li>
+    <li>Juma 12:00 dagi yakuniy jadval barcha ishtirokchilarga ko'rinadi.</li></ul></section>`,"rate");
+}
+/* ---------- bosqichlar ---------- */
+function scrStages(){
+  shell(`<ol class="path">${STAGES.map((st,i)=>{const sc=S.stars[i]||0,op=unlocked(i);
+    return `<li class="stage ${sc?"done":""}"><div class="num">${i+1}</div>
+    <button ${op?"":"disabled"} data-s="${i}"><h3>${st.icon} ${st.title}</h3>
+    <div class="meta"><span>${op?st.tasks.length+" vazifa":"🔒 Yopiq"}</span><span class="stars">${starStr(sc)}</span></div></button></li>`;}).join("")}</ol>
+    <section class="card"><h3>Kunlik mashq</h3><p class="small">Ochilgan bosqichlardan 10 ta tasodifiy savol.</p>
+    <button class="btn" id="dly">🎯 Boshlash</button></section>`,"stage");
+  app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>intro(+b.dataset.s));
+  document.getElementById("dly").onclick=()=>startDaily(STAGES.map((x,i)=>i).filter(unlocked));
+}
+/* ---------- profil ---------- */
+function scrProfile(){
+  const rk=rankOf(S.xp), pct=rk.next?Math.max(2,Math.round((S.xp-rk.cur[0])/(rk.next[0]-rk.cur[0])*100)):100;
+  const u=S.user, done=Object.keys(S.days).filter(k=>S.days[k]==="done").length, miss=Object.keys(S.days).filter(k=>S.days[k]==="missed").length;
+  shell(`<section class="card"><h3>${u.first} ${u.last}</h3>
+    <div class="small">📞 ${u.phone}</div>
+    <div class="rank-top" style="margin-top:12px"><b>${rk.cur[1]}</b><span class="pill">⚡ ${S.xp} XP</span></div>
+    <div class="meter"><i style="width:${pct}%"></i></div>
+    <div class="small" style="margin-top:6px">${rk.next?`«${rk.next[1]}» uchun yana ${rk.next[0]-S.xp} XP`:"Eng yuqori daraja!"}</div></section>
+  <div class="duo"><div><div class="n">${done}</div><div class="small">bajarilgan kun</div></div>
+    <div><div class="n">${miss}</div><div class="small">qoldirilgan kun</div></div></div>
+  <section class="card"><h3>So'nggi 7 kun</h3><div class="week7">${(()=>{let o="";
+    for(let i=6;i>=0;i--){const dt=new Date();dt.setDate(dt.getDate()-i);const v=S.days[dstr(dt)];
+      const cl=v==="done"?"d":v==="shield"?"s":v==="missed"?"m":v?"b":(isWorkday(dt)?"n":"w");
+      o+=`<span class="${cl}">${["Ya","Du","Se","Ch","Pa","Ju","Sh"][dt.getDay()]}</span>`;}
+    return o;})()}</div>
+    <div class="small" style="margin-top:8px">🟢 bajarilgan · 🔴 qoldirilgan · 🛡️ qalqon · ⚪ dam olish</div></section>
+  <section class="card"><h3>Do'kon</h3>
+    <div class="shop"><div><b>🛡️ Qalqon</b><i>17:00 o'tib ketsa seriyani saqlaydi. Sizda: ${S.shield}</i></div>
+    <button class="buy" id="buy">300 XP</button></div>
+    <div class="shop"><div><b>📕 Xato daftari</b><i>Xato qilgan savollaringiz: ${Object.keys(S.errs).length} ta</i></div>
+    <button class="buy" id="errb">Mashq</button></div></section>
+  <section class="card"><h3>Yutuqlar (${S.ach.length}/${ACH.length})</h3>
+    <div class="badges">${ACH.map(a=>`<div class="badge ${S.ach.includes(a.id)?"":"off"}" title="${a.n}: ${a.d}">${a.i}</div>`).join("")}</div></section>
+  <section class="card"><h3>Liga ulanishi</h3>
+    <div class="small">${S.key?(S.pid?`✅ Ulangan · ishtirokchilar: ${S.pcount||1}/7`:"⚠️ Kalit bor, lekin ro'yxatga qo'shilmagan"):"❌ Serverga ulanmagan — hozircha yolg'iz o'ynayapsiz"}</div>
+    <button class="btn ghost" id="srv">🔗 Ligaga ulanish</button></section>
+  <section class="card"><h3>Sozlamalar</h3>
+    <button class="btn ghost" id="inst">📲 Telefonga o'rnatish</button>
+    <button class="btn ghost" id="set">🔔 Eslatma va sozlamalar</button>
+    ${Object.keys(S.stars).length===STAGES.length?`<button class="btn ghost" id="cert">🏅 Sertifikat</button>`:""}</section>`,"prof");
+  document.getElementById("srv").onclick=scrServer;
+  document.getElementById("buy").onclick=buyShield;
+  document.getElementById("errb").onclick=startErrs;
+  document.getElementById("inst").onclick=install;
+  document.getElementById("set").onclick=settings;
+  const c=document.getElementById("cert"); if(c) c.onclick=cert;
+}
+function home(){ sweepDays(); if(!S.user.first) return register(); scrMain(); }
+function nextStage(){ for(let i=0;i<STAGES.length;i++) if(!(S.stars[i])) return unlocked(i)?i:null; return null; }
+function leagueResult(){
+  const d=S.pending; S.pending=null; persist();
+  app.innerHTML=`<section class="sheet result">
+    <div style="font-size:64px">${d.cup}</div>
+    <h2>Haftalik liga yakunlandi!</h2>
+    <p class="story">${d.pos===1?"Tabriklaymiz — siz g'olib bo'ldingiz!":d.txt+" — "+d.pos+"-o'rin"}</p>
+    <div class="stats"><span class="pill">🎁 +${d.xp} XP</span>${d.pos<=3?`<span class="pill">${d.cup} kubok javoningizda</span>`:""}</div>
+    <div class="card"><div class="lb">${d.board.map((x,k)=>`<div class="row ${x.me?"me":""}">
+      <span class="pos">${["🥇","🥈","🥉","4"][k]}</span><span class="who">${x.n}</span><span class="xp">${x.x} XP</span></div>`).join("")}</div></div>
+    <p class="small">Yangi liga boshlandi — hisob noldan. Keyingi juma yana yakunlanadi.</p></section>`;
+  setDock(`<button class="btn" id="g">Yangi ligani boshlash</button>`);
+  document.getElementById("g").onclick=home; coins(); window.scrollTo(0,0);
+}
+function scrServer(){
+  setDock(null);
+  app.innerHTML=`<div class="bar"><button class="back">←</button><span class="small">Liga ulanishi</span></div>
+  <section class="sheet set"><h2>🔗 7 kishilik liga</h2>
+  <p class="story">Ishtirokchilar bitta umumiy jadvalda bo'lishi uchun server kaliti kerak. Kalit bir marta kiritiladi.</p>
+  <label for="k">Server kaliti (anon / publishable key)</label>
+  <input id="k" type="text" placeholder="sb_publishable_... yoki eyJ..." value="${(S.key||"").slice(0,12)?(S.key||""):""}">
+  <p class="small">Supabase → Project Settings → API Keys → publishable (anon) key.</p>
+  <p class="small" id="st"></p>
+  <div class="shop"><div><b>Ishtirokchilar</b><i id="cnt">${S.pcount||1} / 7</i></div>
+    <button class="buy" id="ref">Yangilash</button></div>
+  <p class="small">Sizdan tashqari 6 kishi qo'shila oladi. Ular ham shu ilovani o'rnatib, ro'yxatdan o'tadi — kalit ilova ichida tayyor turadi.</p>
+  </section>`;
+  app.querySelector(".back").onclick=scrProfile;
+  const st=document.getElementById("st");
+  setDock(`<button class="btn" id="go">Ulanish</button>`);
+  document.getElementById("go").onclick=async()=>{
+    S.key=document.getElementById("k").value.trim(); persist();
+    if(!S.key){ st.textContent="Kalitni kiriting"; return; }
+    st.textContent="Ulanmoqda...";
+    const r=await joinServer();
+    st.textContent=(r.ok?"✅ ":"❌ ")+r.msg;
+    if(r.ok){ toast(r.msg); await pullPlayers(true); document.getElementById("cnt").textContent=(S.pcount||1)+" / 7"; }
+  };
+  document.getElementById("ref").onclick=async()=>{ await pullPlayers(true); document.getElementById("cnt").textContent=(S.pcount||1)+" / 7"; toast("Yangilandi"); };
+  window.scrollTo(0,0);
+}
+function install(){
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  app.innerHTML=`<div class="bar"><button class="back">←</button><span class="small">O'rnatish</span></div>
+  <section class="sheet"><h2>📲 Telefonga o'rnatish</h2>
+  <p class="story">Uch qadam — ikonka telefon ekranida paydo bo'ladi va brauzersiz ochiladi.</p>
+  ${ios?`<ol class="steps"><li>Pastdagi <b>Ulashish</b> belgisini bosing (kvadrat va yuqoriga o'q).</li>
+    <li><b>Bosh ekranga qo'shish</b> ni tanlang.</li><li><b>Qo'shish</b> tugmasini bosing.</li></ol>`
+   :`<ol class="steps"><li>Pastdagi <b>O'rnatish</b> tugmasini bosing.</li>
+    <li>Tugma ishlamasa: Chrome'da o'ng yuqoridagi <b>⋮</b> → <b>Ilovani o'rnatish</b> (yoki <b>Bosh ekranga qo'shish</b>).</li>
+    <li><b>O'rnatish</b> ni tasdiqlang.</li></ol>`}
+  <p class="small">Natijalaringiz shu telefonda saqlanadi. Ilovani o'chirsangiz, XP va yulduzlar ham o'chadi.</p></section>`;
+  app.querySelector(".back").onclick=home;
+  setDock(`<button class="btn" id="go">O'rnatish</button>`);
+  document.getElementById("go").onclick=async()=>{
+    if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt=null; toast("O'rnatish oynasi ochildi"); }
+    else toast(ios?"Ulashish → Bosh ekranga qo'shish":"Chrome menyusi ⋮ → Ilovani o'rnatish");
+  };
+  window.scrollTo(0,0);
+}
+
+/* ---------------- sozlamalar / sertifikat ---------------- */
+function settings(){
+  app.innerHTML=`<div class="bar"><button class="back">←</button><span class="small">Sozlamalar</span></div>
+  <section class="sheet set">
+    <h2>Eslatma va sozlamalar</h2>
+    <label for="nm">Ismingiz (reyting va sertifikat uchun)</label>
+    <input id="nm" type="text" value="${(S.name||"").replace(/"/g,"&quot;")}" placeholder="Ismingiz">
+    <label for="tm">Kunlik eslatma vaqti</label>
+    <input id="tm" type="time" value="${S.rem||"20:00"}">
+    <p class="small" id="nst"></p>
+    <button class="btn" id="on">Eslatmani yoqish</button>
+    <button class="btn ghost" id="test">Sinov eslatmasini ko'rish</button>
+    <p class="small">Eslatma matnida raqobatchilar reytingi bo'ladi. Ilova butunlay yopilgan bo'lsa, eslatma siz ilovani ochganingizda ko'rinadi — shuning uchun aniq vaqtli eslatma uchun telefon budilnigi ham foydali.</p>
+    <button class="btn ghost" id="ins">Telefonga ilova qilib o'rnatish</button>
+    <button class="btn ghost" id="rst">Natijalarni nolga qaytarish</button>
+  </section>`;
+  app.querySelector(".back").onclick=home; setDock(null);
+  const nst=document.getElementById("nst");
+  const st=()=>{ nst.textContent = !("Notification" in window) ? "Bu brauzer eslatmani qo'llab-quvvatlamaydi."
+    : Notification.permission==="granted" ? "Eslatma yoqilgan ✓" : Notification.permission==="denied" ? "Brauzer sozlamalarida bloklangan." : "Hali yoqilmagan."; };
+  st();
+  document.getElementById("nm").onchange=e=>{S.name=e.target.value.trim();persist();};
+  document.getElementById("tm").onchange=e=>{S.rem=e.target.value;persist();};
+  document.getElementById("on").onclick=async()=>{
+    S.rem=document.getElementById("tm").value; S.name=document.getElementById("nm").value.trim();
+    if(!("Notification" in window)){st();return;}
+    const p=await Notification.requestPermission(); S.notif=p==="granted"; persist(); st();
+    if(p==="granted"){ toast("Eslatma yoqildi ✓"); scheduleReminder(); }
+  };
+  document.getElementById("test").onclick=()=>{
+    if(!notify(remText())) toast("Avval eslatmani yoqing");
+  };
+  const ins=document.getElementById("ins");
+  if(ins) ins.onclick=async()=>{ if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt=null; }
+    else toast("Chrome menyusi (⋮) → «Ilovani o'rnatish»"); };
+  document.getElementById("rst").onclick=()=>{ if(confirm("Barcha XP, yulduz va yutuqlar o'chiriladi. Davom etasizmi?")){
+    S={xp:0,stars:{},streak:0,last:"",sim:Date.now(),riv:{},ach:[],daily:{d:"",n:0,got:false},dailyRuns:0,failed:{},name:S.name,rem:S.rem,notif:S.notif};
+    RIVALS.forEach(r=>S.riv[r.id]=0); persist(); home(); } };
+}
+function cert(){
+  const d=new Date().toLocaleDateString("ru-RU");
+  app.innerHTML=`<div class="bar"><button class="back">←</button></div>
+  <section class="cert"><div style="font-size:44px">🏆</div><h2>Sertifikat</h2>
+  <p class="small">Ushbu sertifikat beriladi:</p><div class="nm">${S.name||"Buxgalter"}</div>
+  <p style="margin-top:14px">«Buxgalter safari» kursining barcha 8 bosqichini yakunlagani uchun: hisobvaraqlar, provodka, QQS, ish haqi, amortizatsiya va yil yakuni.</p>
+  <p class="small">Daraja: ${rankOf(S.xp).cur[1]} · ${S.xp} XP · ${d}</p></section>`;
+  app.querySelector(".back").onclick=home; setDock(`<button class="btn" id="h">Xaritaga qaytish</button>`);
+  document.getElementById("h").onclick=home; coins();
+}
+
+/* ---------------- bosqich ---------------- */
+let run=null;
+function intro(si){
+  const s=STAGES[si];
+  app.innerHTML=`<div class="bar"><button class="back">←</button><span class="small">${si+1}-bosqich</span></div>
+  <article class="sheet"><h2>${s.icon} ${s.title}</h2><p class="story">${s.story}</p>
+  <div class="theory">${s.theory}</div>
+  ${s.example?`<div class="example"><div class="small">${s.example.t}</div>
+    <div class="r"><span>Dt ${s.example.dt}</span><span>Kt ${s.example.kt}</span></div>
+    <div class="small">${A[s.example.dt]} ⟵ ${A[s.example.kt]}</div></div>`:""}
+  <p class="small">❤️ 3 ta jon. Xato savol oxirida yana qaytadi. ${s.tasks.length} ta vazifa.</p></article>`;
+  app.querySelector(".back").onclick=home;
+  setDock(`<button class="btn" id="go">Boshlash</button>`);
+  document.getElementById("go").onclick=()=>{
+    const tasks=STAGES[si].tasks.map((t,k)=>({...t,k}));
+    run={mode:"stage",si,queue:tasks,total:tasks.length,i:0,lives:3,combo:0,mistakes:0,marks:tasks.map(()=>""),retried:new Set(),earned:0};
+    task();
+  };
+  window.scrollTo(0,0);
+}
+function startBlitz(open){
+  let pool=[]; open.forEach(i=>STAGES[i].tasks.forEach(t=>pool.push(t)));
+  pool=shuffle(pool).slice(0,40).map((t,k)=>({...t,k}));
+  run={mode:"blitz",si:null,queue:pool,total:pool.length,i:0,lives:99,combo:0,mistakes:0,
+    marks:pool.map(()=>""),retried:new Set(),earned:0,right:0,end:Date.now()+60000};
+  task();
+}
+function startErrs(){
+  const ids=Object.keys(S.errs);
+  if(!ids.length){ toast("Xato daftari bo'sh — zo'r!"); return; }
+  const pool=shuffle(ids.map(id=>TASKMAP[id]).filter(Boolean)).slice(0,12).map((t,k)=>({...t,k}));
+  run={mode:"errs",si:null,queue:pool,total:pool.length,i:0,lives:5,combo:0,mistakes:0,
+    marks:pool.map(()=>""),retried:new Set(),earned:0};
+  task();
+}
+const GIFT_NEED=5;                       // sovg'a uchun bugungi to'g'ri javoblar
+function giftDone(){ return S.gift===today(); }
+function giftCorrect(){ return S.daily.d===today()?S.daily.n:0; }
+function giftReady(){ return !giftDone()&&giftCorrect()>=GIFT_NEED; }
+function openGift(){
+  if(giftDone()) return toast("Bugungi sovg'a olingan — ertaga yana");
+  if(giftCorrect()<GIFT_NEED) return toast("Avval "+(GIFT_NEED-giftCorrect())+" ta to'g'ri javob bering");
+  const open=STAGES.map((x,i)=>i).filter(unlocked);
+  let pool=[]; open.forEach(i=>STAGES[i].tasks.forEach(t=>pool.push(t)));
+  const q={...shuffle(pool)[0],k:0};
+  run={mode:"gift",si:null,queue:[q],total:1,i:0,lives:1,combo:0,mistakes:0,marks:[""],retried:new Set(),earned:0};
+  task();
+}
+function giftReward(ok){
+  const n=ok?[80,110,140,170,200][Math.floor(Math.random()*5)]:25;
+  S.gift=today(); addXP(n); persist(); sync();
+  app.innerHTML=`<section class="sheet result"><div style="font-size:70px">${ok?"🎁":"📦"}</div>
+    <h2>${ok?"Sovg'a ochildi!":"Qutida kichik sovg'a"}</h2>
+    <p class="story">${ok?"To'g'ri javob uchun katta sovg'a":"Javob xato edi — lekin quruq qolmadingiz"}</p>
+    <div class="stats"><span class="pill">⚡ +${n} XP</span></div>
+    <p class="small">Ertaga yangi sovg'a: yana ${GIFT_NEED} ta to'g'ri javobdan keyin ochiladi.</p></section>`;
+  if(ok) coins();
+  setDock(`<button class="btn" id="h">Davom etish</button>`);
+  document.getElementById("h").onclick=home; window.scrollTo(0,0);
+}
+function buyShield(){
+  if(S.xp<300) return toast("Qalqon uchun 300 XP kerak");
+  S.xp-=300; S.shield++; persist(); toast("🛡️ Qalqon olindi! Bir kunni saqlaydi"); scrProfile();
+}
+function startDaily(open){
+  let pool=[]; open.forEach(i=>STAGES[i].tasks.forEach(t=>pool.push(t)));
+  pool=shuffle(pool).slice(0,10).map((t,k)=>({...t,k}));
+  run={mode:"daily",si:null,queue:pool,total:pool.length,i:0,lives:5,combo:0,mistakes:0,marks:pool.map(()=>""),retried:new Set(),earned:0};
+  task();
+}
+
+function task(){
+  const r=run,t=r.queue[r.i];
+  r.answered=false; r.pick=null; r.slots={dt:null,kt:null}; r.active="dt";
+  const kind={mc:"Test",pv:"Provodka tuzing",calc:"Hisoblang"}[t.t];
+  const retry=r.i>=r.total;
+  app.innerHTML=`<div class="bar"><button class="back">✕</button>
+    ${r.mode==="blitz"?`<span class="tmr" id="tmr">⏱ 60</span><span class="pill">✅ ${r.right}</span>`
+      :`<span class="hearts">${"❤️".repeat(r.lives)}${"🤍".repeat((r.mode==="daily"||r.mode==="errs"?5:3)-r.lives)}</span>`}<span class="spacer"></span>
+    ${r.combo>=2?`<span class="combo">🔥 ×${r.combo}</span>`:""}<span class="pill">⚡ ${S.xp+r.earned}</span></div>
+  <div class="progress">${r.marks.map((m,k)=>`<span class="${m||(k===t.k?"now":"")}"></span>`).join("")}</div>
+  <article class="sheet task" id="card"><div class="kind">${({daily:"Kunlik mashq · ",blitz:"⚡ Blits · ",errs:"📕 Xato daftari · ",gift:"🎁 Sovg'a savoli · "})[r.mode]||""}${kind}${retry?" — takroriy":""}</div>
+  <p class="q">${t.q}</p><div id="body"></div><div id="fb"></div></article>`;
+  app.querySelector(".back").onclick=()=>{ if(confirm("Chiqasizmi? Natija saqlanmaydi.")){ clearInterval(r.tick); home(); } };
+  if(r.mode==="blitz"){
+    clearInterval(r.tick);
+    r.tick=setInterval(()=>{
+      const left=Math.max(0,Math.round((r.end-Date.now())/1000));
+      const el=document.getElementById("tmr"); if(el) el.textContent="⏱ "+left;
+      if(left<=0){ clearInterval(r.tick); finish(true); }
+    },250);
+  }
+  const body=document.getElementById("body");
+  if(t.t==="mc"){
+    let opts=t.o.map((x,k)=>({x,c:k===t.a}));
+    if(t.o.every(o=>/^\d{4}$/.test(o))){           // faqat hisobvaraq raqamlari bo'lsa — yana 2 ta chalg'ituvchi
+      const pool=Object.keys(A).filter(c=>!t.o.includes(c));
+      shuffle(pool).slice(0,2).forEach(c=>opts.push({x:c,c:false}));
+    }
+    r.opts=shuffle(opts); r.ans=r.opts.findIndex(o=>o.c);
+    body.innerHTML=`<div class="opts">${r.opts.map((o,k)=>`<button class="opt" data-k="${k}">${o.x}</button>`).join("")}</div>`;
+    body.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ if(r.answered)return; r.pick=+b.dataset.k;
+      body.querySelectorAll(".opt").forEach(x=>x.classList.toggle("sel",x===b)); btn(true); });
+    btn(false);
+  }
+  if(t.t==="pv"){
+    let pv=[...t.o];
+    const pool=Object.keys(A).filter(c=>!pv.includes(c));
+    pv=pv.concat(shuffle(pool).slice(0,Math.max(0,8-pv.length)));
+    const opts=shuffle(pv);
+    body.innerHTML=`<div class="ledger"><div class="h">Debet</div><div class="h">Kredit</div>
+      <button class="slot" data-side="dt"></button><button class="slot" data-side="kt"></button></div>
+      <div class="accs">${opts.map(c=>`<button class="acc" data-c="${c}"><code>${c}</code>${A[c]}</button>`).join("")}</div>`;
+    const draw=()=>{
+      body.querySelectorAll(".slot").forEach(s=>{ const v=r.slots[s.dataset.side];
+        s.classList.toggle("active",!r.answered&&r.active===s.dataset.side);
+        s.innerHTML=v?`<span class="hw">${v}</span><span>${A[v]}</span>`:`<span>${r.active===s.dataset.side?"Hisobvaraqni tanlang":"Bo'sh"}</span>`; });
+      body.querySelectorAll(".acc").forEach(a=>a.classList.toggle("used",a.dataset.c===r.slots.dt||a.dataset.c===r.slots.kt));
+      btn(!!(r.slots.dt&&r.slots.kt));
+    };
+    body.querySelectorAll(".slot").forEach(s=>s.onclick=()=>{ if(r.answered)return; const side=s.dataset.side;
+      if(r.slots[side])r.slots[side]=null; r.active=side; draw(); });
+    body.querySelectorAll(".acc").forEach(a=>a.onclick=()=>{ if(r.answered)return; const c=a.dataset.c;
+      if(r.slots.dt===c)r.slots.dt=null; if(r.slots.kt===c)r.slots.kt=null;
+      r.slots[r.active]=c; r.active=!r.slots.dt?"dt":(!r.slots.kt?"kt":r.active); draw(); });
+    draw();
+  }
+  if(t.t==="calc"){
+    body.innerHTML=`<div class="calc"><input id="num" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Javob">
+      <div class="unit">${t.unit||"so'm"} — faqat raqam</div></div>`;
+    const inp=document.getElementById("num");
+    inp.oninput=()=>{const d=inp.value.replace(/\D/g,""); inp.value=d?fmt(+d):""; btn(!!d);};
+    inp.onkeydown=e=>{ if(e.key==="Enter"&&inp.value) check(); };
+    btn(false);
+  }
+  window.scrollTo(0,0);
+}
+function btn(on){ setDock(`<button class="btn" id="chk" ${on?"":"disabled"}>Tekshirish</button>`); document.getElementById("chk").onclick=check; }
+
+function check(){
+  const r=run,t=r.queue[r.i]; if(r.answered)return; r.answered=true;
+  let ok=false,right="";
+  const body=document.getElementById("body");
+  if(t.t==="mc"){ ok=r.pick===r.ans;
+    body.querySelectorAll(".opt").forEach((b,k)=>{ if(k===r.ans)b.classList.add("right"); else if(k===r.pick)b.classList.add("wrong"); }); }
+  if(t.t==="pv"){ ok=r.slots.dt===t.dt&&r.slots.kt===t.kt;
+    body.querySelectorAll(".slot").forEach(s=>{const side=s.dataset.side; s.classList.remove("active");
+      s.classList.add(r.slots[side]===t[side]?"right":"wrong");});
+    right=`To'g'ri provodka: <b style="display:inline">Dt ${t.dt} — Kt ${t.kt}</b><br>`; }
+  if(t.t==="calc"){ const v=+document.getElementById("num").value.replace(/\D/g,""); ok=v===t.a;
+    document.getElementById("num").disabled=true;
+    right=`To'g'ri javob: <b style="display:inline">${fmt(t.a)} ${t.unit||"so'm"}</b><br>`; }
+  const card=document.getElementById("card"), st=document.createElement("div");
+  st.className="stamp "+(ok?"ok":"bad"); st.textContent=ok?"TO'G'RI":"XATO"; card.appendChild(st);
+  if(ok){
+    r.combo++;
+    let g=(r.i>=r.total?5:(r.mode==="daily"?8:10)); if(r.combo>=3)g+=5; if(r.combo>=7)g+=5;
+    r.earned+=g; if(r.marks[t.k]!=="bad")r.marks[t.k]="ok";
+    if(r.combo===3)toast("🔥 3 ketma-ket! +5 bonus");
+    if(r.combo===5){toast("🚀 5 ketma-ket!");award("combo5");}
+    if(r.combo===7)toast("💎 7 ketma-ket! +10 bonus");
+    if(r.combo===10)award("combo10");
+    dailyTick(true);
+    if(r.mode==="blitz") r.right++;
+    if(t.id&&S.errs[t.id]&&(r.mode==="errs"||r.mode==="daily")){ delete S.errs[t.id]; persist(); }
+    const p=["Barakalla!","Aniq hisob!","Balans joyida!","Zo'r!","Professional daraja!","Inspektor ham rozi!"];
+    document.getElementById("fb").innerHTML=`<div class="explain ok"><b>${p[Math.floor(Math.random()*p.length)]} +${g} XP</b>${t.e}</div>`;
+  } else {
+    r.combo=0; if(r.mode!=="blitz") r.lives--; r.mistakes++; r.marks[t.k]="bad";
+    if(t.id){ S.errs[t.id]=true; persist(); }
+    if(!r.retried.has(t.k)){r.retried.add(t.k); r.queue.push(t);}
+    if(navigator.vibrate)try{navigator.vibrate(120);}catch(e){}
+    document.getElementById("fb").innerHTML=`<div class="explain bad"><b>Unchalik emas — keling, tushunib olamiz</b>${right}${t.e}</div>`;
+  }
+  const last=r.i>=r.queue.length-1;
+  if(r.mode==="gift"){
+    setDock(`<button class="btn" id="nx">🎁 Sovg'ani ochish</button>`);
+    document.getElementById("nx").onclick=()=>giftReward(ok);
+  } else if(r.mode==="blitz"){
+    setDock(`<button class="btn" id="nx">Keyingi savol</button>`);
+    const go=()=>{ if(Date.now()>=r.end) return; if(last) return finish(true); r.i++; task(); };
+    document.getElementById("nx").onclick=go;
+    setTimeout(()=>{ if(run===r&&r.answered) go(); },1100);
+  } else {
+  setDock(`<button class="btn" id="nx">${r.lives<=0?"Natijani ko'rish":(last?"Yakunlash":"Davom etish")}</button>`);
+  document.getElementById("nx").onclick=()=>{ if(r.lives<=0)return finish(false); if(last)return finish(true); r.i++; task(); };
+  }
+  document.getElementById("fb").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+function finish(passed){
+  const r=run; clearInterval(r.tick);
+  if(r.mode==="blitz"){
+    const rec=r.right>(S.blitz||0); if(rec) S.blitz=r.right;
+    addXP(r.earned); markDay(); persist();
+    app.innerHTML=`<section class="sheet result"><div style="font-size:60px">⚡</div>
+      <h2>Blits yakunlandi!</h2>
+      <div class="stats"><span class="pill">✅ ${r.right} to'g'ri</span><span class="pill">⚡ +${r.earned} XP</span>
+      <span class="pill">🏅 rekord: ${S.blitz}</span></div>
+      ${rec?`<p class="story">Yangi rekord! 🎉</p>`:`<p class="small">Rekordni yangilash uchun ${S.blitz-r.right+1} ta ko'proq javob kerak.</p>`}</section>`;
+    if(rec) coins();
+    setDock(`<div class="two"><button class="btn" id="a">Yana blits</button><button class="btn ghost" id="b">Asosiy</button></div>`);
+    document.getElementById("a").onclick=()=>startBlitz(STAGES.map((x,i)=>i).filter(unlocked));
+    document.getElementById("b").onclick=home; window.scrollTo(0,0); return;
+  }
+  const posBefore=place();
+  if(passed){
+    const stars=r.mistakes===0?3:(r.mistakes===1?2:1);
+    let bonus=r.mode==="stage"?stars*30:70;
+    addXP(r.earned+bonus);
+    if(r.mode==="stage"){
+      const prev=S.stars[r.si]||0; S.stars[r.si]=Math.max(prev,stars);
+      award("first"); if(stars===3)award("perfect");
+      if(Object.keys(S.stars).length>=4)award("half");
+      if(Object.keys(S.stars).length>=STAGES.length)award("all");
+      if(S.failed[r.si])award("comeback");
+    } else { S.dailyRuns=(S.dailyRuns||0)+1; if(S.dailyRuns>=5)award("daily5"); }
+    const dayBonus=markDay();
+    persist(); sync();
+    if(place()===1)award("lead");
+    const posAfter=place(), moved=posBefore-posAfter;
+    const b=board(), me=b[posAfter-1], above=posAfter>1?b[posAfter-2]:null;
+    app.innerHTML=`<section class="sheet result">
+      <div class="big-stars">${r.mode==="stage"?starStr(stars):"🎯"}</div>
+      <h2>${r.mode==="daily"?"Kunlik mashq bajarildi!":(r.si===STAGES.length-1?"Tekshiruvdan o'tdingiz!":"Bosqich yakunlandi!")}</h2>
+      <div class="stats"><span class="pill">⚡ +${r.earned+bonus+dayBonus} XP</span>
+        <span class="pill">❌ ${r.mistakes} xato</span><span class="pill">🔥 ${S.streak} kun</span></div>
+      ${dayBonus?`<p class="small">Kunlik seriya bonusi: +${dayBonus} XP</p>`:""}
+      <div class="card" style="margin:14px 0 0"><h3>Reyting</h3><div class="lb">
+        ${b.map((x,k)=>`<div class="row ${x.me?"me":""}"><span class="pos">${["🥇","🥈","🥉","4"][k]}</span>
+        <span class="who">${x.emoji} ${x.name}</span><span class="xp">${x.xp} XP</span></div>`).join("")}</div>
+        <div class="gap ${moved>0?"up":(above?"down":"up")}">${moved>0?`${moved} pog'ona ko'tarildingiz! 🎉`:(above?`${above.name}gacha ${above.xp-me.xp} XP qoldi.`:"Siz yetakchisiz — ushlab turing!")}</div></div>
+    </section>`;
+    coins();
+    const nx=r.mode==="stage"&&r.si+1<STAGES.length&&unlocked(r.si+1);
+    setDock(`<div class="two"><button class="btn" id="a">${nx?"Keyingi bosqich":"Xaritaga"}</button><button class="btn ghost" id="b">Xaritaga</button></div>`);
+    document.getElementById("a").onclick=()=>nx?intro(r.si+1):home();
+    document.getElementById("b").onclick=home;
+  } else {
+    if(r.mode==="stage"){S.failed[r.si]=true; persist();}
+    const b=board();
+    app.innerHTML=`<section class="sheet result"><div class="big-stars">🤍🤍🤍</div>
+      <h2>Jonlar tugadi</h2><p>Har bir bosh buxgalter ham shu yerdan o'tgan. Nazariyani ko'rib, qayta urinib ko'ring.</p>
+      <div class="stats"><span class="pill">✅ ${r.marks.filter(m=>m==="ok").length} to'g'ri</span><span class="pill">❌ ${r.mistakes} xato</span></div>
+      <p class="small">${b[0].me?"Siz hali yetakchisiz.":b[0].name+" hozir 1-o'rinda ("+b[0].xp+" XP)."}</p></section>`;
+    setDock(`<div class="two"><button class="btn" id="a">Qayta boshlash</button><button class="btn ghost" id="b">Xaritaga</button></div>`);
+    document.getElementById("a").onclick=()=>r.mode==="stage"?intro(r.si):home();
+    document.getElementById("b").onclick=home;
+  }
+  window.scrollTo(0,0);
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ---------------- ishga tushirish ---------------- */
+overtake=simulate();
+checkWeek();
+if(S.user.first&&!S.pid) joinServer().then(()=>pullPlayers(true)); else pullPlayers(true);
+if(S.pending) leagueResult(); else home();
+scheduleReminder();
+scheduleLeague();
+if(S.last!==today()&&S.xp>0) setTimeout(()=>toast("Bugungi mashq hali bajarilmagan 🔥"),900);
+</script>
+</body>
+</html>
