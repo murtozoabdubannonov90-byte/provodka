@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Buxgalter safari</title>
+<title>Buxgalter Safari - liga</title>
 <meta name="theme-color" content="#7C5CFF">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -236,41 +239,9 @@ h1,h2,h3{margin:0; line-height:1.1; font-family:var(--display); font-weight:800}
 <div class="wrap" id="app"></div>
 <div class="dock" id="dock" hidden></div>
 <script>
-/* ---------- bitta fayldan ilova: ikonka va manifest shu yerda yasaladi ---------- */
-function makeIcon(size){
-  try{
-  const c=document.createElement("canvas"); c.width=c.height=size;
-  const x=c.getContext("2d"), g=x.createLinearGradient(0,0,size,size);
-  g.addColorStop(0,"#7C5CFF"); g.addColorStop(1,"#2FA8FF");
-  x.fillStyle=g; x.fillRect(0,0,size,size);
-  const p=size*0.17, r=size*0.11, w=size-2*p;
-  x.fillStyle="#FFFFFF"; x.beginPath();
-  if(x.roundRect) x.roundRect(p,p,w,w,r); else x.rect(p,p,w,w);
-  x.fill();
-  x.strokeStyle="#FF6B5A"; x.lineWidth=size*0.028;
-  x.beginPath(); x.moveTo(size/2,p+size*0.07); x.lineTo(size/2,size-p-size*0.07); x.stroke();
-  x.fillStyle="#4B2FD6"; x.textAlign="center"; x.textBaseline="middle";
-  x.font="800 "+Math.round(size*0.21)+"px 'Baloo 2', system-ui, sans-serif";
-  x.fillText("Dt",size*0.32,size*0.5); x.fillText("Kt",size*0.68,size*0.5);
-  x.font=Math.round(size*0.12)+"px sans-serif"; x.fillText("⭐",size*0.5,size*0.83);
-  return c.toDataURL("image/png");
-  }catch(e){ return ""; }
-}
-const ICON192=makeIcon(192), ICON512=makeIcon(512);
-(function(){ try{
-  const mf={name:"Buxgalter safari — provodka o'yini",short_name:"Buxgalter safari",
-    description:"Provodka, QQS, ish haqi va amortizatsiyani bosqichma-bosqich o'rgatadigan o'yin",
-    start_url:location.href.split("#")[0],scope:"./",display:"standalone",orientation:"portrait",
-    background_color:"#F5F2FF",theme_color:"#7C5CFF",lang:"uz",
-    icons:[{src:ICON192,sizes:"192x192",type:"image/png",purpose:"any"},
-           {src:ICON512,sizes:"512x512",type:"image/png",purpose:"any"},
-           {src:ICON512,sizes:"512x512",type:"image/png",purpose:"maskable"}]};
-  let url=""; try{ url=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:"application/manifest+json"})); }catch(e){}
-  if(url){ const l=document.createElement("link"); l.rel="manifest"; l.href=url; document.head.appendChild(l); }
-  const a=document.createElement("link"); a.rel="apple-touch-icon"; a.href=ICON192; document.head.appendChild(a);
-  const f=document.createElement("link"); f.rel="icon"; f.href=ICON192; document.head.appendChild(f);
-  }catch(e){}
-})();
+/* ---------- manifest, ikonka va service worker alohida fayllarda ---------- */
+const ICON192="icon-192.png";
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 let deferredPrompt=null;
 addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); deferredPrompt=e; });
 
@@ -505,7 +476,8 @@ async function joinServer(){
     const row=await apiPost({first_name:S.user.first,last_name:S.user.last,phone:S.user.phone,
       xp:S.xp,week_xp:S.week.my,week_id:S.week.id,stages:Object.keys(S.stars).length,streak:S.streak});
     S.pid=row[0].id; persist(); return {ok:true,msg:"Ligaga qo'shildingiz"};
-  }catch(e){ return {ok:false,msg:/safari_full/.test(e.message)?"Joylar to'ldi (7/7)":"Serverga ulanmadi"}; }
+  }catch(e){ const m=String(e.message||e);
+    return {ok:false,msg:/safari_full/.test(m)?"Joylar to'ldi (7/7)":"Serverga ulanmadi",detail:m.slice(0,200)}; }
 }
 async function pushMe(){
   if(!S.key||!S.pid) return;
@@ -902,6 +874,8 @@ function scrServer(){
   <p class="small" id="st"></p>
   <div class="shop"><div><b>Ishtirokchilar</b><i id="cnt">${S.pcount||1} / 7</i></div>
     <button class="buy" id="ref">Yangilash</button></div>
+  <div class="shop"><div><b>Diagnostika</b><i>Ulanishni tekshirish va xatoni ko'rsatish</i></div>
+    <button class="buy" id="diag">Tekshirish</button></div>
   <p class="small">Sizdan tashqari 6 kishi qo'shila oladi. Ular ham shu ilovani o'rnatib, ro'yxatdan o'tadi — kalit ilova ichida tayyor turadi.</p>
   </section>`;
   app.querySelector(".back").onclick=scrProfile;
@@ -912,8 +886,17 @@ function scrServer(){
     if(!S.key){ st.textContent="Kalitni kiriting"; return; }
     st.textContent="Ulanmoqda...";
     const r=await joinServer();
-    st.textContent=(r.ok?"✅ ":"❌ ")+r.msg;
+    st.innerHTML=(r.ok?"✅ ":"❌ ")+r.msg+(r.detail?`<br><span style="font-size:12px">${r.detail}</span>`:"");
     if(r.ok){ toast(r.msg); await pullPlayers(true); document.getElementById("cnt").textContent=(S.pcount||1)+" / 7"; }
+  };
+  document.getElementById("diag").onclick=async()=>{
+    st.textContent="Tekshirilmoqda...";
+    try{
+      const r=await fetch(SUPA_URL+"/rest/v1/safari_players?select=id&limit=1",{headers:sHead()});
+      const t=await r.text();
+      st.innerHTML=r.ok?`✅ Server javob berdi (${r.status}). Ma'lumot: ${t.slice(0,60)}`
+        :`❌ Xato ${r.status}: <span style="font-size:12px">${t.slice(0,160).replace(/</g,"&lt;")}</span>`;
+    }catch(e){ st.innerHTML=`❌ Ulanib bo'lmadi: <span style="font-size:12px">${String(e.message).slice(0,160)}</span>`; }
   };
   document.getElementById("ref").onclick=async()=>{ await pullPlayers(true); document.getElementById("cnt").textContent=(S.pcount||1)+" / 7"; toast("Yangilandi"); };
   window.scrollTo(0,0);
