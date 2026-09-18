@@ -1,1237 +1,985 @@
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Buxgalter safari</title>
-<meta name="theme-color" content="#7C5CFF">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="manifest" href="manifest.json">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Provodka — 30 kunlik kurs</title>
+<meta name="theme-color" content="#EFF3EA">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>
 :root{
-  --bg:#F5F2FF; --dot:#E0D8FF; --card:#FFFFFF; --line:#E4DCFF; --shade:#D9CFFF;
-  --ink:#4B2FD6; --text:#241F40; --muted:#6F6796;
-  --coral:#FF6B5A; --amber:#FFB020; --teal:#0FB8A1; --violet:#7C5CFF; --pink:#FF5FA2; --lime:#4CC14B; --sky:#2FA8FF; --plum:#B054FF;
-  --ok:#0FA25C; --ok-bg:#E0F8EC; --bad:#E8433B; --bad-bg:#FFE6E3; --gold:#FFB020;
-  --display:"Baloo 2","Segoe UI",system-ui,sans-serif;
-  --ui:"Nunito","Segoe UI",system-ui,-apple-system,sans-serif;
+  --paper:#EFF3EA;
+  --band:#DFE8D8;
+  --rule:#A9BFA6;
+  --rule-soft:#C6D5C2;
+  --ink:#141E18;
+  --ink-2:#4A5A4E;
+  --ink-3:#77877A;
+  --ok:#256B4A;
+  --ok-bg:#DCEBDF;
+  --no:#9E3324;
+  --no-bg:#F2DED9;
+  --card:#FBFCF8;
+  --shadow:0 1px 0 var(--rule-soft);
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#15123A; --dot:#241F55; --card:#1F1B4A; --line:#332C6B; --shade:#120F30;
-    --ink:#C6B6FF; --text:#F0EDFF; --muted:#A49CD1;
-    --ok:#3EDD8C; --ok-bg:#12372A; --bad:#FF7E72; --bad-bg:#3D1C24; --gold:#FFC44D;
-  }
-}
-:root[data-theme="dark"]{--bg:#15123A;--dot:#241F55;--card:#1F1B4A;--line:#332C6B;--shade:#120F30;--ink:#C6B6FF;--text:#F0EDFF;--muted:#A49CD1;--ok:#3EDD8C;--ok-bg:#12372A;--bad:#FF7E72;--bad-bg:#3D1C24;}
-*{box-sizing:border-box}
-html,body{margin:0}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
 body{
-  background:var(--bg);
-  background-image:radial-gradient(var(--dot) 1.6px, transparent 1.6px);
-  background-size:20px 20px;
-  color:var(--text); font-family:var(--ui); font-size:17px; line-height:1.5; min-height:100vh;
-  -webkit-tap-highlight-color:transparent;
+  background:var(--paper);
+  color:var(--ink);
+  font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  padding:0 0 64px;
+  overscroll-behavior-y:contain;
 }
-.wrap{max-width:560px; margin:0 auto; padding:12px 14px 124px}
-.appbar{position:sticky; top:8px; z-index:5; display:flex; align-items:center; gap:11px; background:var(--card); border-radius:20px; padding:9px 13px; margin-bottom:14px; box-shadow:0 4px 0 var(--shade)}
-.ava{width:42px; height:42px; border-radius:14px; background:linear-gradient(140deg,var(--violet),var(--sky)); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:800; font-size:19px}
-.ttl b{display:block; font-family:var(--display); font-size:18px; line-height:1.15}
-.ttl i{font-style:normal; font-size:13px; color:var(--muted); font-weight:600}
-.xpchip{margin-left:auto; background:linear-gradient(135deg,var(--amber),var(--coral)); color:#fff; font-weight:800; border-radius:999px; padding:6px 13px; font-size:15px; white-space:nowrap}
-.nav{max-width:532px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; background:var(--card); border-radius:22px; padding:8px 6px; box-shadow:0 4px 0 var(--shade)}
-.nav button{border:0; background:none; border-radius:16px; padding:7px 2px; font-size:12px; font-weight:700; color:var(--muted); display:grid; gap:3px; justify-items:center}
-.nav button span{font-size:21px; line-height:1}
-.nav button.on{background:linear-gradient(135deg,var(--violet),var(--sky)); color:#fff}
-.dl{display:flex; align-items:center; gap:12px; border-radius:22px; padding:14px 16px; color:#fff; box-shadow:0 5px 0 rgba(0,0,0,.16); margin-bottom:14px}
-.dl.open{background:linear-gradient(135deg,#FF8A3D,var(--coral))}
-.dl.done{background:linear-gradient(135deg,var(--lime),var(--teal))}
-.dl.missed{background:linear-gradient(135deg,#8B87A6,#5A5674)}
-.dl.off{background:linear-gradient(135deg,var(--sky),var(--violet))}
-.dl-l b{display:block; font-family:var(--display); font-size:19px}
-.dl-l i{font-style:normal; font-size:14px; opacity:.95; font-weight:600}
-.dl-r{margin-left:auto; text-align:center; font-family:var(--display); font-size:34px; line-height:1}
-.dl-r span{display:block; font-size:12px; font-family:var(--ui); opacity:.92; font-weight:700}
-.acts{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px}
-.act{background:var(--bg); border:0; border-radius:16px; padding:11px 8px; font-weight:700; font-size:14px; line-height:1.25; box-shadow:0 4px 0 var(--line); display:grid; gap:2px; justify-items:center; text-align:center}
-.act span{font-size:24px} .act i{font-style:normal; font-size:12px; color:var(--muted); font-weight:600}
-.act:active{transform:translateY(3px); box-shadow:0 1px 0 var(--line)}
-.act.dim{opacity:.5} .act.gift{background:linear-gradient(140deg,var(--amber),var(--coral)); color:#fff; box-shadow:0 4px 0 #c9500f}
-.act.gift i{color:rgba(255,255,255,.9)}
-.goal{background:rgba(255,255,255,.18); border-radius:16px; padding:12px; text-align:center}
-.goal-n{font-family:var(--display); font-size:30px; line-height:1.1}
-.goal-bar{height:12px; background:rgba(0,0,0,.18); border-radius:8px; margin:8px 0 6px; overflow:hidden}
-.goal-bar i{display:block; height:100%; background:#fff; border-radius:8px; transition:width .6s}
-.goal-t{font-size:14px; font-weight:700}
-.tmr{background:linear-gradient(135deg,var(--coral),var(--pink)); color:#fff; font-weight:800; border-radius:999px; padding:5px 13px}
-.week7{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; text-align:center}
-.week7 span{border-radius:12px; padding:10px 0; font-size:12px; font-weight:800; background:var(--bg); color:var(--muted)}
-.week7 .d{background:var(--ok); color:#fff} .week7 .m{background:var(--bad); color:#fff}
-.week7 .s{background:var(--violet); color:#fff} .week7 .b{background:var(--amber); color:#fff}
-.shop{display:flex; align-items:center; gap:10px; background:var(--bg); border-radius:16px; padding:11px 13px; margin-bottom:10px}
-.shop b{display:block; font-family:var(--display); font-size:17px} .shop i{font-style:normal; font-size:13px; color:var(--muted); font-weight:600}
-.buy{margin-left:auto; border:0; border-radius:999px; padding:9px 16px; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--violet),var(--sky)); box-shadow:0 3px 0 #3f2bb5; white-space:nowrap}
-.rules{padding-left:20px; margin:0} .rules li{margin-bottom:9px; font-size:15px}
-.reg{margin-top:18px} .reglogo{font-size:58px; text-align:center} .reg h2{text-align:center}
-button{font-family:inherit; font-size:inherit; color:inherit; cursor:pointer}
-button:focus-visible,input:focus-visible{outline:3px solid var(--violet); outline-offset:3px}
-h1,h2,h3{margin:0; line-height:1.1; font-family:var(--display); font-weight:800}
-.small{font-size:14px; color:var(--muted); line-height:1.4}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
 
-.bar{display:flex; align-items:center; gap:10px; padding:4px 0 12px}
-.bar .back{border:0; background:var(--card); box-shadow:0 3px 0 var(--shade); border-radius:14px; font-size:22px; width:42px; height:42px; line-height:1}
-.pill{display:inline-flex; align-items:center; gap:6px; background:var(--card); border-radius:999px; padding:5px 14px; font-weight:700; font-size:15px; box-shadow:0 3px 0 var(--shade)}
-.spacer{flex:1}
+/* ---------- header ---------- */
+header{
+  padding:22px 0 14px;
+  border-bottom:2px solid var(--rule);
+  margin-bottom:18px;
+}
+.eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600;margin:0 0 4px;
+}
+h1{
+  font:700 27px/1.15 Georgia,"Times New Roman",serif;
+  margin:0;letter-spacing:-.01em;
+}
+.sub{color:var(--ink-2);font-size:14px;margin:6px 0 0}
 
-.hero{padding:10px 4px 2px}
-.hero h1{font-size:46px; color:var(--ink); letter-spacing:-.5px}
-.hero h1 span{display:inline-block; animation:wiggle 3s ease-in-out infinite}
-@keyframes wiggle{0%,92%,100%{transform:rotate(0)}95%{transform:rotate(-14deg)}98%{transform:rotate(12deg)}}
-.hero p{margin:6px 0 0; color:var(--muted); max-width:38ch}
+/* ---------- progress ---------- */
+.prog{margin:16px 0 4px}
+.prog-top{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--ink-2);margin-bottom:6px}
+.prog-top b{font-size:14px;color:var(--ink)}
+.bar{height:9px;background:var(--band);border:1px solid var(--rule-soft);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .35s ease}
 
-.card{background:var(--card); border-radius:22px; padding:16px; margin:14px 0 0; box-shadow:0 5px 0 var(--shade)}
-.card h3{font-size:19px; margin-bottom:10px; color:var(--ink)}
-.rank-top{display:flex; justify-content:space-between; align-items:center; gap:8px}
-.rank-top b{font-family:var(--display); font-size:24px; color:var(--ink)}
-.meter{height:14px; background:var(--bg); border-radius:10px; margin-top:12px; overflow:hidden}
-.meter i{display:block; height:100%; border-radius:10px; background:linear-gradient(90deg,var(--amber),var(--coral)); transition:width .6s cubic-bezier(.3,1.4,.5,1)}
+/* ---------- day grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin:18px 0 8px}
+.d{
+  aspect-ratio:1;border:1px solid var(--rule);background:var(--card);
+  color:var(--ink);font:600 15px/1 ui-monospace,Menlo,monospace;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;padding:0;
+}
+.d.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.d.now{outline:2px solid var(--ink);outline-offset:-3px}
+.d.lock{color:var(--ink-3);background:var(--band);border-color:var(--rule-soft);cursor:not-allowed}
+.legend{display:flex;gap:14px;font-size:11.5px;color:var(--ink-3);margin-top:10px;flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:5px}
+.sw{width:11px;height:11px;border:1px solid var(--rule)}
+.sw.done{background:var(--ok);border-color:var(--ok)}
+.sw.lock{background:var(--band)}
 
-.lb{display:grid; gap:8px}
-.row{display:grid; grid-template-columns:36px 1fr auto; gap:10px; align-items:center; padding:9px 11px; border-radius:16px; background:var(--bg)}
-.row.me{background:linear-gradient(90deg,rgba(124,92,255,.18),rgba(47,168,255,.14)); box-shadow:inset 0 0 0 2.5px var(--violet)}
-.row .pos{font-size:22px; text-align:center}
-.row .who{font-weight:700}
-.row .who i{display:block; font-style:normal; font-size:13px; color:var(--muted); font-weight:400}
-.row .xp{font-weight:800; color:var(--ink); white-space:nowrap}
-.gap{margin-top:10px; font-size:15px; font-weight:600}
-.gap.up{color:var(--ok)} .gap.down{color:var(--coral)}
-.alert{background:linear-gradient(135deg,var(--coral),var(--pink)); color:#fff; border-radius:18px; padding:13px 15px; margin-top:14px; font-weight:700; box-shadow:0 5px 0 rgba(0,0,0,.14)}
+/* ---------- day view ---------- */
+.back{
+  background:none;border:none;padding:8px 0;margin:12px 0 2px;
+  font:600 13px/1 inherit;color:var(--ink-2);cursor:pointer;
+  display:flex;align-items:center;gap:7px;
+}
+.daynum{
+  font:700 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;
+  color:var(--ink-3);text-transform:uppercase;margin:8px 0 5px;
+}
+h2{font:700 22px/1.25 Georgia,"Times New Roman",serif;margin:0 0 16px}
 
-.duo{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px}
-.duo>div{border-radius:22px; padding:14px 10px; text-align:center; color:#fff; box-shadow:0 5px 0 rgba(0,0,0,.15)}
-.duo>div:first-child{background:linear-gradient(140deg,#FF8A3D,var(--coral))}
-.duo>div:last-child{background:linear-gradient(140deg,var(--teal),#2FA8FF)}
-.duo .n{font-family:var(--display); font-size:44px; line-height:1}
-.duo .small{color:rgba(255,255,255,.92); font-weight:600}
+.card{
+  background:var(--card);border:1px solid var(--rule-soft);
+  border-left:3px solid var(--rule);
+  padding:15px 16px;margin:0 0 16px;
+}
+.card p{margin:0 0 11px;font-size:15px}
+.card p:last-child{margin-bottom:0}
+.card b{font-weight:650}
+.pv{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13.5px;background:var(--band);padding:1px 6px;
+  white-space:nowrap;display:inline-block;
+}
+.fm{
+  font-family:ui-monospace,Menlo,monospace;font-size:14px;
+  background:var(--band);padding:10px 12px;text-align:center;
+}
 
-.league{background:linear-gradient(140deg,#7C5CFF,#B054FF 55%,#FF5FA2); color:#fff; border-radius:22px; padding:16px; margin-top:14px; box-shadow:0 5px 0 rgba(0,0,0,.18)}
-.league h3{font-size:20px; color:#fff}
-.lg-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:8px}
-.lg-timer{background:rgba(255,255,255,.22); border-radius:999px; padding:4px 12px; font-weight:800; font-size:14px; white-space:nowrap}
-.league .row{background:rgba(255,255,255,.16)}
-.league .row.me{background:rgba(255,255,255,.34); box-shadow:inset 0 0 0 2.5px #fff}
-.league .row .xp,.league .row .who{color:#fff}
-.league .gap{color:#fff !important; font-weight:700}
-.privacy{margin:10px 2px 0; font-size:13px; color:var(--muted); font-weight:600}
-.lg-note{background:rgba(255,255,255,.16); border-radius:12px; padding:7px 10px; font-size:13px; font-weight:700; margin-bottom:10px}
-.prizes+.lg-note{margin:8px 0 0}
-.prizes{margin-top:10px; font-size:14px; font-weight:700; background:rgba(255,255,255,.18); border-radius:12px; padding:8px 10px; text-align:center}
-.cups{display:flex; gap:14px; align-items:center; flex-wrap:wrap; font-family:var(--display); font-size:24px; color:var(--ink)}
-.cups .small{font-family:var(--ui); font-size:14px}
-.steps{padding-left:22px; margin:0} .steps li{margin-bottom:10px; font-weight:600}
-.badges{display:flex; flex-wrap:wrap; gap:9px}
-.badge{width:50px; height:50px; border-radius:16px; background:linear-gradient(140deg,var(--amber),var(--coral)); display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 4px 0 rgba(0,0,0,.14)}
-.badge.off{background:var(--bg); filter:grayscale(1); opacity:.45; box-shadow:none}
+/* account table — ledger banding */
+table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:14px}
+td{padding:8px 10px;border-bottom:1px solid var(--rule-soft)}
+tr:nth-child(odd) td{background:var(--band)}
+tr:nth-child(even) td{background:var(--card)}
+td:first-child{
+  font-family:ui-monospace,Menlo,monospace;font-weight:600;
+  width:78px;white-space:nowrap;border-right:1px solid var(--rule-soft);
+}
 
-.path{list-style:none; margin:16px 0 0; padding:0}
-.stage{display:grid; grid-template-columns:52px 1fr; gap:10px; align-items:center; margin-bottom:10px}
-.stage .num{width:44px; height:44px; margin:0 auto; border-radius:16px; color:#fff; font-family:var(--display); font-size:24px; display:flex; align-items:center; justify-content:center; background:var(--c); box-shadow:0 4px 0 rgba(0,0,0,.16)}
-.stage button{text-align:left; background:var(--card); border:0; border-radius:20px; padding:13px 15px; width:100%; box-shadow:0 5px 0 var(--shade); border-left:7px solid var(--c)}
-.stage button:active{transform:translateY(3px); box-shadow:0 2px 0 var(--shade)}
-.stage button:disabled{opacity:.5; transform:none; box-shadow:0 5px 0 var(--shade)}
-.stage:nth-child(8n+1){--c:var(--coral)} .stage:nth-child(8n+2){--c:var(--amber)}
-.stage:nth-child(8n+3){--c:var(--teal)} .stage:nth-child(8n+4){--c:var(--violet)}
-.stage:nth-child(8n+5){--c:var(--pink)} .stage:nth-child(8n+6){--c:var(--lime)}
-.stage:nth-child(8n+7){--c:var(--sky)} .stage:nth-child(8n+8){--c:var(--plum)}
-.stage h3{font-size:19px}
-.stage .meta{display:flex; justify-content:space-between; margin-top:3px; font-size:14px; color:var(--muted)}
-.stars{color:var(--gold); letter-spacing:2px; font-size:16px}
-.linkbtn{background:var(--card); border:0; border-radius:14px; box-shadow:0 3px 0 var(--shade); color:var(--ink); font-weight:700; font-size:15px; padding:10px 14px; margin:16px 8px 0 0}
+/* ---------- quiz ---------- */
+.qhead{
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-top:2px solid var(--rule);padding-top:12px;margin-top:4px;
+}
+.qhead .lbl{font:600 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.qhead .sc{font:600 13px/1 ui-monospace,Menlo,monospace;color:var(--ink-2)}
+.q{font-size:17px;font-weight:600;margin:12px 0 14px;line-height:1.4}
 
-.sheet{background:var(--card); border-radius:24px; padding:18px; box-shadow:0 6px 0 var(--shade)}
-.sheet h2{font-size:28px; color:var(--ink); margin-bottom:8px}
-.story{background:linear-gradient(135deg,var(--violet),var(--sky)); color:#fff; border-radius:18px; padding:13px 15px; font-weight:700; font-size:17px; line-height:1.4; margin:8px 0 14px}
-.theory p{margin:0 0 10px} .theory ul{margin:0 0 10px; padding-left:22px}
-.theory b{color:var(--ink)}
-.example{background:var(--bg); border-radius:16px; padding:12px 14px; margin:12px 0}
-.example .r{display:flex; gap:12px; margin:6px 0}
-.example .r span{flex:1; text-align:center; font-family:var(--display); font-size:22px; color:#fff; background:var(--violet); border-radius:12px; padding:4px}
-.example .r span:last-child{background:var(--coral)}
+.opts{display:flex;flex-direction:column;gap:8px}
+.o{
+  width:100%;text-align:left;background:var(--card);
+  border:1px solid var(--rule);padding:0;cursor:pointer;
+  font:inherit;color:var(--ink);overflow:hidden;
+}
+.o:disabled{cursor:default}
+.o:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+/* T-schyot ko'rinishi */
+.t{display:flex;align-items:stretch;min-height:46px}
+.t .side{flex:1;padding:11px 12px;display:flex;align-items:center;gap:8px}
+.t .side:first-child{border-right:1px solid var(--rule)}
+.t .k{font-size:10.5px;letter-spacing:.14em;color:var(--ink-3);font-weight:700}
+.t .v{font-family:ui-monospace,Menlo,monospace;font-size:16px;font-weight:600}
+.plain{padding:12px;font-size:15px}
+.o.ok{background:var(--ok-bg);border-color:var(--ok)}
+.o.ok .t .side:first-child,.o.ok .t .side{border-color:var(--ok)}
+.o.no{background:var(--no-bg);border-color:var(--no)}
+.o.dim{opacity:.5}
+.mark{
+  float:right;font:700 13px/1 ui-monospace,Menlo,monospace;
+  padding:12px 12px 0 0;
+}
+.o.ok .mark{color:var(--ok)}
+.o.no .mark{color:var(--no)}
 
-.btn{display:block; width:100%; border:0; border-radius:20px; padding:15px; font-weight:800; font-size:18px; font-family:var(--display);
-  background:linear-gradient(135deg,var(--violet),var(--sky)); color:#fff; box-shadow:0 5px 0 #3f2bb5; margin-top:14px}
-.btn:active{transform:translateY(4px); box-shadow:0 1px 0 #3f2bb5}
-.btn.ghost{background:var(--card); color:var(--ink); box-shadow:0 5px 0 var(--shade)}
-.btn.ghost:active{box-shadow:0 1px 0 var(--shade)}
-.btn:disabled{opacity:.45; transform:none}
+.why{
+  margin:12px 0 0;padding:12px 13px;font-size:14.5px;
+  border-left:3px solid var(--ok);background:var(--ok-bg);
+}
+.why.no{border-left-color:var(--no);background:var(--no-bg)}
+.why b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
 
-.progress{display:flex; gap:5px; margin-bottom:14px}
-.progress span{flex:1; height:9px; border-radius:6px; background:var(--card)}
-.progress span.ok{background:var(--ok)} .progress span.bad{background:var(--bad)} .progress span.now{background:var(--violet)}
-.hearts{font-size:19px} .combo{color:#fff; background:linear-gradient(135deg,var(--amber),var(--coral)); border-radius:999px; padding:4px 12px; font-weight:800; box-shadow:0 3px 0 rgba(0,0,0,.14)}
-.task{position:relative; overflow:hidden}
-.kind{font-size:14px; color:var(--muted); font-weight:700; margin-bottom:6px}
-.q{font-size:20px; font-weight:700; margin:0 0 16px}
-.opts{display:grid; gap:11px}
-.opt{text-align:left; background:var(--bg); border:0; border-radius:16px; padding:13px 15px; width:100%; font-weight:600; box-shadow:0 4px 0 var(--line)}
-.opt:active{transform:translateY(3px); box-shadow:0 1px 0 var(--line)}
-.opt.sel{background:rgba(124,92,255,.16); box-shadow:0 4px 0 var(--violet)}
-.opt.right{background:var(--ok-bg); box-shadow:0 4px 0 var(--ok)}
-.opt.wrong{background:var(--bad-bg); box-shadow:0 4px 0 var(--bad)}
+.btn{
+  display:block;width:100%;margin:16px 0 0;padding:14px;
+  background:var(--ink);color:var(--paper);border:none;
+  font:600 15px/1 inherit;cursor:pointer;
+}
+.btn:disabled{background:var(--rule);color:var(--ink-3);cursor:not-allowed}
+.btn.ghost{background:none;color:var(--ink-2);border:1px solid var(--rule)}
 
-.ledger{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px}
-.ledger .h{text-align:center; font-family:var(--display); font-size:18px; color:#fff; border-radius:12px 12px 0 0; padding:5px; margin-bottom:-8px; position:relative; z-index:1}
-.ledger .h:first-child{background:var(--violet)} .ledger .h:nth-child(2){background:var(--coral)}
-.slot{min-height:86px; border:0; background:var(--bg); border-radius:0 0 16px 16px; padding:10px 8px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-size:13px; color:var(--muted); font-weight:600; box-shadow:0 4px 0 var(--line)}
-.slot.active{box-shadow:0 4px 0 var(--gold), inset 0 0 0 3px var(--gold)}
-.slot .hw{font-family:var(--display); font-size:34px; color:var(--ink); line-height:1.1}
-.slot.right{background:var(--ok-bg); box-shadow:0 4px 0 var(--ok)}
-.slot.wrong{background:var(--bad-bg); box-shadow:0 4px 0 var(--bad)}
-.accs{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-.acc{text-align:left; background:var(--bg); border:0; border-radius:14px; padding:9px 11px; font-size:13.5px; line-height:1.25; font-weight:600; box-shadow:0 4px 0 var(--line)}
-.acc:active{transform:translateY(3px); box-shadow:0 1px 0 var(--line)}
-.acc code{display:block; font-family:var(--display); font-size:20px; color:var(--ink)}
-.acc.used{opacity:.3}
+.done-box{border:2px solid var(--ok);background:var(--ok-bg);padding:18px;text-align:center;margin-top:18px}
+.done-box .big{font:700 34px/1 Georgia,serif;margin-bottom:4px}
+.done-box .cap{font-size:14px;color:var(--ink-2)}
 
-.calc input{width:100%; font-family:var(--display); font-size:40px; font-weight:800; color:var(--ink); background:var(--bg); border:0; border-radius:16px; padding:8px 12px; box-shadow:0 4px 0 var(--line); text-align:center}
-.calc .unit{font-size:14px; color:var(--muted); margin-top:8px; text-align:center; font-weight:600}
-
-.stamp{position:absolute; right:12px; top:12px; transform:rotate(-12deg); pointer-events:none; border-radius:14px; padding:6px 14px; font-family:var(--display); font-weight:800; font-size:24px; color:#fff; animation:slam .4s cubic-bezier(.2,1.7,.4,1) both}
-.stamp.ok{background:var(--ok)} .stamp.bad{background:var(--bad)}
-@keyframes slam{from{transform:rotate(-12deg) scale(2.4); opacity:0} to{transform:rotate(-12deg) scale(1); opacity:1}}
-.explain{margin-top:16px; border-radius:16px; padding:13px 15px; font-weight:600}
-.explain.ok{background:var(--ok-bg); box-shadow:0 4px 0 var(--ok)}
-.explain.bad{background:var(--bad-bg); box-shadow:0 4px 0 var(--bad)}
-.explain b{display:block; margin-bottom:5px; font-family:var(--display); font-size:19px}
-.explain.ok b{color:var(--ok)} .explain.bad b{color:var(--bad)}
-
-.dock{position:fixed; left:0; right:0; bottom:0; padding:12px 14px calc(12px + env(safe-area-inset-bottom)); background:linear-gradient(to top,var(--bg) 62%,transparent)}
-.dock .btn{max-width:532px; margin:0 auto}
-.dock .two{max-width:532px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:10px}
-.dock .two .btn{margin-top:0; font-size:16px; padding:14px 8px}
-
-.result{text-align:center}
-.big-stars{font-size:56px; color:var(--gold); letter-spacing:6px; margin:4px 0}
-.result h2{font-size:34px; color:var(--ink)}
-.stats{display:flex; justify-content:center; gap:9px; flex-wrap:wrap; margin:14px 0}
-.toast{position:fixed; left:50%; top:14px; transform:translateX(-50%); background:linear-gradient(135deg,var(--amber),var(--coral)); color:#fff; font-weight:800; padding:10px 18px; border-radius:999px; animation:pop 2.1s ease both; z-index:10; max-width:92vw; text-align:center; box-shadow:0 5px 0 rgba(0,0,0,.16)}
-@keyframes pop{0%{opacity:0;transform:translate(-50%,-14px) scale(.9)}12%,80%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0}}
-.coin{position:fixed; top:-30px; font-size:28px; animation:fall linear forwards; pointer-events:none; z-index:9}
-@keyframes fall{to{transform:translateY(112vh) rotate(560deg)}}
-
-.cert{background:var(--card); border-radius:24px; padding:22px; text-align:center; box-shadow:0 6px 0 var(--shade); border:5px dashed var(--violet)}
-.cert h2{font-size:36px; color:var(--ink)}
-.cert .nm{font-family:var(--display); font-size:34px; color:var(--coral); display:inline-block; padding:0 14px; border-bottom:3px solid var(--line)}
-.set label{display:block; margin:14px 0 5px; font-weight:700}
-.set input[type=time],.set input[type=text]{width:100%; padding:12px; font-size:17px; font-family:inherit; font-weight:700; border:0; border-radius:14px; background:var(--bg); color:var(--text); box-shadow:0 4px 0 var(--line)}
-@media (prefers-reduced-motion:reduce){.stamp,.toast,.coin,.hero h1 span{animation:none}.coin{display:none}.btn:active,.opt:active,.acc:active,.stage button:active{transform:none}}
-@media (max-width:380px){.hero h1{font-size:38px}.accs{grid-template-columns:1fr}}
+.locked{text-align:center;padding:36px 18px;color:var(--ink-2);font-size:15px}
+.hide{display:none}
+footer{margin-top:26px;padding-top:14px;border-top:1px solid var(--rule-soft);font-size:12px;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (min-width:520px){.grid{grid-template-columns:repeat(10,1fr)}}
 </style>
-</head>
-<body>
-<div class="wrap" id="app"></div>
-<div class="dock" id="dock" hidden></div>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Buxgalteriya mashqi</p>
+    <h1>Provodka — 30 kunlik kurs</h1>
+    <p class="sub">Har kuni: qisqa nazariya, keyin mashq. Kunni tugatmasdan keyingisi ochilmaydi.</p>
+    <div class="prog">
+      <div class="prog-top"><span>Bajarilgan kunlar</span><b><span id="pd">0</span> / 30</b></div>
+      <div class="bar"><i id="pb"></i></div>
+    </div>
+  </header>
+
+  <main id="home">
+    <div class="grid" id="grid"></div>
+    <div class="legend">
+      <span><i class="sw done"></i> tugatilgan</span>
+      <span><i class="sw"></i> ochiq</span>
+      <span><i class="sw lock"></i> yopiq</span>
+    </div>
+    <footer>Schyot raqamlari O'zbekiston hisoblar rejasi bo'yicha. Amaliy ishda joriy tahrirga solishtirib turing.</footer>
+  </main>
+
+  <main id="day" class="hide"></main>
+</div>
+
 <script>
-/* ---------- manifest, ikonka va service worker alohida fayllarda ---------- */
-const ICON192="icon-192.png";
-if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
-let deferredPrompt=null;
-addEventListener("beforeinstallprompt",e=>{ e.preventDefault(); deferredPrompt=e; });
-
-/* ---------------- hisobvaraqlar ---------------- */
-const A={
-"0130":"Mashina va uskunalar","0230":"Mashina va uskunalar eskirishi","0820":"Asosiy vositalarni xarid qilish",
-"1010":"Xomashyo va materiallar","2010":"Asosiy ishlab chiqarish","2810":"Ombordagi tayyor mahsulot","2910":"Ombordagi tovarlar",
-"4010":"Xaridorlardan olinadigan schyotlar","4410":"Budjetga bo'naklar (kirim QQS)","4610":"Ta'sischilar qarzi (ustav kapital)",
-"5010":"Kassa (so'm)","5110":"Hisob-kitob schyoti","5210":"Valyuta schyoti",
-"6010":"Mol yetkazib beruvchilarga qarz","6310":"Xaridorlardan olingan bo'naklar","6410":"Budjetga to'lovlar bo'yicha qarz",
-"6610":"Dividendlar bo'yicha qarz","6710":"Xodimlar bilan mehnat haqi hisobi","6810":"Sug'urta va boshqa ushlanmalar",
-"6910":"Boshqa kreditorlik qarzlari","7810":"Uzoq muddatli bank kreditlari","6810k":"",
-"8330":"Ustav kapital (ulushlar)","8710":"Taqsimlanmagan foyda",
-"9020":"Tovar sotishdan daromad","9120":"Sotilgan tovarlar tannarxi","9310":"Asosiy vositalarni sotishdan daromad",
-"9410":"Sotish xarajatlari","9420":"Ma'muriy xarajatlar","9430":"Boshqa operatsion xarajatlar",
-"9810":"Foyda solig'i xarajati","9910":"Yakuniy moliyaviy natija"};
-delete A["6810k"];
-const fmt=n=>n.toLocaleString("ru-RU").replace(/\u00a0/g," ");
-
-/* ---------------- bosqichlar ---------------- */
-const STAGES=[
-{title:"Birinchi ish kuni",icon:"☕",
- story:"Siz «Omad Savdo» MCHJga buxgalter bo'lib keldingiz. Direktor stolga qalin papka qo'ydi: «Avval hisobvaraqlarni tanib ol».",
- theory:`<p>Har bir narsaning o'z <b>hisobvarag'i</b> (schyoti) bor — javonning raqamli tortmalari kabi.</p>
- <ul><li><b>Aktiv</b> — firmada bor narsa: pul, tovar, uskuna, sizga qarzdorlar.</li>
- <li><b>Passiv</b> — u qayerdan kelgani: ustav kapital va sizning qarzlaringiz.</li></ul>
- <p>Birinchi raqam guruhni bildiradi: <b>0</b> uzoq muddatli aktivlar, <b>1</b> materiallar, <b>2</b> tovar-zaxiralar, <b>4</b> debitorlar, <b>5</b> pul, <b>6</b> majburiyatlar, <b>8</b> kapital, <b>9</b> daromad va xarajat.</p>`,
- example:null,
- tasks:[
- {t:"mc",q:"Firma kassasidagi naqd so'm qaysi hisobvaraqda turadi?",o:["5110","5010","6010","2910"],a:1,e:"5010 — milliy valyutadagi kassa. 5110 esa bankdagi hisob-kitob schyoti."},
- {t:"mc",q:"Bankdagi hisob raqamingizdagi pul qaysi hisobvaraqda?",o:["5010","4010","5110","8330"],a:2,e:"5110 — hisob-kitob schyoti. Bank ko'chirmasidagi har bir harakat shu yerda."},
- {t:"mc",q:"Sotish uchun omborda turgan tovarlar qaysi hisobvaraqda?",o:["2910","0130","9120","6010"],a:0,e:"2910 — ombordagi tovarlar. 9120 esa tovar sotilgandan keyingi tannarx."},
- {t:"mc",q:"Tovar oldingiz, pulini hali to'lamadingiz. Bu qarz qayerda?",o:["4010","6410","6010","5110"],a:2,e:"6010 — mol yetkazib beruvchilarga qarz. Passiv: siz to'lashingiz kerak."},
- {t:"mc",q:"Xaridor tovarni oldi, pulini keyin beradi. Uning qarzi qayerda?",o:["6010","4010","6310","9020"],a:1,e:"4010 — xaridorlardan olinadigan schyotlar. Aktiv: pul sizga keladi."},
- {t:"mc",q:"Qaysi biri AKTIV hisobvaraq?",o:["8330 Ustav kapital","6010 Yetkazib beruvchiga qarz","5010 Kassa","6410 Budjetga qarz"],a:2,e:"Kassadagi pul — firmada bor narsa, demak aktiv. Qolganlari passiv."},
- {t:"mc",q:"«9» bilan boshlanadigan hisobvaraqlar nima haqida?",o:["Pul mablag'lari","Daromad va xarajatlar","Uskunalar","Kapital"],a:1,e:"9-guruh — daromad va xarajatlar: 9020, 9120, 9420 va hokazo."},
- {t:"mc",q:"Ishlab chiqarish uchun olingan xomashyo qayerda hisobga olinadi?",o:["2910","1010","0130","9420"],a:1,e:"1010 — xomashyo va materiallar. 2910 esa qayta sotish uchun tovar."},
- {t:"mc",q:"Xodimga hisoblangan, lekin hali to'lanmagan oylik qaysi hisobvaraqda?",o:["9420","6710","5110","6410"],a:1,e:"6710 — xodimlar bilan mehnat haqi bo'yicha hisob. Bu firmaning xodim oldidagi qarzi."},
- {t:"mc",q:"Ustav kapital qaysi hisobvaraqda turadi?",o:["8710","8330","4610","7810"],a:1,e:"8330 — ta'sischilar ulushlari, ya'ni ustav kapital. 8710 esa taqsimlanmagan foyda."},
- {t:"mc",q:"Balans tenglamasi qanday?",o:["Aktiv = Majburiyat + Kapital","Aktiv = Daromad − Xarajat","Kapital = Aktiv + Majburiyat","Aktiv = Kassa + Bank"],a:0,e:"Aktiv = Majburiyat + Kapital. Bu tenglama hech qachon buzilmaydi."},
- {t:"mc",q:"Bank krediti (2 yilga olingan) qayerda aks etadi?",o:["Aktivda","Majburiyatlarda","Kapitalda","Daromadda"],a:1,e:"Kredit — qaytariladigan qarz, demak majburiyat (7810 — uzoq muddatli kredit)."}
+const DAYS = [
+{n:1,t:"Ikki yoqlama yozuv: Debet va Kredit",
+th:`<p>Buxgalteriyaning butun mantig'i bitta qoidaga suyanadi: <b>har bir operatsiya kamida ikkita schyotda aks etadi</b>. Bittasining debetiga, ikkinchisining kreditiga — va summa har doim teng bo'ladi.</p>
+<p>Nega shunday? Chunki pul yo'qdan paydo bo'lmaydi. Agar kassaga 1 mln so'm kirgan bo'lsa, u <i>qayerdandir</i> kelgan. Kassa ko'paydi (debet), manba kamaydi yoki qarz paydo bo'ldi (kredit).</p>
+<p><b>Debet</b> — chap taraf. <b>Kredit</b> — o'ng taraf. Buxgalterlar buni "samolyotcha" (T-schyot) deb chizadi: ustiga schyot raqami, chapga debet, o'ngga kredit.</p>
+<p>Yozilishi: <span class="pv">Dt 5010 — Kt 5110</span> deb o'qiladi: "besh o'n bir yuzning debetiga, besh bir yuz o'nning krediti bilan".</p>
+<p><b>Muhim:</b> "debet" yaxshi, "kredit" yomon degani emas. Ular shunchaki chap va o'ng taraf. Ma'nosi schyot turiga qarab o'zgaradi — buni ertaga o'rganamiz.</p>`,
+acc:[["5010","Kassa (milliy valyuta)"],["5110","Hisob-kitob schyoti (bank)"]],
+q:[
+{q:"Bankdan kassaga 5 mln so'm olindi. Provodka?",o:["Dt 5010 — Kt 5110","Dt 5110 — Kt 5010","Dt 5010 — Kt 6010","Dt 5110 — Kt 4010"],c:0,w:"Kassa ko'paydi → uning debetiga. Bankdagi pul kamaydi → uning krediti."},
+{q:"Bitta provodkada debet va kredit summasi qanday bo'ladi?",o:["Har doim teng","Debet ko'proq","Kredit ko'proq","Farqi yo'q"],c:0,w:"Ikki yoqlama yozuvning asosiy qoidasi — tenglik. Teng bo'lmasa, xato bor."},
+{q:"«Dt 5110 — Kt 5010» nimani bildiradi?",o:["Kassadan bankka pul topshirildi","Bankdan kassaga pul olindi","Xaridordan pul keldi","Yetkazib beruvchiga to'landi"],c:0,w:"Bank debetda → bankda pul ko'paydi. Kassa kreditda → kassadan chiqdi."},
+{q:"T-schyotda (samolyotchada) debet qaysi tomonda?",o:["Chapda","O'ngda","Pastda","Yuqorida"],c:0,w:"Debet — har doim chapda, kredit — o'ngda. Bu shartli kelishuv, o'zgarmaydi."},
+{q:"Bitta operatsiya nechta schyotga ta'sir qiladi?",o:["Kamida ikkitaga","Faqat bittaga","Har doim uchtaga","Hech qanday qoida yo'q"],c:0,w:"Kamida ikkitaga. Ba'zan ko'proq — masalan tovar + QQS bir provodkada uch schyotni qamraydi."},
+{q:"Buxgalteriyada «provodka» nima?",o:["Operatsiyaning schyotlarda yozilishi","Hujjat nomi","Soliq turi","Hisobot shakli"],c:0,w:"Provodka (buxgalteriya yozuvi) — operatsiyani debet va kredit orqali qayd etish."}
 ]},
-{title:"Firma tug'iladi",icon:"🏢",
- story:"Ta'sischi 100 million so'm ustav kapital e'lon qildi. Pul hali bankka tushmagan. Birinchi provodkangizni yozish vaqti!",
- theory:`<p><b>Provodka</b> — bitta muomalani ikki hisobvaraqda yozish: <b>Debet (Dt)</b> va <b>Kredit (Kt)</b>, summa bir xil. Bu — <b>ikki yoqlama yozuv</b>.</p>
- <ul><li>Aktiv <b>ko'paysa</b> — Debet, <b>kamaysa</b> — Kredit.</li><li>Passiv <b>ko'paysa</b> — Kredit, <b>kamaysa</b> — Debet.</li></ul>
- <p>O'zingizga savol bering: «Nima keldi?» — Debetga. «Qayerdan keldi?» — Kreditga.</p>`,
- example:{t:"Ta'sischi ulush qo'shishi kerak, kapital shakllandi:",dt:"4610",kt:"8330"},
- tasks:[
- {t:"pv",q:"Ustav kapital e'lon qilindi — ta'sischi 100 mln so'm qo'shishi shart.",dt:"4610",kt:"8330",o:["4610","8330","5110","6010","4010","5010"],e:"Ta'sischining qarzi paydo bo'ldi (Dt 4610), ustav kapital shakllandi (Kt 8330)."},
- {t:"pv",q:"Ta'sischi 100 mln so'mni bank hisob raqamiga o'tkazdi.",dt:"5110",kt:"4610",o:["5110","4610","8330","5010","6010","4010"],e:"Bankda pul ko'paydi (Dt 5110), ta'sischining qarzi yopildi (Kt 4610)."},
- {t:"pv",q:"Bankdan kassaga 3 mln so'm naqd olindi.",dt:"5010",kt:"5110",o:["5010","5110","4010","6710","8330","6010"],e:"Kassa ko'paydi (Dt 5010), bank kamaydi (Kt 5110)."},
- {t:"mc",q:"Ikki yoqlama yozuvning asosiy qoidasi nima?",o:["Debet doim Kreditdan katta","Bir summa bir vaqtda Dt va Kt ga yoziladi","Faqat pul harakati yoziladi","Kredit — doim xarajat"],a:1,e:"Har muomala bir xil summada bir hisobvaraq debetiga va boshqasining kreditiga tushadi."},
- {t:"calc",q:"Bankda 100 000 000 so'm edi, kassaga 3 000 000 olindi. Bankda qancha qoldi?",a:97000000,e:"100 000 000 − 3 000 000 = 97 000 000 so'm."},
- {t:"mc",q:"Passiv hisobvaraq qoldig'i odatda qaysi tomonda?",o:["Debetda","Kreditda","Ikkalasida","Qoldiq bo'lmaydi"],a:1,e:"Passivlar kreditda ko'payadi, qoldig'i ham kreditda. Aktivlarniki — debetda."},
- {t:"pv",q:"Ta'sischi ulush o'rniga 20 mln so'mlik uskuna berdi (foydalanishga tayyor).",dt:"0130",kt:"4610",o:["0130","4610","8330","0820","5110","2910"],e:"Asosiy vosita keldi (Dt 0130), ta'sischi qarzi shu summaga yopildi (Kt 4610)."},
- {t:"mc",q:"Firmada 100 mln aktiv, 0 majburiyat bor. Kapital qancha?",o:["0","50 mln","100 mln","Aniqlab bo'lmaydi"],a:2,e:"Aktiv = Majburiyat + Kapital → 100 − 0 = 100 mln."},
- {t:"pv",q:"Bankdan 50 mln so'mlik ikki yillik kredit olindi.",dt:"5110",kt:"7810",o:["5110","7810","8330","6010","5010","4610"],e:"Bankda pul ko'paydi (Dt 5110), uzoq muddatli qarz paydo bo'ldi (Kt 7810)."},
- {t:"calc",q:"Aktiv 170 mln, ustav kapital 100 mln, boshqa kapital yo'q. Majburiyatlar qancha?",a:70000000,e:"170 − 100 = 70 mln so'm majburiyat."},
- {t:"mc",q:"«Dt 5010 — Kt 5110» provodkasi nimani anglatadi?",o:["Bankka pul topshirildi","Bankdan naqd pul olindi","Oylik to'landi","Tovar sotildi"],a:1,e:"Kassa debetlandi — pul kassaga kirdi, bank kreditlandi — u yerdan chiqdi."}
+
+{n:2,t:"Aktiv va Passiv schyotlar",
+th:`<p>Kecha debet va kredit shunchaki chap-o'ng ekanini bildik. Ular <b>nimani</b> anglatishi schyot turiga bog'liq.</p>
+<p><b>Aktiv schyotlar</b> — korxonaning mulki: pul, tovar, materiallar, asosiy vositalar, sizga qarzdorlar. Balansning chap tomoni.<br>
+Ko'paysa → <b>debetga</b>. Kamaysa → <b>kreditga</b>. Qoldiq (saldo) har doim <b>debetda</b> turadi.</p>
+<p><b>Passiv schyotlar</b> — bu mulk qayerdan kelgani: ustav kapitali, foyda, qarzlar, soliqlar, ish haqi.<br>
+Ko'paysa → <b>kreditga</b>. Kamaysa → <b>debetga</b>. Qoldiq <b>kreditda</b>.</p>
+<p>Eslab qolish uchun oddiy tekshiruv: <i>"Bu menda bormi yoki men qarzdormanmi?"</i> Bor bo'lsa — aktiv. Qarz bo'lsa — passiv.</p>
+<p>Mantiq: kassada pul ko'paysa debetga yozamiz. Yetkazib beruvchiga qarzim ko'paysa — kreditga. Qarzni to'lasam, qarz kamayadi → debetga.</p>`,
+acc:[["Aktiv","5010, 5110, 4010, 2910, 1010, 0100"],["Passiv","6010, 6710, 6410, 8310, 8710"]],
+q:[
+{q:"5110 (hisob-kitob schyoti) qanday schyot?",o:["Aktiv","Passiv","Aktiv-passiv","Hech qaysi"],c:0,w:"Bankdagi pul — korxona mulki. Demak aktiv."},
+{q:"6010 (mol yetkazib beruvchilar) qanday schyot?",o:["Passiv","Aktiv","Aktiv-passiv","Moliyaviy natija"],c:0,w:"Bu — sizning qarzingiz. Qarz = passiv."},
+{q:"Aktiv schyotda mablag' ko'paysa, qayerga yoziladi?",o:["Debetga","Kreditga","Ikkalasiga","Yozilmaydi"],c:0,w:"Aktivda ko'payish har doim debetda."},
+{q:"Passiv schyotda qarz kamaysa (to'lansa), qayerga yoziladi?",o:["Debetga","Kreditga","Ikkalasiga","Yozilmaydi"],c:0,w:"Passivda ko'payish kreditda bo'lgani uchun, kamayish teskari tomonga — debetga."},
+{q:"Aktiv schyotning qoldig'i qayerda turadi?",o:["Debetda","Kreditda","Ikkalasida","Qoldiq bo'lmaydi"],c:0,w:"Aktiv schyot debet qoldig'i bilan yopiladi. Kassada minus pul bo'lmaydi."},
+{q:"6710 (ish haqi) schyotining kredit qoldig'i nimani bildiradi?",o:["Xodimlarga qarzdorsiz","Xodimlar sizga qarzdor","Qarz yo'q","Ish haqi ortiqcha to'langan"],c:0,w:"Passiv schyotning kredit qoldig'i — to'lanmagan qarz. Ya'ni ish haqi hali berilmagan."}
 ]},
-{title:"Tovar keldi",icon:"📦",
- story:"«Mega Opt» dan 10 mln so'mlik tovar keldi, ustiga 12% QQS. Faktura imzolandi. Endi uni hisobga oling.",
- theory:`<p>Xaridda ikki narsa yoziladi: <b>tovarning o'zi</b> (QQSsiz) va <b>kirim QQS</b> (keyin budjetdan hisobga olinadi).</p>
- <p>QQS = summa × 12%. Jami to'lov = summa + QQS.</p>
- <p>Pul to'langanda: Dt 6010 — Kt 5110.</p>`,
- example:{t:"Tovar omborga kirdi, qarz paydo bo'ldi:",dt:"2910",kt:"6010"},
- tasks:[
- {t:"calc",q:"Tovar QQSsiz 10 000 000 so'm, QQS 12%. QQS summasi qancha?",a:1200000,e:"10 000 000 × 12% = 1 200 000 so'm."},
- {t:"calc",q:"Shu faktura bo'yicha jami to'lov qancha?",a:11200000,e:"10 000 000 + 1 200 000 = 11 200 000 so'm."},
- {t:"pv",q:"Tovar omborga kirim qilindi (QQSsiz summa).",dt:"2910",kt:"6010",o:["2910","6010","4010","9020","5110","9120"],e:"Tovar ko'paydi (Dt 2910), yetkazib beruvchiga qarz paydo bo'ldi (Kt 6010)."},
- {t:"pv",q:"Faktura bo'yicha kirim QQS aks ettirildi.",dt:"4410",kt:"6010",o:["4410","6410","6010","2910","9420","5110"],e:"Kirim QQS — hisobga olinadigan summa (Dt 4410), u ham qarzning bir qismi (Kt 6010)."},
- {t:"pv",q:"Bankdan yetkazib beruvchiga 11,2 mln so'm to'landi.",dt:"6010",kt:"5110",o:["6010","5110","2910","4010","5010","6410"],e:"Qarz yopildi (Dt 6010), bank kamaydi (Kt 5110)."},
- {t:"mc",q:"Tovar bor, faktura bor, to'lanmagan. 6010 dagi qoldiq qancha?",o:["0","10 000 000","11 200 000","1 200 000"],a:2,e:"Qarz tovar summasi va QQS bilan birga — 11 200 000 so'm."},
- {t:"pv",q:"Tovarni omborga keltirish uchun transport xizmatiga 500 ming to'landi (tovar tannarxiga qo'shiladi).",dt:"2910",kt:"6010",o:["2910","6010","9410","5110","4410","9420"],e:"Yetkazish xarajati tovar tannarxini oshiradi (Dt 2910), transport firmasiga qarz (Kt 6010)."},
- {t:"calc",q:"Tovar 10 000 000, transport 500 000. 100 dona bo'lsa, 1 dona tannarxi qancha?",a:105000,unit:"so'm",e:"(10 000 000 + 500 000) ÷ 100 = 105 000 so'm."},
- {t:"pv",q:"Ishlab chiqarish uchun xomashyo keldi, pul keyin to'lanadi.",dt:"1010",kt:"6010",o:["1010","6010","2910","2010","5110","4410"],e:"Xomashyo — 1010. Qarz esa 6010 da."},
- {t:"mc",q:"Kirim QQS (4410) nima uchun kerak?",o:["Budjetga to'lanadigan QQSni kamaytirish uchun","Foydani oshirish uchun","Tovar narxini oshirish uchun","Hech narsa uchun"],a:0,e:"To'lanadigan QQS = chiqim QQS − kirim QQS. Shuning uchun kirim QQS aniq hisobga olinadi."},
- {t:"calc",q:"Yetkazib beruvchiga 11 200 000 dan 7 000 000 to'landi. 6010 da qancha qoldi?",a:4200000,e:"11 200 000 − 7 000 000 = 4 200 000 so'm."},
- {t:"pv",q:"Yetkazib beruvchiga tovar kelishidan oldin kassadan bo'nak to'landi.",dt:"6010",kt:"5010",o:["6010","5010","5110","4010","2910","6310"],e:"6010 debet qoldiq beradi — endi yetkazib beruvchi sizga qarzdor. Kassa kamaydi (Kt 5010)."}
+
+{n:3,t:"Hisoblar rejasi — schyot raqamlari mantig'i",
+th:`<p>O'zbekiston hisoblar rejasida har bir schyot 4 xonali raqam. Birinchi raqam guruhni bildiradi — buni yodlab olsangiz, notanish schyotni ko'rganda ham nima ekanini taxmin qilasiz.</p>
+<p><b>0xxx</b> — uzoq muddatli aktivlar (asosiy vositalar, nomoddiy aktivlar, kapital qo'yilmalar)<br>
+<b>1xxx</b> — materiallar, xom ashyo<br>
+<b>2xxx</b> — ishlab chiqarish xarajatlari, tayyor mahsulot, tovarlar<br>
+<b>4xxx</b> — debitorlar (sizga qarzdorlar, berilgan bo'naklar)<br>
+<b>5xxx</b> — pul mablag'lari (kassa, bank, valyuta)<br>
+<b>6xxx</b> — kreditorlar (siz qarzdorsiz: yetkazib beruvchilar, soliq, ish haqi)<br>
+<b>7xxx</b> — uzoq muddatli majburiyatlar (kreditlar)<br>
+<b>8xxx</b> — kapital (ustav kapitali, foyda)<br>
+<b>9xxx</b> — daromad va xarajatlar, moliyaviy natija</p>
+<p>Eng foydali qoida: <b>4 — menga qarzdor, 6 — men qarzdorman</b>. Shu ikkitasini adashtirmasangiz, ishning yarmi bajarilgan.</p>
+<p>Ikkinchi-uchinchi raqam turini aniqlashtiradi: 5010 kassa, 5110 bank, 5210 valyuta — hammasi 5, ya'ni pul.</p>`,
+acc:[["4010","Xaridorlar qarzi (menga qarzdor)"],["6010","Yetkazib beruvchilarga qarz (men qarzdorman)"],["9020","Tovar sotishdan daromad"]],
+q:[
+{q:"4010 qaysi guruhga kiradi?",o:["Debitorlar — menga qarzdor","Kreditorlar — men qarzdorman","Pul mablag'lari","Kapital"],c:0,w:"4 bilan boshlanadi → debitor. Xaridor tovarni olgan, puli hali kelmagan."},
+{q:"Pul mablag'lari qaysi raqam bilan boshlanadi?",o:["5","4","6","2"],c:0,w:"5xxx — kassa, bank, valyuta, maxsus schyotlar."},
+{q:"Byudjetga soliq qarzi (6410) qaysi guruh?",o:["Kreditorlar","Debitorlar","Xarajatlar","Aktivlar"],c:0,w:"6 bilan boshlanadi → siz qarzdorsiz. Soliq hali to'lanmagan."},
+{q:"Asosiy vositalar qaysi raqamda?",o:["0100","1010","2910","5010"],c:0,w:"0xxx — uzoq muddatli aktivlar. Asosiy vositalar 0100 guruhida."},
+{q:"Daromad va xarajatlar qaysi guruhda?",o:["9xxx","8xxx","2xxx","6xxx"],c:0,w:"9xxx — moliyaviy natija guruhi. Yil oxirida yopiladi."},
+{q:"Omborda turgan tovar qaysi schyotda?",o:["2910","1010","4010","0100"],c:0,w:"2910 — omborlardagi tovarlar. 1010 esa xom ashyo va materiallar."},
+{q:"Ustav kapitali qaysi guruhda?",o:["8xxx","6xxx","5xxx","0xxx"],c:0,w:"8xxx — o'z kapitali. 8310 — ustav kapitali."}
 ]},
-{title:"Birinchi savdo",icon:"🛒",
- story:"«Baraka Market» sizdan tovar oldi: 5 600 000 so'm (QQS bilan). Tannarxi 3 500 000 so'm edi. Daromadni to'g'ri ko'rsating!",
- theory:`<p>Sotuvda uchta yozuv:</p>
- <ul><li>Daromad (QQSsiz): Dt 4010 — Kt 9020</li><li>Chiqim QQS: Dt 4010 — Kt 6410</li><li>Tannarx: Dt 9120 — Kt 2910</li></ul>
- <p>Summa QQS bilan berilsa: <b>QQS = jami × 12 / 112</b>.</p>`,
- example:{t:"Tovar ombordan chiqdi, qiymati xarajatga o'tdi:",dt:"9120",kt:"2910"},
- tasks:[
- {t:"calc",q:"Sotuv QQS bilan 5 600 000 so'm (12%). Ichidagi QQS qancha?",a:600000,e:"5 600 000 × 12 / 112 = 600 000 so'm."},
- {t:"calc",q:"QQSsiz daromad qancha?",a:5000000,e:"5 600 000 − 600 000 = 5 000 000 so'm."},
- {t:"pv",q:"Tovar jo'natildi — QQSsiz daromad aks ettirildi.",dt:"4010",kt:"9020",o:["4010","9020","2910","6010","9120","5110"],e:"Xaridor qarzdor bo'ldi (Dt 4010), daromad tan olindi (Kt 9020)."},
- {t:"pv",q:"Sotuv QQSi budjetga qarz sifatida yozildi.",dt:"4010",kt:"6410",o:["4010","6410","4410","9020","6010","9420"],e:"Xaridor QQSni ham to'laydi (Dt 4010), lekin bu pul davlatniki (Kt 6410)."},
- {t:"pv",q:"Sotilgan tovar tannarxi hisobdan chiqarildi.",dt:"9120",kt:"2910",o:["9120","2910","9020","4010","0130","6010"],e:"Ombordagi tovar kamaydi (Kt 2910), tannarx xarajat bo'ldi (Dt 9120)."},
- {t:"calc",q:"Yalpi foyda qancha? (QQSsiz daromad − tannarx)",a:1500000,e:"5 000 000 − 3 500 000 = 1 500 000 so'm."},
- {t:"pv",q:"«Baraka Market» 5,6 mln so'mni bankka o'tkazdi.",dt:"5110",kt:"4010",o:["5110","4010","9020","6310","5010","6410"],e:"Bank ko'paydi (Dt 5110), xaridor qarzi yopildi (Kt 4010)."},
- {t:"pv",q:"Boshqa xaridor tovar olishdan oldin bankka 2 mln bo'nak to'ladi.",dt:"5110",kt:"6310",o:["5110","6310","4010","9020","6010","5010"],e:"Oldindan olingan pul — majburiyat, xaridor tovar kutmoqda (Kt 6310)."},
- {t:"pv",q:"Tovarni xaridorga yetkazish uchun transportga to'landi (sotish xarajati).",dt:"9410",kt:"5110",o:["9410","5110","9420","2910","9120","6010"],e:"Sotish bilan bog'liq xarajat — 9410. Bank kamaydi (Kt 5110)."},
- {t:"calc",q:"Marja 25% bo'lishi kerak. Tannarx 3 500 000 bo'lsa, QQSsiz sotuv narxi qancha?",a:4375000,e:"3 500 000 × 1,25 = 4 375 000 so'm."},
- {t:"mc",q:"Xaridor tovarni qaytardi. Daromad provodkasi qanday tuzatiladi?",o:["Hech narsa qilinmaydi","Teskari yozuv: Dt 9020 — Kt 4010","Dt 4010 — Kt 9020 takrorlanadi","Dt 9120 — Kt 2910"],a:1,e:"Qaytarishda daromad kamayadi: teskari (storno) yozuv beriladi."},
- {t:"calc",q:"Oyda 12 ta savdo, har biri QQSsiz 5 000 000 so'mdan. Oylik daromad qancha?",a:60000000,e:"5 000 000 × 12 = 60 000 000 so'm."}
+
+{n:4,t:"Kassa operatsiyalari (5010)",
+th:`<p><b>5010 — Kassa</b>, aktiv schyot. Debetda pul kirimi, kreditda chiqimi. Qoldiq faqat debetda bo'ladi (kassada minus pul bo'lishi mumkin emas — bo'lsa, xato bor).</p>
+<p>Har bir harakat hujjat bilan tasdiqlanadi:<br>
+• <b>KO-1</b> — kirim orderi (pul kirganda)<br>
+• <b>KO-2</b> — chiqim orderi (pul berilganda)<br>
+• <b>Kassa kitobi</b> — kunlik qoldiq</p>
+<p>Eng ko'p uchraydigan provodkalar:<br>
+<span class="pv">Dt 5010 — Kt 5110</span> bankdan kassaga pul olindi<br>
+<span class="pv">Dt 5110 — Kt 5010</span> kassadan bankka topshirildi<br>
+<span class="pv">Dt 5010 — Kt 4010</span> xaridor naqd to'ladi<br>
+<span class="pv">Dt 4220 — Kt 5010</span> hisobdor shaxsga berildi<br>
+<span class="pv">Dt 6710 — Kt 5010</span> ish haqi berildi</p>
+<p>Diqqat: kassa limiti bor. Ortiqcha naqd pulni bankka topshirish kerak.</p>`,
+acc:[["5010","Kassa"],["4220","Hisobdor shaxslar"],["6710","Ish haqi"]],
+q:[
+{q:"Kassadan hisobdor shaxsga 500 ming so'm berildi.",o:["Dt 4220 — Kt 5010","Dt 5010 — Kt 4220","Dt 6710 — Kt 5010","Dt 4220 — Kt 5110"],c:0,w:"Hisobdor shaxs endi sizga qarzdor (4xxx debetga), kassadan pul chiqdi (5010 kreditga)."},
+{q:"Kassadan xodimlarga ish haqi berildi.",o:["Dt 6710 — Kt 5010","Dt 5010 — Kt 6710","Dt 9420 — Kt 5010","Dt 6710 — Kt 5110"],c:0,w:"Ish haqi qarzi kamaydi → 6710 debetga. Kassadan pul chiqdi → 5010 kreditga."},
+{q:"Kassa schyotining qoldig'i kreditda chiqdi. Bu nimani bildiradi?",o:["Xato bor, tekshirish kerak","Normal holat","Foyda bor","Qarz bor"],c:0,w:"Kassa aktiv schyot — qoldig'i faqat debetda bo'ladi. Kredit qoldiq = xato yoki hujjat yetishmayapti."},
+{q:"Kassaga pul kirganda qaysi hujjat rasmiylashtiriladi?",o:["Kirim orderi (KO-1)","Chiqim orderi (KO-2)","Faktura","Shartnoma"],c:0,w:"KO-1 — kirim orderi. KO-2 esa pul berilganda."},
+{q:"Xaridor tovar uchun kassaga naqd to'ladi.",o:["Dt 5010 — Kt 4010","Dt 4010 — Kt 5010","Dt 5010 — Kt 9020","Dt 5110 — Kt 4010"],c:0,w:"Kassaga pul kirdi (debet), xaridorning qarzi yopildi (4010 kreditga)."},
+{q:"Kassadan bankka 10 mln topshirildi.",o:["Dt 5110 — Kt 5010","Dt 5010 — Kt 5110","Dt 5110 — Kt 6010","Dt 5010 — Kt 4010"],c:0,w:"Bankda ko'paydi (5110 debet), kassadan chiqdi (5010 kredit)."}
 ]},
-{title:"Ish haqi kuni",icon:"💸",
- story:"Oy oxiri. Menejer Dilnozaning oyligi 8 000 000 so'm. Xodimlar kutyapti — xato qilmang!",
- theory:`<p>Ish haqi uch bosqichda:</p>
- <ul><li><b>Hisoblash</b>: Dt 9420 — Kt 6710</li><li><b>JShDS ushlash</b>: Dt 6710 — Kt 6410</li><li><b>To'lash</b>: Dt 6710 — Kt 5110</li></ul>
- <p>Qo'lga tegadigan summa = hisoblangan − ushlanmalar.</p>`,
- example:{t:"Oylik hisoblandi (ma'muriy xodim):",dt:"9420",kt:"6710"},
- tasks:[
- {t:"pv",q:"Menejerga 8 mln so'm ish haqi hisoblandi.",dt:"9420",kt:"6710",o:["9420","6710","5110","6410","9120","4010"],e:"Ma'muriy xarajat (Dt 9420), xodim oldida qarz (Kt 6710)."},
- {t:"calc",q:"JShDS 12%. 8 000 000 so'mdan qancha ushlanadi?",a:960000,e:"8 000 000 × 12% = 960 000 so'm."},
- {t:"pv",q:"Ish haqidan JShDS ushlandi.",dt:"6710",kt:"6410",o:["6710","6410","9420","5110","4410","6010"],e:"Xodimga qarz kamaydi (Dt 6710), budjetga qarz ko'paydi (Kt 6410)."},
- {t:"calc",q:"Kartaga qancha tushadi? (boshqa ushlanma yo'q)",a:7040000,e:"8 000 000 − 960 000 = 7 040 000 so'm."},
- {t:"pv",q:"Ish haqi bankdan kartaga o'tkazildi.",dt:"6710",kt:"5110",o:["6710","5110","9420","5010","6410","4010"],e:"Qarz yopildi (Dt 6710), bank kamaydi (Kt 5110)."},
- {t:"pv",q:"Ushlangan JShDS budjetga to'landi.",dt:"6410",kt:"5110",o:["6410","5110","4410","6710","9420","5010"],e:"Budjetga qarz yopildi (Dt 6410), bank kamaydi (Kt 5110)."},
- {t:"mc",q:"Hisoblangan, lekin to'lanmagan oylik 6710 da qanday qoldiq beradi?",o:["Debet qoldiq","Kredit qoldiq","Qoldiq bo'lmaydi","Faqat JShDS summasi"],a:1,e:"6710 — passiv, qoldig'i kreditda."},
- {t:"calc",q:"Oylik 8 000 000, ustiga 12% ijtimoiy soliq. Firmaning jami xarajati qancha?",a:8960000,e:"8 000 000 + 960 000 = 8 960 000 so'm (soliq firma hisobidan)."},
- {t:"pv",q:"Xodimga kassadan avans berildi.",dt:"6710",kt:"5010",o:["6710","5010","9420","5110","6410","6910"],e:"Avans — qarzning oldindan to'langan qismi (Dt 6710), kassadan chiqdi (Kt 5010)."},
- {t:"calc",q:"5 ta xodim, har biriga 6 000 000. JShDS 12%. Jami ushlanma qancha?",a:3600000,e:"5 × 6 000 000 = 30 000 000; 30 000 000 × 12% = 3 600 000 so'm."},
- {t:"mc",q:"Ishlab chiqarish ishchisining ish haqi qaysi hisobvaraqqa yoziladi?",o:["9420","2010","9120","9410"],a:1,e:"Ishchi mehnati mahsulot tannarxiga kiradi: Dt 2010 — Kt 6710."},
- {t:"calc",q:"Oylik 8 000 000, JShDS 960 000, sud qarori bo'yicha 500 000 ushlandi. Qo'lga qancha?",a:6540000,e:"8 000 000 − 960 000 − 500 000 = 6 540 000 so'm."}
+
+{n:5,t:"Bank — hisob-kitob schyoti (5110)",
+th:`<p><b>5110 — Hisob-kitob schyoti</b>, aktiv. Korxonaning asosiy bank schyoti, milliy valyutada.</p>
+<p>Debetda — pul tushumi, kreditda — to'lovlar. Asosiy hujjat: <b>to'lov topshiriqnomasi</b> va <b>bank ko'chirmasi</b> (vipiska).</p>
+<p>Muhim odat: har kuni bank ko'chirmasini oling va har bir qatorni provodkaga aylantiring. Ko'chirmadagi qoldiq 5110 dagi qoldiq bilan mos kelishi shart.</p>
+<p>Tez-tez uchraydiganlari:<br>
+<span class="pv">Dt 5110 — Kt 4010</span> xaridordan tushum<br>
+<span class="pv">Dt 5110 — Kt 6310</span> xaridordan bo'nak (avans)<br>
+<span class="pv">Dt 6010 — Kt 5110</span> yetkazib beruvchiga to'lov<br>
+<span class="pv">Dt 6410 — Kt 5110</span> soliq to'landi<br>
+<span class="pv">Dt 9430 — Kt 5110</span> bank xizmati haqi</p>
+<p>Diqqat: bankdan pul tushgani — har doim daromad degani emas. Bo'nak bo'lishi mumkin, qarz qaytishi ham mumkin.</p>`,
+acc:[["5110","Hisob-kitob schyoti"],["6310","Olingan bo'naklar"],["9430","Boshqa operatsion xarajatlar"]],
+q:[
+{q:"Xaridordan bank orqali tovar puli tushdi.",o:["Dt 5110 — Kt 4010","Dt 4010 — Kt 5110","Dt 5110 — Kt 9020","Dt 5010 — Kt 4010"],c:0,w:"Bankda pul ko'paydi (debet), xaridor qarzi yopildi (4010 kredit)."},
+{q:"Mol yetkazib beruvchiga qarz to'landi.",o:["Dt 6010 — Kt 5110","Dt 5110 — Kt 6010","Dt 2910 — Kt 5110","Dt 6010 — Kt 5010"],c:0,w:"Qarz kamaydi → 6010 debetga. Bankdan pul chiqdi → 5110 kreditga."},
+{q:"Bank xizmat haqi ushlab qoldi.",o:["Dt 9430 — Kt 5110","Dt 5110 — Kt 9430","Dt 9420 — Kt 6010","Dt 6410 — Kt 5110"],c:0,w:"Bu xarajat → 9430 debetga (ba'zi korxonalarda 9420). Bankdan pul chiqdi → 5110 kreditga."},
+{q:"Bank ko'chirmasidagi qoldiq 5110 qoldig'iga mos kelmadi. Nima qilish kerak?",o:["Sabab topilguncha tekshirish","Ko'chirmaga ishonib to'g'rilash","E'tibor bermaslik","Farqni xarajatga yozish"],c:0,w:"Farq har doim sabab bilan bo'ladi: o'tkazib yuborilgan qator, ikki marta yozilgan provodka, sana xatosi. Topilguncha yopmaslik kerak."},
+{q:"Byudjetga QQS to'landi.",o:["Dt 6410 — Kt 5110","Dt 5110 — Kt 6410","Dt 4410 — Kt 5110","Dt 9810 — Kt 5110"],c:0,w:"Soliq qarzi kamaydi → 6410 debetga. Bankdan chiqdi → 5110 kreditga."},
+{q:"Xaridordan kelgan pul — bu har doim daromadmi?",o:["Yo'q, bo'nak yoki qarz qaytishi bo'lishi mumkin","Ha, har doim daromad","Faqat naqd bo'lsa daromad","Faqat QQS bilan bo'lsa"],c:0,w:"Daromad tovar/xizmat yetkazilganda tan olinadi, pul kelganda emas. Oldindan to'lov — 6310 bo'naklar."}
 ]},
-{title:"Yangi uskuna",icon:"⚙️",
- story:"Firma 60 mln so'mga qadoqlash uskunasi sotib oldi. Uni ishga tushiring va eskirishini hisoblang.",
- theory:`<p>Asosiy vosita avval <b>0820</b> da yig'iladi (narx, yetkazish, o'rnatish), foydalanishga topshirilganda <b>0130</b> ga o'tadi.</p>
- <div class="example">Yillik amortizatsiya = (boshlang'ich qiymat − qoldiq qiymat) ÷ foydalanish yillari</div>
- <p>Oylik = yillik ÷ 12. Provodka: Dt 9420 — Kt 0230.</p>`,
- example:{t:"Uskuna xarid qilindi, pul keyin to'lanadi:",dt:"0820",kt:"6010"},
- tasks:[
- {t:"pv",q:"Uskuna keldi, faktura olindi (QQSsiz 60 mln).",dt:"0820",kt:"6010",o:["0820","6010","0130","2910","5110","0230"],e:"Kapital qo'yilma yig'ildi (Dt 0820), qarz paydo bo'ldi (Kt 6010)."},
- {t:"pv",q:"Uskuna o'rnatildi va foydalanishga topshirildi.",dt:"0130",kt:"0820",o:["0130","0820","0230","2910","9420","6010"],e:"Asosiy vosita tayyor (Dt 0130), xarid hisobvarag'i yopildi (Kt 0820)."},
- {t:"calc",q:"60 000 000 so'm, muddat 5 yil, qoldiq qiymat 0. Yillik amortizatsiya?",a:12000000,e:"60 000 000 ÷ 5 = 12 000 000 so'm."},
- {t:"calc",q:"Oylik amortizatsiya qancha?",a:1000000,e:"12 000 000 ÷ 12 = 1 000 000 so'm."},
- {t:"pv",q:"Oylik amortizatsiya hisoblandi (ma'muriy uskuna).",dt:"9420",kt:"0230",o:["9420","0230","0130","0820","9120","6010"],e:"Xarajat (Dt 9420), eskirish to'plandi (Kt 0230) — kontr-aktiv, kreditda ko'payadi."},
- {t:"calc",q:"Ikki yildan keyin qoldiq (balans) qiymati qancha?",a:36000000,e:"60 000 000 − 12 000 000 × 2 = 36 000 000 so'm."},
- {t:"calc",q:"Uskuna 48 000 000, qoldiq qiymati 6 000 000, muddat 7 yil. Yillik amortizatsiya?",a:6000000,e:"(48 000 000 − 6 000 000) ÷ 7 = 6 000 000 so'm."},
- {t:"pv",q:"Uskunani o'rnatish ishlariga pudratchiga to'lanadigan summa qo'shildi.",dt:"0820",kt:"6010",o:["0820","6010","9420","0130","0230","5110"],e:"O'rnatish xarajati ham asosiy vosita qiymatiga kiradi (Dt 0820)."},
- {t:"mc",q:"0230 hisobvarag'i balansda qanday ko'rinadi?",o:["Aktivni oshiradi","Aktivdan ayriladi","Majburiyat sifatida","Daromad sifatida"],a:1,e:"To'plangan eskirish asosiy vosita qiymatidan ayriladi — qoldiq qiymat chiqadi."},
- {t:"calc",q:"Uskuna 3 yil ishlatildi (yillik 12 mln). To'plangan eskirish qancha?",a:36000000,e:"12 000 000 × 3 = 36 000 000 so'm — bu 0230 ning kredit qoldig'i."},
- {t:"pv",q:"Uskuna ta'mirlandi, ta'mir xarajati joriy xarajatga yozildi.",dt:"9430",kt:"6010",o:["9430","6010","0820","0130","0230","9120"],e:"Oddiy ta'mir asosiy vosita qiymatini oshirmaydi — joriy xarajat (Dt 9430)."},
- {t:"mc",q:"Uskuna to'liq amortizatsiya qilindi, lekin hali ishlayapti. Nima bo'ladi?",o:["Hisobdan chiqariladi","Amortizatsiya to'xtaydi, uskuna balansda qoladi","Yana amortizatsiya boshlanadi","Daromad yoziladi"],a:1,e:"Qoldiq qiymat nolga yetgach, amortizatsiya to'xtaydi, aktiv esa foydalanishda turaveradi."}
+
+{n:6,t:"Mol yetkazib beruvchilar (6010)",
+th:`<p><b>6010 — Mol yetkazib beruvchilar va pudratchilarga to'lanadigan schyotlar</b>, passiv.</p>
+<p>Tovar yoki xizmat olganingizda qarz paydo bo'ladi → <b>kreditga</b>. To'laganingizda qarz kamayadi → <b>debetga</b>.</p>
+<p>Tipik ketma-ketlik (QQS to'lovchi korxona uchun, tovar 12 mln + QQS 12% = 1.44 mln):<br>
+<span class="pv">Dt 2910 — Kt 6010</span> 12 000 000 — tovar kirim qilindi<br>
+<span class="pv">Dt 4410 — Kt 6010</span> 1 440 000 — hisobga olinadigan QQS<br>
+<span class="pv">Dt 6010 — Kt 5110</span> 13 440 000 — to'lov amalga oshirildi</p>
+<p>Asosiy hujjat — <b>hisob-faktura</b> (schyot-faktura). Provodka faktura sanasi bo'yicha qilinadi, to'lov sanasi bo'yicha emas.</p>
+<p>6010 ni <b>har bir kontragent bo'yicha alohida</b> yuritish kerak (analitik hisob). Umumiy qoldiq nolga teng bo'lsa ham, bir firmaga qarzdor, boshqasidan haqdor bo'lishingiz mumkin.</p>`,
+acc:[["6010","Yetkazib beruvchilarga qarz"],["4410","Hisobga olinadigan QQS"],["2910","Omborlardagi tovarlar"]],
+q:[
+{q:"Yetkazib beruvchidan tovar olindi (QQSsiz summa).",o:["Dt 2910 — Kt 6010","Dt 6010 — Kt 2910","Dt 2910 — Kt 5110","Dt 1010 — Kt 4010"],c:0,w:"Tovar ko'paydi → 2910 debetga. Qarz paydo bo'ldi → 6010 kreditga."},
+{q:"Fakturadagi QQS summasi qayerga yoziladi?",o:["Dt 4410 — Kt 6010","Dt 6410 — Kt 6010","Dt 2910 — Kt 6410","Dt 6010 — Kt 4410"],c:0,w:"Kirim QQS hisobga olinadi → 4410 debetga, qarzning bir qismi sifatida 6010 kreditga."},
+{q:"6010 schyotida kredit qoldiq bor. Bu nimani anglatadi?",o:["Siz yetkazib beruvchiga qarzdorsiz","Yetkazib beruvchi sizga qarzdor","Qarz yo'q","Ortiqcha to'langan"],c:0,w:"Passiv schyotning kredit qoldig'i — to'lanmagan qarz."},
+{q:"6010 da debet qoldiq chiqdi. Bu nimani bildiradi?",o:["Ortiqcha to'langan yoki bo'nak berilgan","Qarz ko'paygan","Xato, bunday bo'lmaydi","Daromad"],c:0,w:"Ko'p hollarda bo'nak. Uni 4310 (berilgan bo'naklar) ga o'tkazish to'g'riroq bo'ladi."},
+{q:"Provodka qaysi sana bo'yicha qilinadi?",o:["Faktura sanasi bo'yicha","To'lov sanasi bo'yicha","Shartnoma sanasi bo'yicha","Oy oxirida"],c:0,w:"Hisob boshlangan sana — hujjat (faktura) sanasi. To'lov keyin bo'lishi mumkin."},
+{q:"Nega 6010 ni har bir firma bo'yicha alohida yuritish kerak?",o:["Kim bilan qancha hisob-kitob borligini ko'rish uchun","Soliq talab qilgani uchun","Bank so'ragani uchun","Kerak emas"],c:0,w:"Analitik hisob bo'lmasa, umumiy raqam ortida kimga qarzdor, kimdan haqdor ekaningiz ko'rinmaydi."}
 ]},
-{title:"Yil yakuni",icon:"🎆",
- story:"31-dekabr. Direktor so'raydi: «Xo'sh, foyda qildikmi?» Hisobvaraqlarni yopib, javob bering.",
- theory:`<p>Yil oxirida 9-guruh <b>9910 — Yakuniy moliyaviy natija</b> ga yopiladi:</p>
- <ul><li>Daromad: Dt 9020 — Kt 9910</li><li>Xarajatlar: Dt 9910 — Kt 9120, 9410, 9420</li></ul>
- <p>Foyda solig'i: Dt 9810 — Kt 6410. Sof foyda: Dt 9910 — Kt 8710. Dividend: Dt 8710 — Kt 6610.</p>`,
- example:{t:"Daromad yakuniy natijaga yopildi:",dt:"9020",kt:"9910"},
- tasks:[
- {t:"pv",q:"Yillik tovar sotishdan daromad yopildi.",dt:"9020",kt:"9910",o:["9020","9910","8710","4010","9120","6410"],e:"Daromad hisobvarag'i nolga tushdi (Dt 9020), natijaga o'tdi (Kt 9910)."},
- {t:"pv",q:"Sotilgan tovarlar tannarxi yopildi.",dt:"9910",kt:"9120",o:["9910","9120","2910","9020","8710","9420"],e:"Xarajat natijani kamaytiradi (Dt 9910), 9120 yopildi."},
- {t:"calc",q:"Daromad 90 mln, tannarx 55 mln, ma'muriy xarajat 15 mln. Soliqqacha foyda?",a:20000000,e:"90 − 55 − 15 = 20 mln so'm."},
- {t:"calc",q:"Foyda solig'i 15%. 20 000 000 so'mdan qancha?",a:3000000,e:"20 000 000 × 15% = 3 000 000 so'm."},
- {t:"pv",q:"Foyda solig'i hisoblandi.",dt:"9810",kt:"6410",o:["9810","6410","9910","8710","5110","4410"],e:"Soliq xarajati (Dt 9810), budjetga qarz (Kt 6410)."},
- {t:"calc",q:"Soliqdan keyingi sof foyda qancha?",a:17000000,e:"20 000 000 − 3 000 000 = 17 000 000 so'm."},
- {t:"pv",q:"Sof foyda taqsimlanmagan foydaga o'tkazildi.",dt:"9910",kt:"8710",o:["9910","8710","8330","9020","6610","9810"],e:"Natija yopildi (Dt 9910), foyda kapitalga qo'shildi (Kt 8710)."},
- {t:"pv",q:"Ta'sischilar 10 mln so'm dividend taqsimlashga qaror qildi.",dt:"8710",kt:"6610",o:["8710","6610","8330","5110","9910","6710"],e:"Taqsimlanmagan foyda kamaydi (Dt 8710), ta'sischiga qarz (Kt 6610)."},
- {t:"calc",q:"Dividenddan 5% soliq ushlanadi. Ta'sischi 10 mln dan qancha oladi?",a:9500000,e:"10 000 000 − 500 000 = 9 500 000 so'm."},
- {t:"pv",q:"Dividend solig'i ushlandi.",dt:"6610",kt:"6410",o:["6610","6410","8710","5110","9810","4410"],e:"Ta'sischiga qarz kamaydi (Dt 6610), budjetga qarz ko'paydi (Kt 6410)."},
- {t:"pv",q:"Ma'muriy xarajatlar yil yakunida yopildi.",dt:"9910",kt:"9420",o:["9910","9420","9120","8710","6710","9410"],e:"Barcha xarajatlar 9910 debetiga yig'iladi."},
- {t:"mc",q:"9910 da kredit qoldiq chiqdi. Bu nimani bildiradi?",o:["Zarar","Foyda","Xato","Soliq qarzi"],a:1,e:"Kredit qoldiq — daromad xarajatdan ko'p, ya'ni foyda."},
- {t:"calc",q:"Daromad 40 mln, xarajatlar 47 mln. Natija qancha? (zarar summasini raqamda yozing)",a:7000000,e:"47 − 40 = 7 mln so'm zarar. 9910 da debet qoldiq bo'ladi."}
+
+{n:7,t:"TAKROR — 1-hafta",
+th:`<p>Birinchi hafta poydevor edi. Nimalarni bilib oldingiz:</p>
+<p>• Har bir operatsiya ikkita schyotga tushadi, summalar teng<br>
+• Aktiv: ko'payish debetda, qoldiq debetda<br>
+• Passiv: ko'payish kreditda, qoldiq kreditda<br>
+• 4 — menga qarzdor, 6 — men qarzdorman, 5 — pul<br>
+• Kassa (5010), bank (5110), yetkazib beruvchi (6010)</p>
+<p>Endi aralash savollar. Shoshilmang — har bir savolda avval "aktivmi, passivmi?" deb o'ylang, keyin "ko'paydimi, kamaydimi?".</p>`,
+acc:[],
+q:[
+{q:"Kassaga bankdan pul olindi.",o:["Dt 5010 — Kt 5110","Dt 5110 — Kt 5010","Dt 5010 — Kt 4010","Dt 5010 — Kt 6010"],c:0,w:"Kassa ko'paydi (debet), bankda kamaydi (kredit)."},
+{q:"Tovar qarzga olindi, QQSsiz 8 mln.",o:["Dt 2910 — Kt 6010","Dt 6010 — Kt 2910","Dt 2910 — Kt 5110","Dt 4010 — Kt 2910"],c:0,w:"Tovar kirdi, qarz paydo bo'ldi."},
+{q:"Passiv schyotda qoldiq qayerda turadi?",o:["Kreditda","Debetda","Ikkalasida","Turmaydi"],c:0,w:"Passiv — kredit qoldiq. Aktiv — debet qoldiq."},
+{q:"Yetkazib beruvchiga bank orqali to'landi.",o:["Dt 6010 — Kt 5110","Dt 5110 — Kt 6010","Dt 6010 — Kt 5010","Dt 2910 — Kt 5110"],c:0,w:"Qarz kamaydi (6010 debet), bankdan pul chiqdi (5110 kredit)."},
+{q:"4010 da debet qoldiq — nimani bildiradi?",o:["Xaridor sizga qarzdor","Siz xaridorga qarzdorsiz","Qarz yo'q","Bo'nak olingan"],c:0,w:"4xxx — debitorlar. Debet qoldiq = olinmagan pul."},
+{q:"Aktiv schyotda mablag' kamaysa?",o:["Kreditga yoziladi","Debetga yoziladi","Yozilmaydi","Ikkalasiga"],c:0,w:"Aktivda ko'payish debetda, demak kamayish kreditda."},
+{q:"Kassadan ish haqi berildi.",o:["Dt 6710 — Kt 5010","Dt 5010 — Kt 6710","Dt 9420 — Kt 5010","Dt 6710 — Kt 5110"],c:0,w:"Ish haqi qarzi yopildi (6710 debet), kassadan chiqdi (5010 kredit)."},
+{q:"Hisoblar rejasida 9 raqami nimani bildiradi?",o:["Daromad va xarajatlar","Pul mablag'lari","Kreditorlar","Asosiy vositalar"],c:0,w:"9xxx — moliyaviy natija guruhi."}
 ]},
-{title:"Boss: soliq tekshiruvi",icon:"🕵️",
- story:"Eshik taqilladi. Soliq inspektori: «Hujjatlaringizni ko'rsak bo'ladimi?» Hamma bilimingiz kerak. Faqat 3 ta jon!",
- theory:`<p>Yakuniy sinov — barcha bosqichlardan aralash savollar. Esda tuting:</p>
- <ul><li>Aktiv = Majburiyat + Kapital.</li><li>Aktiv qoldiq = boshlang'ich + Dt oborot − Kt oborot.</li><li>Tovar astatkasi = boshlang'ich + kirim − chiqim.</li><li>To'lanadigan QQS = chiqim QQS − kirim QQS.</li></ul>`,
- example:null,
- tasks:[
- {t:"calc",q:"Aktivlar 50 mln, majburiyatlar 18 mln. Kapital qancha?",a:32000000,e:"50 − 18 = 32 mln so'm."},
- {t:"calc",q:"5110: boshlang'ich 4 000 000, Dt oborot 9 000 000, Kt oborot 6 500 000. Oxirgi qoldiq?",a:6500000,e:"4 000 000 + 9 000 000 − 6 500 000 = 6 500 000 so'm."},
- {t:"calc",q:"Oy boshida 120 dona tovar, kirim 300, chiqim 270. Astatka (dona)?",a:150,unit:"dona",e:"120 + 300 − 270 = 150 dona."},
- {t:"pv",q:"Xaridordan olingan bo'nak hisobiga tovar jo'natildi.",dt:"6310",kt:"4010",o:["6310","4010","9020","5110","6010","6410"],e:"Bo'nak majburiyati yopiladi (Dt 6310), xaridor qarzi kamayadi (Kt 4010)."},
- {t:"mc",q:"6010 da DEBET qoldiq bor. Bu nimani anglatadi?",o:["Xato — bunday bo'lmaydi","Yetkazib beruvchiga oldindan to'langan","Tovar sotilgan","Soliq ortiqcha to'langan"],a:1,e:"Debet qoldiq — siz oldindan to'lagansiz, yetkazib beruvchi qarzdor."},
- {t:"pv",q:"Kassadan bankka 5 mln topshirildi.",dt:"5110",kt:"5010",o:["5110","5010","4010","6010","9020","6710"],e:"Bank ko'paydi (Dt 5110), kassa kamaydi (Kt 5010)."},
- {t:"calc",q:"Chiqim QQS 7 200 000, kirim QQS 4 800 000. Budjetga qancha to'lanadi?",a:2400000,e:"7 200 000 − 4 800 000 = 2 400 000 so'm."},
- {t:"mc",q:"Qaysi provodka XATO?",o:["Dt 2910 — Kt 6010 (tovar keldi)","Dt 5110 — Kt 4010 (xaridor to'ladi)","Dt 9020 — Kt 4010 (tovar sotildi)","Dt 6710 — Kt 5110 (oylik to'landi)"],a:2,e:"To'g'risi: Dt 4010 — Kt 9020. Daromad kreditda paydo bo'ladi."},
- {t:"pv",q:"Yil yakuni: sof foyda taqsimlanmagan foydaga o'tkazildi.",dt:"9910",kt:"8710",o:["9910","8710","8330","9020","6610","9810"],e:"Natija yopildi (Dt 9910), foyda kapitalga qo'shildi (Kt 8710)."},
- {t:"calc",q:"Tovar QQS bilan 22 400 000 so'mga sotildi (12%). QQSsiz daromad qancha?",a:20000000,e:"22 400 000 ÷ 1,12 = 20 000 000 so'm."},
- {t:"mc",q:"Inspektor: «Kassada 12 mln naqd, hujjatda 9 mln». Bu nima?",o:["Kassada ortiqcha (izlash kerak)","Normal holat","Foyda","Zarar"],a:0,e:"Haqiqiy va hisob qoldig'i farqi — inventarizatsiya natijasi, sababi aniqlanib rasmiylashtiriladi."},
- {t:"calc",q:"Uskuna 84 000 000, muddat 7 yil, qoldiq qiymat 0. 4 yildan keyin balans qiymati?",a:36000000,e:"Yillik 12 mln; 84 − 48 = 36 mln so'm."},
- {t:"pv",q:"Ishlab chiqarish ishchisining ish haqi hisoblandi.",dt:"2010",kt:"6710",o:["2010","6710","9420","9120","5110","6410"],e:"Ishchi mehnati mahsulot tannarxiga kiradi (Dt 2010)."},
- {t:"calc",q:"Daromad 120 mln, tannarx 70 mln, xarajatlar 20 mln, foyda solig'i 15%. Sof foyda qancha?",a:25500000,e:"Foyda 30 mln; soliq 4,5 mln; sof foyda 25 500 000 so'm."}
-]}];
 
-const RANKS=[[0,"Stajyor"],[200,"Kichik hisobchi"],[500,"Hisobchi"],[900,"Bosh hisobchi o'rinbosari"],[1400,"Bosh buxgalter"],[2000,"Moliya direktori"],[2800,"Provodka ustozi"]];
-const RIVALS=[];   // jonli sheriklar qo'shilganda shu yerga tushadi
-const TASKMAP={};
-STAGES.forEach((st,si)=>st.tasks.forEach((t,k)=>{ t.id=si+"-"+k; TASKMAP[t.id]=t; }));
-const WEEK_GOAL=600;   // haftalik maqsad (XP)
-const ACH=[
- {id:"first",i:"🎓",n:"Birinchi bosqich",d:"Bitta bosqichni yakunlash"},
- {id:"perfect",i:"💎",n:"Xatosiz",d:"Bosqichni 3 yulduz bilan o'tish"},
- {id:"combo5",i:"🔥",n:"5 ketma-ket",d:"5 ta to'g'ri javob ketma-ket"},
- {id:"combo10",i:"⚡",n:"10 ketma-ket",d:"10 ta to'g'ri javob ketma-ket"},
- {id:"streak3",i:"📅",n:"3 kun",d:"3 kunlik seriya"},
- {id:"streak7",i:"🗓️",n:"7 kun",d:"7 kunlik seriya"},
- {id:"lead",i:"👑",n:"Yetakchi",d:"Reytingda 1-o'rin"},
- {id:"half",i:"⛳",n:"Yarim yo'l",d:"4 ta bosqich"},
- {id:"daily5",i:"🎯",n:"Mashqchi",d:"5 marta kunlik mashq"},
- {id:"comeback",i:"💪",n:"Qaytish",d:"Yiqilgan bosqichni qayta o'tish"},
- {id:"all",i:"🎓",n:"Bosh buxgalter",d:"Barcha 8 bosqich"},
- {id:"league",i:"🏆",n:"Liga g'olibi",d:"Haftalik ligada 1-o'rin"}];
+{n:8,t:"Xaridorlar bilan hisob-kitob (4010)",
+th:`<p><b>4010 — Xaridorlar va buyurtmachilardan olinadigan schyotlar</b>, aktiv.</p>
+<p>Tovar jo'natilganda yoki xizmat ko'rsatilganda xaridor qarzdor bo'ladi → <b>debetga</b>. Pul kelganda qarz yopiladi → <b>kreditga</b>.</p>
+<p>To'liq sotuv sikli (tovar 20 mln + QQS 12%, tannarxi 15 mln):<br>
+<span class="pv">Dt 4010 — Kt 9020</span> 22 400 000 — sotuv summasi (QQS bilan)<br>
+<span class="pv">Dt 9020 — Kt 6410</span> 2 400 000 — QQS ajratildi<br>
+<span class="pv">Dt 9120 — Kt 2910</span> 15 000 000 — tannarx hisobdan chiqarildi<br>
+<span class="pv">Dt 5110 — Kt 4010</span> 22 400 000 — pul keldi</p>
+<p>Diqqat: daromad <b>tovar berilganda</b> tan olinadi, pul kelganda emas. Bu — hisoblash usuli (нарашение), O'zbekistonda majburiy.</p>
+<p>4010 ni ham har bir xaridor bo'yicha alohida yuriting. Kim, qancha, qachondan beri qarzdor — bu ma'lumot sizga har oy kerak bo'ladi.</p>`,
+acc:[["4010","Xaridorlar qarzi"],["9020","Tovar sotishdan daromad"],["9120","Sotilgan tovar tannarxi"]],
+q:[
+{q:"Tovar jo'natildi, pul hali kelmagan.",o:["Dt 4010 — Kt 9020","Dt 5110 — Kt 9020","Dt 9020 — Kt 4010","Dt 4010 — Kt 2910"],c:0,w:"Xaridor qarzdor bo'ldi (4010 debet), daromad tan olindi (9020 kredit)."},
+{q:"Sotuv summasidan QQS ajratildi.",o:["Dt 9020 — Kt 6410","Dt 4410 — Kt 9020","Dt 6410 — Kt 9020","Dt 4010 — Kt 6410"],c:0,w:"Daromaddan QQS chiqariladi → 9020 debetga, byudjetga qarz → 6410 kreditga."},
+{q:"Sotilgan tovarning tannarxi hisobdan chiqarildi.",o:["Dt 9120 — Kt 2910","Dt 2910 — Kt 9120","Dt 9020 — Kt 2910","Dt 9120 — Kt 9020"],c:0,w:"Tannarx xarajatga o'tdi (9120 debet), ombordagi tovar kamaydi (2910 kredit)."},
+{q:"Daromad qachon tan olinadi?",o:["Tovar berilganda","Pul kelganda","Shartnoma imzolanganda","Oy oxirida"],c:0,w:"Hisoblash usuli: daromad yuzaga kelgan paytda qayd etiladi, pul harakatidan qat'i nazar."},
+{q:"Xaridordan pul bank orqali keldi.",o:["Dt 5110 — Kt 4010","Dt 4010 — Kt 5110","Dt 5110 — Kt 9020","Dt 5010 — Kt 4010"],c:0,w:"Bankda ko'paydi (debet), xaridor qarzi yopildi (4010 kredit)."},
+{q:"4010 da kredit qoldiq chiqdi — sabab nima bo'lishi mumkin?",o:["Xaridor oldindan to'lagan (bo'nak)","Xaridor ko'p qarzdor","Tovar kam sotilgan","Xato emas, normal"],c:0,w:"Aktiv schyotda kredit qoldiq — odatda bo'nak. Uni 6310 ga o'tkazish kerak."}
+]},
 
-/* ---------------- server (7 kishilik liga) ---------------- */
-const SUPA_URL="https://bopzjxboembvcqycfwin.supabase.co";
-const DEFAULT_KEY="sb_publishable_DWSUYhML5IH5cOksXdlCDA_SNt6c9Dm";
-const MAXP=7;
-let players=[];
-let syncing=false, lastPull=0;
-function sHead(){ return {apikey:S.key,Authorization:"Bearer "+S.key,"Content-Type":"application/json"}; }
-async function apiGet(q){
-  const r=await fetch(SUPA_URL+"/rest/v1/safari_players?"+q,{headers:sHead()});
-  if(!r.ok) throw new Error(await r.text()); return r.json();
-}
-async function apiPost(body){
-  const r=await fetch(SUPA_URL+"/rest/v1/safari_players",{method:"POST",
-    headers:Object.assign(sHead(),{Prefer:"return=representation"}),body:JSON.stringify(body)});
-  if(!r.ok) throw new Error(await r.text()); return r.json();
-}
-async function apiPatch(id,body){
-  const r=await fetch(SUPA_URL+"/rest/v1/safari_players?id=eq."+id,{method:"PATCH",
-    headers:Object.assign(sHead(),{Prefer:"return=representation"}),body:JSON.stringify(body)});
-  if(!r.ok) throw new Error(await r.text()); return r.json();
-}
-async function joinServer(){
-  if(!S.key) return {ok:false,msg:"Server kaliti kiritilmagan"};
-  try{
-    const ex=await apiGet("select=*&phone=eq."+encodeURIComponent(S.user.phone));
-    if(ex.length){ S.pid=ex[0].id; persist(); await pushMe(); return {ok:true,msg:"Hisobingiz tiklandi"}; }
-    const all=await apiGet("select=id");
-    if(all.length>=MAXP) return {ok:false,msg:"Joylar to'ldi ("+MAXP+"/"+MAXP+")"};
-    const row=await apiPost({first_name:S.user.first,last_name:S.user.last,phone:S.user.phone,
-      xp:S.xp,week_xp:S.week.my,week_id:S.week.id,stages:Object.keys(S.stars).length,streak:S.streak});
-    S.pid=row[0].id; persist(); return {ok:true,msg:"Ligaga qo'shildingiz"};
-  }catch(e){ const m=String(e.message||e);
-    return {ok:false,msg:/safari_full/.test(m)?"Joylar to'ldi (7/7)":"Serverga ulanmadi",detail:m.slice(0,200)}; }
-}
-async function pushMe(){
-  if(!S.key||!S.pid) return;
-  try{ await apiPatch(S.pid,{xp:S.xp,week_xp:S.week.my,week_id:S.week.id,
-    stages:Object.keys(S.stars).length,streak:S.streak,last_active:new Date().toISOString(),
-    first_name:S.user.first,last_name:S.user.last}); }catch(e){}
-}
-async function pullPlayers(force){
-  if(!S.key) return;
-  if(!force&&Date.now()-lastPull<45000) return;
-  lastPull=Date.now();
-  try{ players=await apiGet("select=*&order=xp.desc"); S.pcount=players.length; persist();
-    if(TAB==="main") scrMain(); else if(TAB==="rate") scrRating(); }catch(e){}
-}
-async function sync(){ if(syncing)return; syncing=true; await pushMe(); await pullPlayers(true); syncing=false; }
+{n:9,t:"Bo'naklar — berilgan va olingan (4310 / 6310)",
+th:`<p>Bo'nak (avans) — tovar yoki xizmat hali berilmasidan oldin to'langan pul. Buxgalteriyada bu <b>daromad ham, xarajat ham emas</b> — shunchaki qarz.</p>
+<p><b>4310 — Berilgan bo'naklar</b> (aktiv). Siz yetkazib beruvchiga oldindan to'ladingiz. Endi u sizga qarzdor:<br>
+<span class="pv">Dt 4310 — Kt 5110</span> bo'nak o'tkazildi<br>
+<span class="pv">Dt 2910 — Kt 6010</span> keyinroq tovar keldi<br>
+<span class="pv">Dt 6010 — Kt 4310</span> bo'nak hisobga olindi (zachyot)</p>
+<p><b>6310 — Olingan bo'naklar</b> (passiv). Xaridor sizga oldindan to'ladi. Endi siz unga qarzdorsiz:<br>
+<span class="pv">Dt 5110 — Kt 6310</span> bo'nak keldi<br>
+<span class="pv">Dt 4010 — Kt 9020</span> keyin tovar jo'natildi<br>
+<span class="pv">Dt 6310 — Kt 4010</span> bo'nak hisobga olindi</p>
+<p>Eng ko'p qilinadigan xato: bo'nakni to'g'ridan-to'g'ri daromadga yozib yuborish. Unda soliq bazasi noto'g'ri chiqadi.</p>`,
+acc:[["4310","Berilgan bo'naklar (aktiv)"],["6310","Olingan bo'naklar (passiv)"]],
+q:[
+{q:"Yetkazib beruvchiga oldindan to'lov qilindi.",o:["Dt 4310 — Kt 5110","Dt 6010 — Kt 5110","Dt 5110 — Kt 4310","Dt 2910 — Kt 5110"],c:0,w:"Berilgan bo'nak — aktiv. Endi u sizga qarzdor."},
+{q:"Xaridordan bo'nak tushdi.",o:["Dt 5110 — Kt 6310","Dt 5110 — Kt 9020","Dt 6310 — Kt 5110","Dt 5110 — Kt 4010"],c:0,w:"Pul keldi (debet), lekin bu daromad emas — majburiyat (6310 kredit)."},
+{q:"Olingan bo'nak daromad hisoblanadimi?",o:["Yo'q, tovar berilgunicha majburiyat","Ha, darhol daromad","Faqat QQS qismi daromad","Yarmi daromad"],c:0,w:"Daromad faqat tovar/xizmat yetkazilganda tan olinadi."},
+{q:"Tovar keldi, ilgari berilgan bo'nak hisobga olindi.",o:["Dt 6010 — Kt 4310","Dt 4310 — Kt 6010","Dt 2910 — Kt 4310","Dt 4310 — Kt 5110"],c:0,w:"Yetkazib beruvchiga qarz yopildi (6010 debet), bo'nak yopildi (4310 kredit)."},
+{q:"4310 — qanday schyot?",o:["Aktiv","Passiv","Xarajat","Daromad"],c:0,w:"Berilgan bo'nak — sizning pulingiz boshqada turibdi. Demak aktiv."},
+{q:"Bo'nakni to'g'ridan-to'g'ri daromadga yozsa nima bo'ladi?",o:["Daromad va soliq noto'g'ri chiqadi","Hech narsa","Faqat QQS o'zgaradi","Foyda kamayadi"],c:0,w:"Yetkazilmagan tovar uchun daromad tan olinsa, hisobot ham, soliq bazasi ham buziladi."}
+]},
 
-/* ---------------- saqlash ---------------- */
-const KEY="bux-safari-v2";
-const today=()=>new Date().toISOString().slice(0,10);
-let S={xp:0,stars:{},streak:0,last:"",sim:0,riv:{},ach:[],daily:{d:"",n:0,got:false},dailyRuns:0,failed:{},name:"",rem:"",notif:false,
-  user:{first:"",last:"",phone:""},days:{},errs:{},gift:"",shield:0,blitz:0,lastWeekXp:0,key:"",pid:"",pcount:1,
-  week:{id:"",my:0,riv:{}},cups:[0,0,0],leagues:0,pending:null};
-try{const o=JSON.parse(localStorage.getItem(KEY)); if(o&&typeof o.xp==="number") S=Object.assign(S,o);}catch(e){}
-RIVALS.forEach(r=>{ if(typeof S.riv[r.id]!=="number") S.riv[r.id]=0; });
-if(!S.week||!S.week.riv) S.week={id:"",my:0,riv:{}};
-RIVALS.forEach(r=>{ if(typeof S.week.riv[r.id]!=="number") S.week.riv[r.id]=0; });
-if(!Array.isArray(S.cups)) S.cups=[0,0,0];
-if(!S.user) S.user={first:"",last:"",phone:""};
-if(!S.days) S.days={};
-if(!S.errs) S.errs={};
-if(typeof S.shield!=="number") S.shield=0;
-if(typeof S.blitz!=="number") S.blitz=0;
-if(!S.key) S.key=DEFAULT_KEY;                       // liga serveri tayyor holda ulangan
-function persist(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} syncSW(); }
+{n:10,t:"Hisobdor shaxslar (4220)",
+th:`<p><b>4220 — Hisobdor shaxslarga berilgan bo'naklar</b>, aktiv. Xalq tilida "podotchet".</p>
+<p>Xodimga xarajat uchun pul beriladi. U pulni sarflab, <b>avans hisoboti</b> va cheklarni keltiradi. Shunda qarzi yopiladi.</p>
+<p>To'liq sikl (500 ming berildi, 420 mingga material olindi, 80 ming qaytdi):<br>
+<span class="pv">Dt 4220 — Kt 5010</span> 500 000 — pul berildi<br>
+<span class="pv">Dt 1010 — Kt 4220</span> 420 000 — hisobot qabul qilindi<br>
+<span class="pv">Dt 5010 — Kt 4220</span> 80 000 — qoldiq qaytarildi</p>
+<p>Agar xodim o'z pulidan ortiqcha sarflagan bo'lsa, teskarisi: <span class="pv">Dt 4220 — Kt 5010</span> bilan farq qoplanadi.</p>
+<p>Amaliy maslahat: eski podotchetlar yopilmay yig'ilib qolishi — tekshiruvda birinchi ko'zga tashlanadigan narsa. Har oy 4220 qoldig'ini ko'rib chiqing.</p>`,
+acc:[["4220","Hisobdor shaxslar"],["1010","Xom ashyo va materiallar"]],
+q:[
+{q:"Xodimga xarajat uchun kassadan pul berildi.",o:["Dt 4220 — Kt 5010","Dt 5010 — Kt 4220","Dt 9420 — Kt 5010","Dt 6710 — Kt 5010"],c:0,w:"Xodim qarzdor bo'ldi (4220 debet), kassadan pul chiqdi."},
+{q:"Xodim avans hisoboti keltirdi, material sotib olgan.",o:["Dt 1010 — Kt 4220","Dt 4220 — Kt 1010","Dt 1010 — Kt 5010","Dt 9420 — Kt 4220"],c:0,w:"Material kirim qilindi (1010 debet), xodimning qarzi yopildi (4220 kredit)."},
+{q:"Xodim sarflanmagan pulni kassaga qaytardi.",o:["Dt 5010 — Kt 4220","Dt 4220 — Kt 5010","Dt 5110 — Kt 4220","Dt 5010 — Kt 6710"],c:0,w:"Kassaga pul qaytdi (debet), qarz yopildi (4220 kredit)."},
+{q:"4220 da debet qoldiq nimani bildiradi?",o:["Xodim hali hisobot bermagan","Xodimga qarzdorsiz","Qarz yo'q","Xarajat qilingan"],c:0,w:"Aktiv schyotning debet qoldig'i — yopilmagan podotchet."},
+{q:"Hisobdor shaxs xarajatni qanday tasdiqlaydi?",o:["Avans hisoboti va cheklar bilan","Og'zaki aytish bilan","Shartnoma bilan","Tasdiqlash shart emas"],c:0,w:"Hujjatsiz xarajat hisobga olinmaydi va soliqda ham qabul qilinmaydi."},
+{q:"Xodim berilgan puldan ortiq sarfladi. Farq unga qaytarildi.",o:["Dt 4220 — Kt 5010","Dt 5010 — Kt 4220","Dt 6710 — Kt 5010","Dt 9420 — Kt 5010"],c:0,w:"Avval xarajat 4220 kreditiga o'tgan, endi farqni to'lash yana 4220 debetiga tushadi va schyot yopiladi."}
+]},
 
-/* ---------------- haftalik liga: juma kuni tugaydi ---------------- */
-const PRIZE=[{xp:400,cup:"🏆",txt:"Liga g'olibi"},{xp:200,cup:"🥈",txt:"Ikkinchi o'rin"},{xp:100,cup:"🥉",txt:"Uchinchi o'rin"},{xp:40,cup:"🎗️",txt:"Ishtirok"}];
-function goalPrize(xp){
-  if(xp>=WEEK_GOAL) return {xp:400,cup:"🏆",txt:"Haftalik maqsad bajarildi"};
-  if(xp>=WEEK_GOAL*0.6) return {xp:150,cup:"🥈",txt:"Maqsadga yaqin keldingiz"};
-  if(xp>0) return {xp:50,cup:"🎗️",txt:"Ishtirok"};
-  return {xp:0,cup:"😴",txt:"Bu hafta mashq bo'lmadi"};
-}
-function weekEnd(d){ // joriy liganing tugash vaqti: juma 12:00
-  const t=new Date(d||new Date()), f=new Date(t);
-  f.setHours(12,0,0,0);
-  f.setDate(f.getDate()+((5-t.getDay()+7)%7));
-  if(f<=t) f.setDate(f.getDate()+7);
-  return f;
-}
-function weekId(d){ return weekEnd(d).toISOString().slice(0,16); }
-function timeLeft(){
-  const ms=weekEnd()-new Date();
-  const d=Math.floor(ms/86400000), h=Math.floor(ms%86400000/3600000), m=Math.floor(ms%3600000/60000);
-  return d>0?d+" kun "+h+" soat":(h>0?h+" soat "+m+" daq":m+" daqiqa");
-}
-function weekendNow(){ const n=new Date(), d=n.getDay();
-  return d===6||d===0||(d===5&&n.getHours()>=12); }
-function weekBoard(){
-  if(players.length) return players.map(p=>({name:p.first_name+" "+(p.last_name||"").slice(0,1)+".",
-    emoji:p.id===S.pid?"🧑":"👤",xp:(p.week_id===S.week.id?p.week_xp:0),me:p.id===S.pid}))
-    .sort((a,b)=>b.xp-a.xp);
-  return [{name:S.name||"Siz",emoji:"🧑",xp:S.week.my,me:true}];
-}
-function online(){ return players.length>1; }
-function addXP(n){ S.xp+=n; S.week.my+=n; }
-function d0(p){ return p+"-o'rin"; }
-function checkWeek(){
-  const id=weekId();
-  if(!S.week.id){ S.week.id=id; persist(); return; }
-  if(S.week.id===id) return;
-  const wb=weekBoard(), pos=wb.findIndex(x=>x.me)+1;
-  const pr=online()?PRIZE[Math.min(pos,4)-1]:goalPrize(S.week.my);
-  S.lastWeekXp=S.week.my;
-  S.pending={pos,xp:pr.xp,cup:pr.cup,txt:pr.txt,goal:!online(),my:S.week.my,
-    board:wb.map(x=>({n:x.emoji+" "+x.name,x:x.xp,me:!!x.me}))};
-  S.xp+=pr.xp;
-  if(online()?pos<=3:S.week.my>=WEEK_GOAL*0.6) S.cups[(online()?pos:(S.week.my>=WEEK_GOAL?1:2))-1]++;
-  S.leagues=(S.leagues||0)+1;
-  if(online()?pos===1:S.week.my>=WEEK_GOAL) award("league");
-  notify("🏁 Haftalik liga yakunlandi! "+pr.txt+" — +"+pr.xp+" XP. Yangi liga dushanbadan.");
-  S.week={id,my:0,riv:{}}; RIVALS.forEach(r=>S.week.riv[r.id]=0);
-  persist();
-}
+{n:11,t:"QQS — kirim (hisobga olinadigan, 4410)",
+th:`<p>QQS ikki tomonlama ishlaydi: siz sotib olganingizda <b>to'laysiz</b>, sotganingizda <b>undirasiz</b>. Byudjetga faqat farqini to'laysiz.</p>
+<p><b>4410 — Byudjetga to'lovlar bo'yicha bo'naklar</b> (aktiv). Kirim QQS shu yerda yig'iladi — bu byudjetning sizga "qarzi".</p>
+<p>Tovar 10 mln + QQS 12% = 1.2 mln:<br>
+<span class="pv">Dt 2910 — Kt 6010</span> 10 000 000<br>
+<span class="pv">Dt 4410 — Kt 6010</span> 1 200 000<br>
+Jami qarz: 11.2 mln, lekin tovar tannarxi — 10 mln.</p>
+<p><b>Muhim shart:</b> kirim QQS ni hisobga olish uchun to'g'ri rasmiylashtirilgan <b>elektron hisob-faktura</b> bo'lishi kerak. Fakturasiz QQS — hisobga olinmaydi va tovar tannarxiga qo'shiladi.</p>
+<p>Agar korxona QQS to'lovchisi bo'lmasa, 4410 ishlatilmaydi — QQS to'g'ridan-to'g'ri tovar qiymatiga qo'shiladi: <span class="pv">Dt 2910 — Kt 6010</span> 11 200 000.</p>`,
+acc:[["4410","Hisobga olinadigan QQS"],["6410","Byudjetga soliq qarzi"]],
+q:[
+{q:"QQS to'lovchi korxona tovar oldi. Fakturadagi QQS qayerga tushadi?",o:["Dt 4410","Dt 6410","Dt 2910","Kt 4410"],c:0,w:"Kirim QQS 4410 debetiga yig'iladi va keyin chiqim QQS bilan hisobga olinadi."},
+{q:"Fakturasi yo'q tovarning QQS si nima bo'ladi?",o:["Tovar tannarxiga qo'shiladi","4410 ga yoziladi","Xarajatga yoziladi","Byudjetdan qaytariladi"],c:0,w:"Hisobga olish uchun to'g'ri faktura shart. Bo'lmasa QQS tannarxning bir qismi bo'lib qoladi."},
+{q:"4410 — qanday schyot?",o:["Aktiv","Passiv","Daromad","Kapital"],c:0,w:"Byudjet sizga qarzdor — bu sizning aktivingiz."},
+{q:"10 mln tovar + 12% QQS. Tovar 2910 ga qancha summada kiradi?",o:["10 000 000","11 200 000","1 200 000","12 000 000"],c:0,w:"QQS alohida 4410 ga ketadi. Tovar tannarxi — QQSsiz summa."},
+{q:"QQS to'lovchisi bo'lmagan korxona uchun kirim QQS?",o:["Tovar qiymatiga qo'shiladi","4410 ga yoziladi","Byudjetdan qaytariladi","Xarajat qilinadi"],c:0,w:"Hisobga olish huquqi yo'q, shuning uchun QQS aktiv qiymatiga kiritiladi."},
+{q:"Byudjetga to'lanadigan QQS qanday aniqlanadi?",o:["Chiqim QQS minus kirim QQS","Faqat chiqim QQS","Faqat kirim QQS","Sotuv summasining 12%"],c:0,w:"6410 dagi chiqim QQS dan 4410 dagi kirim QQS ayiriladi. Farq to'lanadi."}
+]},
 
-/* raqobatchilar o'sishi: har o'tgan kun uchun */
-function simulate(){
-  const now=Date.now();
-  if(!S.sim){ S.sim=now; persist(); return []; }
-  const days=Math.min(Math.floor((now-S.sim)/86400000),10);
-  if(days<1) return [];
-  const before=place();
-  RIVALS.forEach(r=>{ for(let d=0;d<days;d++){ const g=Math.round(r.min+Math.random()*(r.max-r.min));
-    S.riv[r.id]+=g; S.week.riv[r.id]=(S.week.riv[r.id]||0)+g; } });
-  S.sim+=days*86400000;
-  const after=place();
-  persist();
-  return after>before?[before,after]:[];
-}
-function board(){
-  if(players.length) return players.map(p=>({id:p.id,name:p.first_name+" "+(p.last_name||"").slice(0,1)+".",
-    emoji:p.id===S.pid?"🧑":"👤",tag:p.stages+" bosqich · "+p.streak+" kun seriya",xp:p.xp,me:p.id===S.pid}))
-    .sort((a,b)=>b.xp-a.xp);
-  return [{id:"me",name:S.name||"Siz",emoji:"🧑",tag:"Bu — siz",xp:S.xp,me:true}];
-}
-function place(){ return board().findIndex(x=>x.me)+1; }
+{n:12,t:"QQS — chiqim va byudjet bilan hisob-kitob (6410)",
+th:`<p><b>6410 — Byudjetga to'lovlar bo'yicha qarz</b>, passiv. Bu yerda barcha soliqlar turadi: QQS, JShDS, foyda solig'i, ijtimoiy soliq. Har biri alohida subschyotda yuritiladi.</p>
+<p>Sotuvda QQS: <span class="pv">Dt 9020 — Kt 6410</span></p>
+<p>Oy oxirida hisobga olish (zachyot). Chiqim QQS 3 mln, kirim QQS 1.2 mln bo'lsa:<br>
+<span class="pv">Dt 6410 — Kt 4410</span> 1 200 000 — kirim QQS hisobga olindi<br>
+6410 da qoladi: 1 800 000 — byudjetga to'lanadi<br>
+<span class="pv">Dt 6410 — Kt 5110</span> 1 800 000 — to'lov</p>
+<p>Agar kirim QQS chiqimdan ko'p bo'lsa, 6410 debet qoldiq beradi — bu byudjetdan qaytarib olish yoki keyingi oyga o'tkazish huquqi.</p>
+<p>Nazorat usuli: QQS hisoboti (deklaratsiya) summasi 6410 dagi oborot bilan mos kelishi shart. Mos kelmasa — provodkalarda uzilish bor.</p>`,
+acc:[["6410","Byudjetga soliq qarzi"],["4410","Hisobga olinadigan QQS"]],
+q:[
+{q:"Tovar sotildi. Undirilgan QQS provodkasi?",o:["Dt 9020 — Kt 6410","Dt 6410 — Kt 9020","Dt 4410 — Kt 9020","Dt 4010 — Kt 4410"],c:0,w:"Daromaddan QQS ajratiladi va byudjetga qarz sifatida 6410 kreditiga yoziladi."},
+{q:"Oy oxirida kirim QQS hisobga olindi.",o:["Dt 6410 — Kt 4410","Dt 4410 — Kt 6410","Dt 6410 — Kt 5110","Dt 9020 — Kt 4410"],c:0,w:"6410 dagi qarz kamayadi (debet), 4410 dagi aktiv yopiladi (kredit)."},
+{q:"QQS byudjetga to'landi.",o:["Dt 6410 — Kt 5110","Dt 5110 — Kt 6410","Dt 4410 — Kt 5110","Dt 9810 — Kt 5110"],c:0,w:"Qarz yopildi (6410 debet), bankdan pul chiqdi (5110 kredit)."},
+{q:"Kirim QQS chiqimdan ko'p bo'lsa nima bo'ladi?",o:["Byudjetdan qaytarish yoki keyingi oyga o'tkazish","Xarajatga yoziladi","Yo'qoladi","Daromad bo'ladi"],c:0,w:"Ortiqcha summa yo'qolmaydi — qaytariladi yoki keyingi davrda hisobga olinadi."},
+{q:"6410 da qaysi soliqlar turadi?",o:["QQS, JShDS, foyda solig'i va boshqalar","Faqat QQS","Faqat foyda solig'i","Faqat JShDS"],c:0,w:"Barcha byudjet to'lovlari, har biri alohida subschyotda."},
+{q:"QQS deklaratsiyasi 6410 oboroti bilan mos kelmadi. Nima demak?",o:["Provodkalarda xato yoki tushib qolgan operatsiya bor","Normal holat","Bank xatosi","Soliq organi xatosi"],c:0,w:"Hisobot buxgalteriya ma'lumotidan chiqadi. Farq bo'lsa, avval o'z provodkalaringizni tekshiring."}
+]},
 
-/* ---------------- yordamchilar ---------------- */
-const app=document.getElementById("app"), dock=document.getElementById("dock");
-const rankOf=xp=>{let c=RANKS[0],n=null; RANKS.forEach((r,k)=>{if(xp>=r[0]){c=r;n=RANKS[k+1]||null;}}); return {cur:c,next:n};};
-const unlocked=i=>i===0||(S.stars[i-1]||0)>0;
-const starStr=n=>"★".repeat(n)+"☆".repeat(3-n);
-function setDock(h){ if(!h){dock.hidden=true;dock.innerHTML="";} else {dock.hidden=false;dock.innerHTML=h;} }
-function toast(t){const d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2100);}
-function coins(){ try{ if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return; }catch(e){}
-  for(let k=0;k<26;k++){const c=document.createElement("div");c.className="coin";c.textContent=["🪙","⭐","💰","📗"][k%4];
-  c.style.left=Math.random()*100+"vw";c.style.animationDuration=(1.8+Math.random()*1.6)+"s";c.style.animationDelay=(Math.random()*.6)+"s";
-  document.body.appendChild(c);setTimeout(()=>c.remove(),4200);} }
-function award(id){ if(S.ach.includes(id))return; S.ach.push(id); addXP(60); persist();
-  const a=ACH.find(x=>x.id===id); toast(a.i+" Yangi yutuq: "+a.n+" (+60 XP)"); }
-const DEADLINE=17;                          // har kuni soat 17:00 gacha
-const dstr=d=>d.toISOString().slice(0,10);
-const isWorkday=d=>d.getDay()>=1&&d.getDay()<=5;
-function deadlineLeft(){
-  const n=new Date(), t=new Date(); t.setHours(DEADLINE,0,0,0);
-  const ms=t-n; if(ms<=0) return null;
-  const h=Math.floor(ms/3600000), m=Math.floor(ms%3600000/60000);
-  return h>0?h+" soat "+m+" daqiqa":m+" daqiqa";
-}
-function recalcStreak(){
-  let n=0; const d=new Date();
-  for(let i=0;i<90;i++){
-    if(isWorkday(d)){ const v=S.days[dstr(d)]; if(v==="done"||v==="shield") n++; else break; }
-    d.setDate(d.getDate()-1);
-  }
-  S.streak=n;
-}
-function sweepDays(){                        // bajarilmagan kunlarni "qoldirilgan" deb belgilash
-  const now=new Date(), t=today();
-  for(let i=1;i<=21;i++){
-    const d=new Date(); d.setDate(d.getDate()-i);
-    if(isWorkday(d)&&!S.days[dstr(d)]) S.days[dstr(d)]="missed";
-  }
-  if(isWorkday(now)&&!S.days[t]&&now.getHours()>=DEADLINE) S.days[t]="missed";
-  Object.keys(S.days).forEach(k=>{                       // qalqon ishlatilsa kun saqlanadi
-    if(S.days[k]==="missed"&&S.shield>0){ S.days[k]="shield"; S.shield--; toast("🛡️ Qalqon ishladi — seriya saqlandi"); }
-  });
-  recalcStreak(); persist();
-}
-function dayState(){                         // bugungi holat
-  const now=new Date(), t=today();
-  if(!isWorkday(now)) return {k:"off",txt:"Dam olish kuni — mashq ixtiyoriy"};
-  const st=S.days[t];
-  if(st==="done") return {k:"done",txt:"Bugungi mashq bajarildi ✅"};
-  if(st==="shield") return {k:"done",txt:"🛡️ Qalqon ishlatildi — seriya saqlandi"};
-  if(st==="missed"||st==="late"||now.getHours()>=DEADLINE) return {k:"missed",txt:"Bugungi mashq qoldirib yuborildi — 17:00 o'tdi"};
-  return {k:"open",txt:"17:00 gacha "+deadlineLeft()+" qoldi"};
-}
-function markDay(){
-  const t=today(), now=new Date();
-  if(S.days[t]==="done") return 0;
-  if(!isWorkday(now)){ S.days[t]="bonus"; S.last=t; persist(); return 0; }
-  if(now.getHours()>=DEADLINE){ S.days[t]="late"; S.last=t; persist(); return 0; }
-  S.days[t]="done"; S.last=t; recalcStreak();
-  const bonus=Math.min(120,S.streak*12);
-  addXP(bonus);
-  if(S.streak>=3) award("streak3");
-  if(S.streak>=7) award("streak7");
-  persist();
-  return bonus;
-}
-function dailyTick(ok){
-  const t=today();
-  if(S.daily.d!==t) S.daily={d:t,n:0,got:false};
-  if(ok) S.daily.n++;
-  if(S.daily.n>=15&&!S.daily.got){ S.daily.got=true; addXP(120); toast("🎯 Kunlik maqsad bajarildi! +120 XP"); }
-  persist();
-}
-/* eslatma matni */
-function remText(){
-  const b=board(), p=place(), lead=b[0];
-  return p===1 ? "Siz 1-o'rindasiz ("+S.xp+" XP). Ortdagilar yaqinlashyapti — bugun ham mashq qiling!"
-    : lead.name+" 1-o'rinda ("+lead.xp+" XP), siz "+p+"-o'rindasiz ("+S.xp+" XP). Farq: "+(lead.xp-S.xp)+" XP.";
-}
-function syncSW(){}
-function notify(body){
-  if(!("Notification" in window)||Notification.permission!=="granted") return false;
-  try{ const n=new Notification("Buxgalter safari 🔥",{body,icon:ICON192,badge:ICON192,tag:"bux-daily"});
-    n.onclick=()=>{window.focus();n.close();}; return true; }catch(e){ return false; }
-}
-/* juma 12:00 da liga yakuni */
-let lgTimer=null;
-function scheduleLeague(){
-  clearTimeout(lgTimer);
-  const ms=weekEnd()-new Date();
-  if(ms>0&&ms<7*86400000) lgTimer=setTimeout(()=>{ checkWeek(); if(S.pending) leagueResult(); scheduleLeague(); }, ms+2000);
-}
+{n:13,t:"Materiallar va xom ashyo (1010)",
+th:`<p><b>1010 — Xom ashyo va materiallar</b>, aktiv. Ishlab chiqarishda yoki xo'jalik ehtiyojida ishlatiladigan zaxiralar.</p>
+<p>Kirim: <span class="pv">Dt 1010 — Kt 6010</span> (yoki Kt 4220 — podotchet orqali olingan bo'lsa)</p>
+<p>Chiqim yo'nalishga qarab:<br>
+<span class="pv">Dt 2010 — Kt 1010</span> ishlab chiqarishga berildi<br>
+<span class="pv">Dt 9420 — Kt 1010</span> ma'muriy ehtiyojga (ofis)<br>
+<span class="pv">Dt 9410 — Kt 1010</span> sotish jarayoniga (qadoqlash)</p>
+<p><b>Tovar va material farqi:</b> tovar (2910) — qayta sotish uchun olingan. Material (1010) — ishlatish uchun. Bir xil predmet ikki xil schyotda bo'lishi mumkin: do'kon uchun sotiladigan lampochka — 2910, o'z ofisiga o'rnatiladigani — 1010.</p>
+<p>Baholash: kirim narxi bo'yicha. Hisobdan chiqarish o'rtacha narx yoki FIFO usulida — korxona hisob siyosatida tanlanadi va yil davomida o'zgarmaydi.</p>`,
+acc:[["1010","Xom ashyo va materiallar"],["2010","Asosiy ishlab chiqarish"],["9420","Ma'muriy xarajatlar"]],
+q:[
+{q:"Yetkazib beruvchidan material olindi.",o:["Dt 1010 — Kt 6010","Dt 6010 — Kt 1010","Dt 2910 — Kt 6010","Dt 1010 — Kt 5110"],c:0,w:"Material kirdi (debet), qarz paydo bo'ldi (kredit)."},
+{q:"Material ishlab chiqarishga berildi.",o:["Dt 2010 — Kt 1010","Dt 1010 — Kt 2010","Dt 9420 — Kt 1010","Dt 2910 — Kt 1010"],c:0,w:"Material ishlab chiqarish xarajatiga o'tdi."},
+{q:"Ofis uchun qog'oz sarflandi.",o:["Dt 9420 — Kt 1010","Dt 2010 — Kt 1010","Dt 9410 — Kt 1010","Dt 1010 — Kt 9420"],c:0,w:"Ma'muriy ehtiyoj — 9420 ga."},
+{q:"Qayta sotish uchun olingan mahsulot qaysi schyotda?",o:["2910 — tovarlar","1010 — materiallar","2010 — ishlab chiqarish","0100 — asosiy vositalar"],c:0,w:"Maqsad hal qiladi: sotish uchun bo'lsa tovar, ishlatish uchun bo'lsa material."},
+{q:"Hisobdan chiqarish usuli (o'rtacha narx / FIFO) qachon tanlanadi?",o:["Hisob siyosatida, yil boshida","Har operatsiyada alohida","Oy oxirida","Soliq organi belgilaydi"],c:0,w:"Usul hisob siyosatida qayd etiladi va davr davomida o'zgartirilmaydi."},
+{q:"Podotchet orqali material olindi.",o:["Dt 1010 — Kt 4220","Dt 4220 — Kt 1010","Dt 1010 — Kt 5010","Dt 1010 — Kt 6010"],c:0,w:"Avans hisoboti qabul qilinganda xodimning qarzi material bilan yopiladi."}
+]},
 
-/* eslatma vaqti kelganda (ilova ochiq yoki fonda bo'lsa) */
-let remTimer=null;
-function scheduleReminder(){
-  clearTimeout(remTimer);
-  if(!S.rem) return;
-  const [h,m]=S.rem.split(":").map(Number);
-  const now=new Date(), t=new Date();
-  t.setHours(h,m,0,0);
-  if(S.last!==today() && now>=t){ notify(remText()); }
-  if(now>=t) t.setDate(t.getDate()+1);
-  remTimer=setTimeout(()=>{ if(S.last!==today()) notify(remText()); scheduleReminder(); }, t-now);
-}
+{n:14,t:"TAKROR — 2-hafta",
+th:`<p>Ikkinchi hafta hisob-kitoblar va QQS haqida edi:</p>
+<p>• 4010 — xaridorlar, daromad tovar berilganda tan olinadi<br>
+• 4310 / 6310 — bo'naklar, bular daromad ham xarajat ham emas<br>
+• 4220 — podotchet, avans hisoboti bilan yopiladi<br>
+• 4410 — kirim QQS, 6410 — chiqim QQS va boshqa soliqlar<br>
+• 1010 — materiallar, chiqimi yo'nalishga qarab har xil schyotga</p>
+<p>Bu haftaning eng ko'p xatosi: bo'nakni daromad deb yozib yuborish va QQS ni tannarxga qo'shib yuborish. Savollarda shularga e'tibor bering.</p>`,
+acc:[],
+q:[
+{q:"Xaridordan oldindan to'lov keldi.",o:["Dt 5110 — Kt 6310","Dt 5110 — Kt 9020","Dt 5110 — Kt 4010","Dt 6310 — Kt 5110"],c:0,w:"Bo'nak — majburiyat, daromad emas."},
+{q:"Tovar sotildi, tannarxi hisobdan chiqarildi.",o:["Dt 9120 — Kt 2910","Dt 2910 — Kt 9120","Dt 9020 — Kt 2910","Dt 9120 — Kt 9020"],c:0,w:"Tannarx xarajatga, ombordagi tovar kamayadi."},
+{q:"QQS to'lovchi tovar oldi: 5 mln + 600 ming QQS. QQS provodkasi?",o:["Dt 4410 — Kt 6010","Dt 6410 — Kt 6010","Dt 2910 — Kt 6410","Dt 4410 — Kt 2910"],c:0,w:"Kirim QQS 4410 debetiga."},
+{q:"Xodim podotchetdan material keltirdi.",o:["Dt 1010 — Kt 4220","Dt 4220 — Kt 1010","Dt 1010 — Kt 5010","Dt 9420 — Kt 4220"],c:0,w:"Material kirim, xodim qarzi yopildi."},
+{q:"Yetkazib beruvchiga bo'nak berildi.",o:["Dt 4310 — Kt 5110","Dt 6010 — Kt 5110","Dt 5110 — Kt 4310","Dt 4220 — Kt 5110"],c:0,w:"Berilgan bo'nak — aktiv (4310)."},
+{q:"Sotuvdagi QQS qaysi schyot kreditiga tushadi?",o:["6410","4410","9020","6010"],c:0,w:"Byudjetga qarz — 6410."},
+{q:"Material ofisga sarflandi.",o:["Dt 9420 — Kt 1010","Dt 2010 — Kt 1010","Dt 1010 — Kt 9420","Dt 9410 — Kt 1010"],c:0,w:"Ma'muriy xarajat — 9420."},
+{q:"4310 va 6310 farqi nima?",o:["4310 — men berdim, 6310 — menga berishdi","Ikkalasi bir xil","4310 passiv, 6310 aktiv","Farqi yo'q"],c:0,w:"4 — debitor (menga qarzdor), 6 — kreditor (men qarzdorman). Bo'naklarda ham shu qoida."}
+]},
 
-/* ---------------- bosh ekran ---------------- */
-let overtake=[];
-let TAB="main";
-const NAVS=[["main","🏠","Asosiy"],["rate","🏆","Reyting"],["stage","📚","Bosqich"],["prof","👤","Profil"]];
-function shell(html,tab){
-  TAB=tab; run=null;
-  const u=S.user, ini=(((u.first||"?")[0]||"?")+((u.last||"")[0]||"")).toUpperCase();
-  app.innerHTML=`<div class="appbar"><div class="ava">${ini}</div>
-    <div class="ttl"><b>${u.first||"Buxgalter"} ${(u.last||"").slice(0,1)}${u.last?".":""}</b><i>${rankOf(S.xp).cur[1]}</i></div>
-    <span class="xpchip">⚡ ${S.xp}</span></div>${html}`;
-  setDock(`<nav class="nav">${NAVS.map(n=>`<button data-t="${n[0]}" class="${tab===n[0]?"on":""}"><span>${n[1]}</span>${n[2]}</button>`).join("")}</nav>`);
-  dock.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>({main:scrMain,rate:scrRating,stage:scrStages,prof:scrProfile})[b.dataset.t]());
-  window.scrollTo(0,0);
-}
-function lbHTML(list){
-  const m=["🥇","🥈","🥉","4","5","6","7","8","9"];
-  return `<div class="lb">${list.map((x,k)=>`<div class="row ${x.me?"me":""}"><span class="pos">${m[k]}</span>
-    <span class="who">${x.emoji} ${x.name}${x.tag?`<i>${x.tag}</i>`:""}</span><span class="xp">${x.xp} XP</span></div>`).join("")}</div>`;
-}
-/* ---------- ro'yxatdan o'tish ---------- */
-function register(){
-  setDock(null);
-  app.innerHTML=`<section class="sheet set reg">
-    <div class="reglogo">📗</div>
-    <h2>Buxgalter safari</h2>
-    <p class="small">Ligada qatnashish uchun ro'yxatdan o'ting.</p>
-    <label for="f">Ism</label><input id="f" type="text" placeholder="Ismingiz" autocomplete="given-name">
-    <label for="l">Familiya</label><input id="l" type="text" placeholder="Familiyangiz" autocomplete="family-name">
-    <label for="p">Telefon raqam</label><input id="p" type="tel" inputmode="tel" placeholder="+998 90 123 45 67" autocomplete="tel">
-    <p class="small" id="err" style="color:var(--bad); min-height:22px"></p>
-  </section>`;
-  setDock(`<button class="btn" id="go">Ro'yxatdan o'tish</button>`);
-  document.getElementById("go").onclick=()=>{
-    const f=document.getElementById("f").value.trim(), l=document.getElementById("l").value.trim();
-    let p=document.getElementById("p").value.replace(/[^\d+]/g,"");
-    const err=document.getElementById("err");
-    if(f.length<2) return err.textContent="Ismni kiriting";
-    if(l.length<2) return err.textContent="Familiyani kiriting";
-    if(/^9\d{8}$/.test(p)) p="+998"+p;
-    if(/^998\d{9}$/.test(p)) p="+"+p;
-    if(!/^\+998\d{9}$/.test(p)) return err.textContent="Telefon raqam: +998 XX XXX XX XX";
-    S.user={first:f,last:l,phone:p}; S.name=f; persist();
-    toast("Xush kelibsiz, "+f+"!"); coins(); scrMain();
-    if(S.key) joinServer().then(r=>{ toast(r.msg); pullPlayers(true); });
-  };
-  window.scrollTo(0,0);
-}
-/* ---------- asosiy oyna ---------- */
-function leagueCard(){
-  const wb=weekBoard(), wp=wb.findIndex(x=>x.me)+1, my=S.week.my;
-  const pct=Math.min(100,Math.round(my/WEEK_GOAL*100));
-  return `<section class="league"><div class="lg-top"><h3>🏆 Haftalik liga</h3><span class="lg-timer">${timeLeft()}</span></div>
-    <div class="lg-note">${weekendNow()?"Yangi liga dushanbada boshlanadi":"Dushanba–juma 12:00 · natijalar juma 12:00 da"}</div>
-    ${online()?lbHTML(wb)+`<div class="gap ${wp===1?"up":"down"}">${wp===1?"Siz yetakchisiz — ushlab turing!":`Birinchi o'ringacha ${wb[0].xp-wb[wp-1].xp} XP`}</div>`
-    :`<div class="goal"><div class="goal-n">${my} / ${WEEK_GOAL} XP</div>
-       <div class="goal-bar"><i style="width:${pct}%"></i></div>
-       <div class="goal-t">${my>=WEEK_GOAL?"Maqsad bajarildi — juma kuni 🏆 +400 XP":"Haftalik maqsadgacha "+(WEEK_GOAL-my)+" XP"}</div></div>
-     <div class="lg-note">${S.lastWeekXp?`O'tgan hafta: ${S.lastWeekXp} XP — ${my>S.lastWeekXp?"hozir oldindasiz 💪":"hozir orqadasiz"}`:"👥 Sheriklar qo'shilganda shu yerda ular bilan poyga bo'ladi"}</div>`}
-  </section>`;
-}
-function scrMain(){
-  const d=dayState(), wb=weekBoard(), wp=wb.findIndex(x=>x.me)+1;
-  const dm=S.daily.d===today()?S.daily.n:0, ns=nextStage();
-  const cta=ns!==null?`${STAGES[ns].icon} ${ns+1}-bosqich: ${STAGES[ns].title}`:"🎯 Kunlik mashq";
-  shell(`
-  ${overtake.length?`<div class="alert">⚠️ Siz ${overtake[0]}-o'rindan ${overtake[1]}-o'ringa tushdingiz. Raqobatchilar siz yo'qligingizda ishladi!</div>`:""}
-  <section class="dl ${d.k}"><div class="dl-l"><b>${d.k==="done"?"✅ Bugun bajarildi":d.k==="missed"?"❌ Qoldirib yuborildi":d.k==="off"?"☕ Dam olish kuni":"⏰ Bugungi mashq"}</b>
-    <i>${d.txt}</i></div><div class="dl-r">${S.streak}<span>kun</span></div></section>
-  ${leagueCard()}
-  <div class="duo">
-    <div><div class="n">${dm}/15</div><div class="small">bugungi to'g'ri javob${S.daily.got?"<br>🎯 +120 olindi":"<br>maqsad: +120 XP"}</div></div>
-    <div><div class="n">${Object.keys(S.stars).length}/${STAGES.length}</div><div class="small">yakunlangan bosqich</div></div>
-  </div>
-  <div class="privacy">🔒 Kunlik natijalar faqat sizga ko'rinadi · 👥 juma 12:00 dagi liga natijasi hammaga</div>
-  <section class="card cta"><h3>${d.k==="open"?"Bugungi mashqni bajaring":"Davom eting"}</h3>
-    <button class="btn" id="go">${cta}</button>
-    <div class="acts">
-      <button class="act" id="dly"><span>🎯</span>Kunlik mashq<i>10 savol</i></button>
-      <button class="act" id="blz"><span>⚡</span>Blits<i>60 soniya · rekord ${S.blitz||0}</i></button>
-      <button class="act ${Object.keys(S.errs).length?"":"dim"}" id="err"><span>📕</span>Xato daftari<i>${Object.keys(S.errs).length} ta savol</i></button>
-      <button class="act ${giftReady()?"gift":"dim"}" id="gft"><span>🎁</span>Kunlik sovg'a<i>${giftDone()?"ertaga yana":giftReady()?"savolga javob bering":giftCorrect()+"/"+GIFT_NEED+" to'g'ri javob"}</i></button>
-    </div></section>`,"main");
-  const open=STAGES.map((x,i)=>i).filter(unlocked);
-  document.getElementById("go").onclick=()=>ns!==null?intro(ns):startDaily(open);
-  document.getElementById("dly").onclick=()=>startDaily(open);
-  document.getElementById("blz").onclick=()=>startBlitz(open);
-  document.getElementById("err").onclick=startErrs;
-  document.getElementById("gft").onclick=openGift;
-  overtake=[];
-}
-/* ---------- reyting ---------- */
-function scrRating(){
-  const wb=weekBoard(), wp=wb.findIndex(x=>x.me)+1, b=board(), p=place();
-  shell(`
-  ${leagueCard()}
-  <section class="card"><h3>Haftalik sovrinlar</h3>
-    <div class="prizes">${online()?"🏆 1-o'rin +400 XP · 🥈 +200 · 🥉 +100 · 🎗️ +40"
-      :"🏆 600 XP maqsad +400 · 🥈 360 XP dan +150 · 🎗️ ishtirok +50"}</div>
-    <p class="small" style="margin-top:10px">Sheriklar qo'shilgach sovrinlar o'rin bo'yicha beriladi.</p></section>
-  <section class="card"><h3>Shaxsiy natijalar</h3>${lbHTML(b)}
-    <div class="duo" style="margin-top:12px"><div><div class="n">${S.blitz||0}</div><div class="small">blits rekordi</div></div>
-    <div><div class="n">${S.lastWeekXp||0}</div><div class="small">o'tgan hafta XP</div></div></div></section>
-  <section class="card"><h3>Kuboklar</h3><div class="cups"><span>🏆 ${S.cups[0]}</span><span>🥈 ${S.cups[1]}</span><span>🥉 ${S.cups[2]}</span>
-    <span class="small">${S.leagues||0} ta liga o'ynaldi</span></div></section>
-  <section class="card"><h3>Liga qoidalari</h3><ul class="rules">
-    <li>Liga dushanba kuni boshlanadi, <b>juma soat 12:00</b> da tugaydi.</li>
-    <li>Har kuni mashq <b>17:00 gacha</b> bajarilishi kerak — keyin kun qoldirilgan hisoblanadi va seriya uziladi.</li>
-    <li>Kunlik natijalar faqat o'zingizga ko'rinadi.</li>
-    <li>Juma 12:00 dagi yakuniy jadval barcha ishtirokchilarga ko'rinadi.</li></ul></section>`,"rate");
-}
-/* ---------- bosqichlar ---------- */
-function scrStages(){
-  shell(`<ol class="path">${STAGES.map((st,i)=>{const sc=S.stars[i]||0,op=unlocked(i);
-    return `<li class="stage ${sc?"done":""}"><div class="num">${i+1}</div>
-    <button ${op?"":"disabled"} data-s="${i}"><h3>${st.icon} ${st.title}</h3>
-    <div class="meta"><span>${op?st.tasks.length+" vazifa":"🔒 Yopiq"}</span><span class="stars">${starStr(sc)}</span></div></button></li>`;}).join("")}</ol>
-    <section class="card"><h3>Kunlik mashq</h3><p class="small">Ochilgan bosqichlardan 10 ta tasodifiy savol.</p>
-    <button class="btn" id="dly">🎯 Boshlash</button></section>`,"stage");
-  app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>intro(+b.dataset.s));
-  document.getElementById("dly").onclick=()=>startDaily(STAGES.map((x,i)=>i).filter(unlocked));
-}
-/* ---------- profil ---------- */
-function scrProfile(){
-  const rk=rankOf(S.xp), pct=rk.next?Math.max(2,Math.round((S.xp-rk.cur[0])/(rk.next[0]-rk.cur[0])*100)):100;
-  const u=S.user, done=Object.keys(S.days).filter(k=>S.days[k]==="done").length, miss=Object.keys(S.days).filter(k=>S.days[k]==="missed").length;
-  shell(`<section class="card"><h3>${u.first} ${u.last}</h3>
-    <div class="small">📞 ${u.phone}</div>
-    <div class="rank-top" style="margin-top:12px"><b>${rk.cur[1]}</b><span class="pill">⚡ ${S.xp} XP</span></div>
-    <div class="meter"><i style="width:${pct}%"></i></div>
-    <div class="small" style="margin-top:6px">${rk.next?`«${rk.next[1]}» uchun yana ${rk.next[0]-S.xp} XP`:"Eng yuqori daraja!"}</div></section>
-  <div class="duo"><div><div class="n">${done}</div><div class="small">bajarilgan kun</div></div>
-    <div><div class="n">${miss}</div><div class="small">qoldirilgan kun</div></div></div>
-  <section class="card"><h3>So'nggi 7 kun</h3><div class="week7">${(()=>{let o="";
-    for(let i=6;i>=0;i--){const dt=new Date();dt.setDate(dt.getDate()-i);const v=S.days[dstr(dt)];
-      const cl=v==="done"?"d":v==="shield"?"s":v==="missed"?"m":v?"b":(isWorkday(dt)?"n":"w");
-      o+=`<span class="${cl}">${["Ya","Du","Se","Ch","Pa","Ju","Sh"][dt.getDay()]}</span>`;}
-    return o;})()}</div>
-    <div class="small" style="margin-top:8px">🟢 bajarilgan · 🔴 qoldirilgan · 🛡️ qalqon · ⚪ dam olish</div></section>
-  <section class="card"><h3>Do'kon</h3>
-    <div class="shop"><div><b>🛡️ Qalqon</b><i>17:00 o'tib ketsa seriyani saqlaydi. Sizda: ${S.shield}</i></div>
-    <button class="buy" id="buy">300 XP</button></div>
-    <div class="shop"><div><b>📕 Xato daftari</b><i>Xato qilgan savollaringiz: ${Object.keys(S.errs).length} ta</i></div>
-    <button class="buy" id="errb">Mashq</button></div></section>
-  <section class="card"><h3>Yutuqlar (${S.ach.length}/${ACH.length})</h3>
-    <div class="badges">${ACH.map(a=>`<div class="badge ${S.ach.includes(a.id)?"":"off"}" title="${a.n}: ${a.d}">${a.i}</div>`).join("")}</div></section>
-  <section class="card"><h3>Liga ulanishi</h3>
-    <div class="small">${S.key?(S.pid?`✅ Ulangan · ishtirokchilar: ${S.pcount||1}/7`:"⚠️ Kalit bor, lekin ro'yxatga qo'shilmagan"):"❌ Serverga ulanmagan — hozircha yolg'iz o'ynayapsiz"}</div>
-    <button class="btn ghost" id="srv">🔗 Ligaga ulanish</button></section>
-  <section class="card"><h3>Sozlamalar</h3>
-    <button class="btn ghost" id="inst">📲 Telefonga o'rnatish</button>
-    <button class="btn ghost" id="set">🔔 Eslatma va sozlamalar</button>
-    ${Object.keys(S.stars).length===STAGES.length?`<button class="btn ghost" id="cert">🏅 Sertifikat</button>`:""}</section>`,"prof");
-  document.getElementById("srv").onclick=scrServer;
-  document.getElementById("buy").onclick=buyShield;
-  document.getElementById("errb").onclick=startErrs;
-  document.getElementById("inst").onclick=install;
-  document.getElementById("set").onclick=settings;
-  const c=document.getElementById("cert"); if(c) c.onclick=cert;
-}
-function home(){ sweepDays(); if(!S.user.first) return register(); scrMain(); }
-function nextStage(){ for(let i=0;i<STAGES.length;i++) if(!(S.stars[i])) return unlocked(i)?i:null; return null; }
-function leagueResult(){
-  const d=S.pending; S.pending=null; persist();
-  app.innerHTML=`<section class="sheet result">
-    <div style="font-size:64px">${d.cup}</div>
-    <h2>Haftalik liga yakunlandi!</h2>
-    <p class="story">${d.pos===1?"Tabriklaymiz — siz g'olib bo'ldingiz!":d.txt+" — "+d.pos+"-o'rin"}</p>
-    <div class="stats"><span class="pill">🎁 +${d.xp} XP</span>${d.pos<=3?`<span class="pill">${d.cup} kubok javoningizda</span>`:""}</div>
-    <div class="card"><div class="lb">${d.board.map((x,k)=>`<div class="row ${x.me?"me":""}">
-      <span class="pos">${["🥇","🥈","🥉","4"][k]}</span><span class="who">${x.n}</span><span class="xp">${x.x} XP</span></div>`).join("")}</div></div>
-    <p class="small">Yangi liga boshlandi — hisob noldan. Keyingi juma yana yakunlanadi.</p></section>`;
-  setDock(`<button class="btn" id="g">Yangi ligani boshlash</button>`);
-  document.getElementById("g").onclick=home; coins(); window.scrollTo(0,0);
-}
-function scrServer(){
-  setDock(null);
-  app.innerHTML=`<div class="bar"><button class="back">←</button><span class="small">Liga ulanishi</span></div>
-  <section class="sheet set"><h2>🔗 7 kishilik liga</h2>
-  <p class="story">Ishtirokchilar bitta umumiy jadvalda bo'lishi uchun server kaliti kerak. Kalit bir marta kiritiladi.</p>
-  <label for="k">Server kaliti (anon / publishable key)</label>
-  <input id="k" type="text" placeholder="sb_publishable_... yoki eyJ..." value="${(S.key||"").slice(0,12)?(S.key||""):""}">
-  <p class="small">Supabase → Project Settings → API Keys → publishable (anon) key.</p>
-  <p class="small" id="st"></p>
-  <div class="shop"><div><b>Ishtirokchilar</b><i id="cnt">${S.pcount||1} / 7</i></div>
-    <button class="buy" id="ref">Yangilash</button></div>
-  <div class="shop"><div><b>Diagnostika</b><i>Ulanishni tekshirish va xatoni ko'rsatish</i></div>
-    <button class="buy" id="diag">Tekshirish</button></div>
-  <p class="small">Sizdan tashqari 6 kishi qo'shila oladi. Ular ham shu ilovani o'rnatib, ro'yxatdan o'tadi — kalit ilova ichida tayyor turadi.</p>
-  </section>`;
-  app.querySelector(".back").onclick=scrProfile;
-  const st=document.getElementById("st");
-  setDock(`<button class="btn" id="go">Ulanish</button>`);
-  document.getElementById("go").onclick=async()=>{
-    S.key=document.getElementById("k").value.trim(); persist();
-    if(!S.key){ st.textContent="Kalitni kiriting"; return; }
-    st.textContent="Ulanmoqda...";
-    const r=await joinServer();
-    st.innerHTML=(r.ok?"✅ ":"❌ ")+r.msg+(r.detail?`<br><span style="font-size:12px">${r.detail}</span>`:"");
-    if(r.ok){ toast(r.msg); await pullPlayers(true); document.getElementById("cnt").textContent=(S.pcount||1)+" / 7"; }
-  };
-  document.getElementById("diag").onclick=async()=>{
-    st.textContent="Tekshirilmoqda...";
-    try{
-      const r=await fetch(SUPA_URL+"/rest/v1/safari_players?select=id&limit=1",{headers:sHead()});
-      const t=await r.text();
-      st.innerHTML=r.ok?`✅ Server javob berdi (${r.status}). Ma'lumot: ${t.slice(0,60)}`
-        :`❌ Xato ${r.status}: <span style="font-size:12px">${t.slice(0,160).replace(/</g,"&lt;")}</span>`;
-    }catch(e){ st.innerHTML=`❌ Ulanib bo'lmadi: <span style="font-size:12px">${String(e.message).slice(0,160)}</span>`; }
-  };
-  document.getElementById("ref").onclick=async()=>{ await pullPlayers(true); document.getElementById("cnt").textContent=(S.pcount||1)+" / 7"; toast("Yangilandi"); };
-  window.scrollTo(0,0);
-}
-function install(){
-  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
-  app.innerHTML=`<div class="bar"><button class="back">←</button><span class="small">O'rnatish</span></div>
-  <section class="sheet"><h2>📲 Telefonga o'rnatish</h2>
-  <p class="story">Uch qadam — ikonka telefon ekranida paydo bo'ladi va brauzersiz ochiladi.</p>
-  ${ios?`<ol class="steps"><li>Pastdagi <b>Ulashish</b> belgisini bosing (kvadrat va yuqoriga o'q).</li>
-    <li><b>Bosh ekranga qo'shish</b> ni tanlang.</li><li><b>Qo'shish</b> tugmasini bosing.</li></ol>`
-   :`<ol class="steps"><li>Pastdagi <b>O'rnatish</b> tugmasini bosing.</li>
-    <li>Tugma ishlamasa: Chrome'da o'ng yuqoridagi <b>⋮</b> → <b>Ilovani o'rnatish</b> (yoki <b>Bosh ekranga qo'shish</b>).</li>
-    <li><b>O'rnatish</b> ni tasdiqlang.</li></ol>`}
-  <p class="small">Natijalaringiz shu telefonda saqlanadi. Ilovani o'chirsangiz, XP va yulduzlar ham o'chadi.</p></section>`;
-  app.querySelector(".back").onclick=home;
-  setDock(`<button class="btn" id="go">O'rnatish</button>`);
-  document.getElementById("go").onclick=async()=>{
-    if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt=null; toast("O'rnatish oynasi ochildi"); }
-    else toast(ios?"Ulashish → Bosh ekranga qo'shish":"Chrome menyusi ⋮ → Ilovani o'rnatish");
-  };
-  window.scrollTo(0,0);
-}
+{n:15,t:"Tovarlar kirimi (2910)",
+th:`<p><b>2910 — Omborlardagi tovarlar</b>, aktiv. Savdo korxonasining asosiy schyoti.</p>
+<p>Tovar <b>haqiqiy tannarxda</b> kirim qilinadi. Bu faqat faktura summasi emas:</p>
+<p>Tannarx = tovar qiymati (QQSsiz) + transport + yuklash + bojxona to'lovlari + sug'urta</p>
+<p><span class="pv">Dt 2910 — Kt 6010</span> tovar qiymati<br>
+<span class="pv">Dt 2910 — Kt 6010</span> transport xarajati (boshqa firma yetkazgan bo'lsa)<br>
+<span class="pv">Dt 4410 — Kt 6010</span> QQS (alohida, tannarxga kirmaydi)</p>
+<p>Import bo'lsa qo'shimcha: bojxona boji va yig'imlari ham tannarxga qo'shiladi.</p>
+<p><b>Analitik hisob</b> — bu yerda hayotiy muhim. Har bir tovar nomi, o'lchov birligi, miqdori va narxi bo'yicha alohida yuritilmasa, ombor qoldig'ini hech qachon to'g'ri chiqara olmaysiz.</p>`,
+acc:[["2910","Omborlardagi tovarlar"],["6010","Yetkazib beruvchilar"],["4410","Kirim QQS"]],
+q:[
+{q:"Tovar tannarxiga nima kiradi?",o:["Tovar narxi + transport + bojxona","Faqat faktura summasi","Faqat tovar narxi + QQS","Sotuv narxi"],c:0,w:"Tovarni omborga keltirish bilan bog'liq barcha bevosita xarajatlar tannarxga qo'shiladi."},
+{q:"Tovarni keltirish uchun transport xizmati to'landi.",o:["Dt 2910 — Kt 6010","Dt 9410 — Kt 6010","Dt 9420 — Kt 6010","Dt 4410 — Kt 6010"],c:0,w:"Kirim transporti — tovar tannarxining qismi, 2910 ga qo'shiladi."},
+{q:"Hisobga olinadigan QQS tovar tannarxiga qo'shiladimi?",o:["Yo'q, alohida 4410 ga","Ha, qo'shiladi","Yarmi qo'shiladi","Xarajatga yoziladi"],c:0,w:"QQS to'lovchi uchun kirim QQS aktiv qiymatiga kirmaydi."},
+{q:"Nega tovar analitik hisobda yuritiladi?",o:["Har bir tovar bo'yicha qoldiqni bilish uchun","Soliq talab qilgani uchun","Bank so'ragani uchun","Shart emas"],c:0,w:"Umumiy summa ombordagi haqiqiy holatni ko'rsatmaydi. Nomi va miqdori kerak."},
+{q:"Import tovarning bojxona boji qayerga yoziladi?",o:["Tovar tannarxiga (2910)","Ma'muriy xarajatga","Sotish xarajatiga","Byudjetga qarzga"],c:0,w:"Bojxona to'lovlari tovarni olib kelish xarajati — tannarxga kiradi."},
+{q:"2910 qanday schyot?",o:["Aktiv","Passiv","Daromad","Xarajat"],c:0,w:"Ombordagi tovar — korxona mulki. Qoldiq debetda."}
+]},
 
-/* ---------------- sozlamalar / sertifikat ---------------- */
-function settings(){
-  app.innerHTML=`<div class="bar"><button class="back">←</button><span class="small">Sozlamalar</span></div>
-  <section class="sheet set">
-    <h2>Eslatma va sozlamalar</h2>
-    <label for="nm">Ismingiz (reyting va sertifikat uchun)</label>
-    <input id="nm" type="text" value="${(S.name||"").replace(/"/g,"&quot;")}" placeholder="Ismingiz">
-    <label for="tm">Kunlik eslatma vaqti</label>
-    <input id="tm" type="time" value="${S.rem||"20:00"}">
-    <p class="small" id="nst"></p>
-    <button class="btn" id="on">Eslatmani yoqish</button>
-    <button class="btn ghost" id="test">Sinov eslatmasini ko'rish</button>
-    <p class="small">Eslatma matnida raqobatchilar reytingi bo'ladi. Ilova butunlay yopilgan bo'lsa, eslatma siz ilovani ochganingizda ko'rinadi — shuning uchun aniq vaqtli eslatma uchun telefon budilnigi ham foydali.</p>
-    <button class="btn ghost" id="ins">Telefonga ilova qilib o'rnatish</button>
-    <button class="btn ghost" id="rst">Natijalarni nolga qaytarish</button>
-  </section>`;
-  app.querySelector(".back").onclick=home; setDock(null);
-  const nst=document.getElementById("nst");
-  const st=()=>{ nst.textContent = !("Notification" in window) ? "Bu brauzer eslatmani qo'llab-quvvatlamaydi."
-    : Notification.permission==="granted" ? "Eslatma yoqilgan ✓" : Notification.permission==="denied" ? "Brauzer sozlamalarida bloklangan." : "Hali yoqilmagan."; };
-  st();
-  document.getElementById("nm").onchange=e=>{S.name=e.target.value.trim();persist();};
-  document.getElementById("tm").onchange=e=>{S.rem=e.target.value;persist();};
-  document.getElementById("on").onclick=async()=>{
-    S.rem=document.getElementById("tm").value; S.name=document.getElementById("nm").value.trim();
-    if(!("Notification" in window)){st();return;}
-    const p=await Notification.requestPermission(); S.notif=p==="granted"; persist(); st();
-    if(p==="granted"){ toast("Eslatma yoqildi ✓"); scheduleReminder(); }
-  };
-  document.getElementById("test").onclick=()=>{
-    if(!notify(remText())) toast("Avval eslatmani yoqing");
-  };
-  const ins=document.getElementById("ins");
-  if(ins) ins.onclick=async()=>{ if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt=null; }
-    else toast("Chrome menyusi (⋮) → «Ilovani o'rnatish»"); };
-  document.getElementById("rst").onclick=()=>{ if(confirm("Barcha XP, yulduz va yutuqlar o'chiriladi. Davom etasizmi?")){
-    S={xp:0,stars:{},streak:0,last:"",sim:Date.now(),riv:{},ach:[],daily:{d:"",n:0,got:false},dailyRuns:0,failed:{},name:S.name,rem:S.rem,notif:S.notif};
-    RIVALS.forEach(r=>S.riv[r.id]=0); persist(); home(); } };
-}
-function cert(){
-  const d=new Date().toLocaleDateString("ru-RU");
-  app.innerHTML=`<div class="bar"><button class="back">←</button></div>
-  <section class="cert"><div style="font-size:44px">🏆</div><h2>Sertifikat</h2>
-  <p class="small">Ushbu sertifikat beriladi:</p><div class="nm">${S.name||"Buxgalter"}</div>
-  <p style="margin-top:14px">«Buxgalter safari» kursining barcha 8 bosqichini yakunlagani uchun: hisobvaraqlar, provodka, QQS, ish haqi, amortizatsiya va yil yakuni.</p>
-  <p class="small">Daraja: ${rankOf(S.xp).cur[1]} · ${S.xp} XP · ${d}</p></section>`;
-  app.querySelector(".back").onclick=home; setDock(`<button class="btn" id="h">Xaritaga qaytish</button>`);
-  document.getElementById("h").onclick=home; coins();
-}
+{n:16,t:"Tovar sotish va tannarxni hisobdan chiqarish",
+th:`<p>Sotuv har doim <b>ikki tomonlama</b>: bir tomondan daromad, ikkinchi tomondan tovarning ketishi. Yangi buxgalterlar ko'pincha ikkinchisini unutadi — natijada foyda haqiqatdan yuqori ko'rinadi.</p>
+<p>To'liq to'plam (sotuv 30 mln + QQS 3.6 mln, tannarx 22 mln):<br>
+<span class="pv">Dt 4010 — Kt 9020</span> 33 600 000 — sotuv<br>
+<span class="pv">Dt 9020 — Kt 6410</span> 3 600 000 — QQS<br>
+<span class="pv">Dt 9120 — Kt 2910</span> 22 000 000 — tannarx</p>
+<p>Yalpi foyda = 30 000 000 − 22 000 000 = <b>8 000 000</b></p>
+<p>Diqqat: <b>9020 — sotuv narxi</b>, <b>9120 — tannarx</b>. Ikkalasi har xil summa. Agar ular teng chiqsa, tannarx noto'g'ri hisoblangan.</p>
+<p>Tannarx qanday aniqlanadi — hisob siyosatiga bog'liq: o'rtacha tortilgan narx yoki FIFO. Savdoda ko'pincha o'rtacha narx qulayroq.</p>`,
+acc:[["9020","Tovar sotishdan daromad"],["9120","Sotilgan tovar tannarxi"],["2910","Tovarlar"]],
+q:[
+{q:"Sotuvda tannarxni hisobdan chiqarish unutildi. Natija?",o:["Foyda haqiqatdan yuqori chiqadi","Foyda past chiqadi","Hech narsa o'zgarmaydi","QQS noto'g'ri bo'ladi"],c:0,w:"Xarajat yozilmasa, foyda sun'iy ravishda ko'tariladi va foyda solig'i ortiqcha hisoblanadi."},
+{q:"Sotilgan tovar tannarxi qaysi schyotda?",o:["9120","9020","2910","9420"],c:0,w:"9120 — sotilgan tovarlar tannarxi. 9020 esa daromad."},
+{q:"Sotuv 50 mln (QQSsiz), tannarx 38 mln. Yalpi foyda?",o:["12 000 000","50 000 000","38 000 000","88 000 000"],c:0,w:"Yalpi foyda = daromad − tannarx = 50 − 38 = 12 mln."},
+{q:"Sotuv provodkasi (QQS bilan jami summa).",o:["Dt 4010 — Kt 9020","Dt 9020 — Kt 4010","Dt 4010 — Kt 2910","Dt 5110 — Kt 9020"],c:0,w:"Avval to'liq summa daromadga yoziladi, keyin undan QQS ajratiladi."},
+{q:"9020 va 9120 summalari teng chiqdi. Bu nimani bildiradi?",o:["Tannarx noto'g'ri hisoblangan","Foyda nolga teng, normal","Sotuv muvaffaqiyatli","QQS xato"],c:0,w:"Sotuv narxi tannarxga teng bo'lishi amalda deyarli uchramaydi — hisobda xato bor."},
+{q:"Tannarxni aniqlash usuli qayerda belgilanadi?",o:["Korxona hisob siyosatida","Har oyda o'zgartiriladi","Soliq organi belgilaydi","Bank belgilaydi"],c:0,w:"Hisob siyosati — yil boshida tasdiqlanadigan hujjat. Usul davr davomida o'zgarmaydi."}
+]},
 
-/* ---------------- bosqich ---------------- */
-let run=null;
-function intro(si){
-  const s=STAGES[si];
-  app.innerHTML=`<div class="bar"><button class="back">←</button><span class="small">${si+1}-bosqich</span></div>
-  <article class="sheet"><h2>${s.icon} ${s.title}</h2><p class="story">${s.story}</p>
-  <div class="theory">${s.theory}</div>
-  ${s.example?`<div class="example"><div class="small">${s.example.t}</div>
-    <div class="r"><span>Dt ${s.example.dt}</span><span>Kt ${s.example.kt}</span></div>
-    <div class="small">${A[s.example.dt]} ⟵ ${A[s.example.kt]}</div></div>`:""}
-  <p class="small">❤️ 3 ta jon. Xato savol oxirida yana qaytadi. ${s.tasks.length} ta vazifa.</p></article>`;
-  app.querySelector(".back").onclick=home;
-  setDock(`<button class="btn" id="go">Boshlash</button>`);
-  document.getElementById("go").onclick=()=>{
-    const tasks=STAGES[si].tasks.map((t,k)=>({...t,k}));
-    run={mode:"stage",si,queue:tasks,total:tasks.length,i:0,lives:3,combo:0,mistakes:0,marks:tasks.map(()=>""),retried:new Set(),earned:0};
-    task();
-  };
-  window.scrollTo(0,0);
-}
-function startBlitz(open){
-  let pool=[]; open.forEach(i=>STAGES[i].tasks.forEach(t=>pool.push(t)));
-  pool=shuffle(pool).slice(0,40).map((t,k)=>({...t,k}));
-  run={mode:"blitz",si:null,queue:pool,total:pool.length,i:0,lives:99,combo:0,mistakes:0,
-    marks:pool.map(()=>""),retried:new Set(),earned:0,right:0,end:Date.now()+60000};
-  task();
-}
-function startErrs(){
-  const ids=Object.keys(S.errs);
-  if(!ids.length){ toast("Xato daftari bo'sh — zo'r!"); return; }
-  const pool=shuffle(ids.map(id=>TASKMAP[id]).filter(Boolean)).slice(0,12).map((t,k)=>({...t,k}));
-  run={mode:"errs",si:null,queue:pool,total:pool.length,i:0,lives:5,combo:0,mistakes:0,
-    marks:pool.map(()=>""),retried:new Set(),earned:0};
-  task();
-}
-const GIFT_NEED=5;                       // sovg'a uchun bugungi to'g'ri javoblar
-function giftDone(){ return S.gift===today(); }
-function giftCorrect(){ return S.daily.d===today()?S.daily.n:0; }
-function giftReady(){ return !giftDone()&&giftCorrect()>=GIFT_NEED; }
-function openGift(){
-  if(giftDone()) return toast("Bugungi sovg'a olingan — ertaga yana");
-  if(giftCorrect()<GIFT_NEED) return toast("Avval "+(GIFT_NEED-giftCorrect())+" ta to'g'ri javob bering");
-  const open=STAGES.map((x,i)=>i).filter(unlocked);
-  let pool=[]; open.forEach(i=>STAGES[i].tasks.forEach(t=>pool.push(t)));
-  const q={...shuffle(pool)[0],k:0};
-  run={mode:"gift",si:null,queue:[q],total:1,i:0,lives:1,combo:0,mistakes:0,marks:[""],retried:new Set(),earned:0};
-  task();
-}
-function giftReward(ok){
-  const n=ok?[80,110,140,170,200][Math.floor(Math.random()*5)]:25;
-  S.gift=today(); addXP(n); persist(); sync();
-  app.innerHTML=`<section class="sheet result"><div style="font-size:70px">${ok?"🎁":"📦"}</div>
-    <h2>${ok?"Sovg'a ochildi!":"Qutida kichik sovg'a"}</h2>
-    <p class="story">${ok?"To'g'ri javob uchun katta sovg'a":"Javob xato edi — lekin quruq qolmadingiz"}</p>
-    <div class="stats"><span class="pill">⚡ +${n} XP</span></div>
-    <p class="small">Ertaga yangi sovg'a: yana ${GIFT_NEED} ta to'g'ri javobdan keyin ochiladi.</p></section>`;
-  if(ok) coins();
-  setDock(`<button class="btn" id="h">Davom etish</button>`);
-  document.getElementById("h").onclick=home; window.scrollTo(0,0);
-}
-function buyShield(){
-  if(S.xp<300) return toast("Qalqon uchun 300 XP kerak");
-  S.xp-=300; S.shield++; persist(); toast("🛡️ Qalqon olindi! Bir kunni saqlaydi"); scrProfile();
-}
-function startDaily(open){
-  let pool=[]; open.forEach(i=>STAGES[i].tasks.forEach(t=>pool.push(t)));
-  pool=shuffle(pool).slice(0,10).map((t,k)=>({...t,k}));
-  run={mode:"daily",si:null,queue:pool,total:pool.length,i:0,lives:5,combo:0,mistakes:0,marks:pool.map(()=>""),retried:new Set(),earned:0};
-  task();
-}
+{n:17,t:"Tovar qoldig'i va inventarizatsiya",
+th:`<p>Ombor qoldig'i formulasi — buxgalteriyaning eng ko'p ishlatiladigan tenglamasi:</p>
+<p class="fm">Boshlang'ich qoldiq + Kirim − Chiqim = Oxirgi qoldiq</p>
+<p>Bu formula ham summa bo'yicha, ham <b>miqdor bo'yicha</b> ishlashi kerak. Ikkalasi mos kelmasa — xato bor.</p>
+<p><b>Manfiy qoldiq</b> — eng ko'p uchraydigan muammo. Sabablari:<br>
+• kirim faktura kiritilmagan yoki kech kiritilgan<br>
+• bir tovar ikki xil nom bilan yuritilgan ("Sement M400" va "sement м400")<br>
+• o'lchov birliklari aralashib ketgan (dona / quti / kg)<br>
+• sotuv miqdori noto'g'ri kiritilgan</p>
+<p><b>Inventarizatsiya</b> — haqiqiy sanoq bilan hisob ma'lumotini solishtirish.<br>
+Kam chiqsa (nedostacha): <span class="pv">Dt 5910 — Kt 2910</span>, keyin aybdorga yoki xarajatga.<br>
+Ortiq chiqsa (izlishka): <span class="pv">Dt 2910 — Kt 9390</span> — boshqa daromad.</p>`,
+acc:[["2910","Tovarlar"],["5910","Kamomad va yo'qotishlar"],["9390","Boshqa operatsion daromadlar"]],
+q:[
+{q:"Boshlang'ich 100, kirim 250, chiqim 180. Oxirgi qoldiq?",o:["170","530","70","330"],c:0,w:"100 + 250 − 180 = 170."},
+{q:"Ombor qoldig'i manfiy chiqdi. Birinchi navbatda nimani tekshirasiz?",o:["Kirim fakturalar to'liq kiritilganmi","Sotuv narxlarini","Bank ko'chirmasini","Ish haqi hisobini"],c:0,w:"Manfiy qoldiqning eng ko'p sababi — kiritilmagan yoki kech kiritilgan kirim hujjati."},
+{q:"Bir tovar ikki xil nom bilan yuritilsa nima bo'ladi?",o:["Biri manfiyga ketadi, biri ortiqcha turadi","Hech narsa","Summa o'zgaradi","QQS xato bo'ladi"],c:0,w:"Sistema ularni ikki alohida tovar deb qaraydi. Nomlarni birlashtirish kerak."},
+{q:"Inventarizatsiyada tovar kam chiqdi (nedostacha).",o:["Dt 5910 — Kt 2910","Dt 2910 — Kt 5910","Dt 9120 — Kt 2910","Dt 2910 — Kt 9390"],c:0,w:"Kamomad avval 5910 ga yig'iladi, keyin aybdor shaxsga yoki xarajatga o'tkaziladi."},
+{q:"Inventarizatsiyada ortiqcha tovar topildi.",o:["Dt 2910 — Kt 9390","Dt 9390 — Kt 2910","Dt 2910 — Kt 6010","Dt 5910 — Kt 2910"],c:0,w:"Ortiqcha tovar kirim qilinadi va boshqa daromad sifatida tan olinadi."},
+{q:"Qoldiq formulasi qaysi ko'rsatkichlar bo'yicha tekshiriladi?",o:["Ham summa, ham miqdor bo'yicha","Faqat summa","Faqat miqdor","Faqat narx"],c:0,w:"Summa to'g'ri, miqdor noto'g'ri bo'lishi mumkin — ikkalasini ham tekshirish kerak."}
+]},
 
-function task(){
-  const r=run,t=r.queue[r.i];
-  r.answered=false; r.pick=null; r.slots={dt:null,kt:null}; r.active="dt";
-  const kind={mc:"Test",pv:"Provodka tuzing",calc:"Hisoblang"}[t.t];
-  const retry=r.i>=r.total;
-  app.innerHTML=`<div class="bar"><button class="back">✕</button>
-    ${r.mode==="blitz"?`<span class="tmr" id="tmr">⏱ 60</span><span class="pill">✅ ${r.right}</span>`
-      :`<span class="hearts">${"❤️".repeat(r.lives)}${"🤍".repeat((r.mode==="daily"||r.mode==="errs"?5:3)-r.lives)}</span>`}<span class="spacer"></span>
-    ${r.combo>=2?`<span class="combo">🔥 ×${r.combo}</span>`:""}<span class="pill">⚡ ${S.xp+r.earned}</span></div>
-  <div class="progress">${r.marks.map((m,k)=>`<span class="${m||(k===t.k?"now":"")}"></span>`).join("")}</div>
-  <article class="sheet task" id="card"><div class="kind">${({daily:"Kunlik mashq · ",blitz:"⚡ Blits · ",errs:"📕 Xato daftari · ",gift:"🎁 Sovg'a savoli · "})[r.mode]||""}${kind}${retry?" — takroriy":""}</div>
-  <p class="q">${t.q}</p><div id="body"></div><div id="fb"></div></article>`;
-  app.querySelector(".back").onclick=()=>{ if(confirm("Chiqasizmi? Natija saqlanmaydi.")){ clearInterval(r.tick); home(); } };
-  if(r.mode==="blitz"){
-    clearInterval(r.tick);
-    r.tick=setInterval(()=>{
-      const left=Math.max(0,Math.round((r.end-Date.now())/1000));
-      const el=document.getElementById("tmr"); if(el) el.textContent="⏱ "+left;
-      if(left<=0){ clearInterval(r.tick); finish(true); }
-    },250);
-  }
-  const body=document.getElementById("body");
-  if(t.t==="mc"){
-    let opts=t.o.map((x,k)=>({x,c:k===t.a}));
-    if(t.o.every(o=>/^\d{4}$/.test(o))){           // faqat hisobvaraq raqamlari bo'lsa — yana 2 ta chalg'ituvchi
-      const pool=Object.keys(A).filter(c=>!t.o.includes(c));
-      shuffle(pool).slice(0,2).forEach(c=>opts.push({x:c,c:false}));
-    }
-    r.opts=shuffle(opts); r.ans=r.opts.findIndex(o=>o.c);
-    body.innerHTML=`<div class="opts">${r.opts.map((o,k)=>`<button class="opt" data-k="${k}">${o.x}</button>`).join("")}</div>`;
-    body.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ if(r.answered)return; r.pick=+b.dataset.k;
-      body.querySelectorAll(".opt").forEach(x=>x.classList.toggle("sel",x===b)); btn(true); });
-    btn(false);
-  }
-  if(t.t==="pv"){
-    let pv=[...t.o];
-    const pool=Object.keys(A).filter(c=>!pv.includes(c));
-    pv=pv.concat(shuffle(pool).slice(0,Math.max(0,8-pv.length)));
-    const opts=shuffle(pv);
-    body.innerHTML=`<div class="ledger"><div class="h">Debet</div><div class="h">Kredit</div>
-      <button class="slot" data-side="dt"></button><button class="slot" data-side="kt"></button></div>
-      <div class="accs">${opts.map(c=>`<button class="acc" data-c="${c}"><code>${c}</code>${A[c]}</button>`).join("")}</div>`;
-    const draw=()=>{
-      body.querySelectorAll(".slot").forEach(s=>{ const v=r.slots[s.dataset.side];
-        s.classList.toggle("active",!r.answered&&r.active===s.dataset.side);
-        s.innerHTML=v?`<span class="hw">${v}</span><span>${A[v]}</span>`:`<span>${r.active===s.dataset.side?"Hisobvaraqni tanlang":"Bo'sh"}</span>`; });
-      body.querySelectorAll(".acc").forEach(a=>a.classList.toggle("used",a.dataset.c===r.slots.dt||a.dataset.c===r.slots.kt));
-      btn(!!(r.slots.dt&&r.slots.kt));
-    };
-    body.querySelectorAll(".slot").forEach(s=>s.onclick=()=>{ if(r.answered)return; const side=s.dataset.side;
-      if(r.slots[side])r.slots[side]=null; r.active=side; draw(); });
-    body.querySelectorAll(".acc").forEach(a=>a.onclick=()=>{ if(r.answered)return; const c=a.dataset.c;
-      if(r.slots.dt===c)r.slots.dt=null; if(r.slots.kt===c)r.slots.kt=null;
-      r.slots[r.active]=c; r.active=!r.slots.dt?"dt":(!r.slots.kt?"kt":r.active); draw(); });
-    draw();
-  }
-  if(t.t==="calc"){
-    body.innerHTML=`<div class="calc"><input id="num" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Javob">
-      <div class="unit">${t.unit||"so'm"} — faqat raqam</div></div>`;
-    const inp=document.getElementById("num");
-    inp.oninput=()=>{const d=inp.value.replace(/\D/g,""); inp.value=d?fmt(+d):""; btn(!!d);};
-    inp.onkeydown=e=>{ if(e.key==="Enter"&&inp.value) check(); };
-    btn(false);
-  }
-  window.scrollTo(0,0);
-}
-function btn(on){ setDock(`<button class="btn" id="chk" ${on?"":"disabled"}>Tekshirish</button>`); document.getElementById("chk").onclick=check; }
+{n:18,t:"Asosiy vositalar kirimi (0100)",
+th:`<p><b>Asosiy vosita</b> — bir yildan ortiq ishlatiladigan va belgilangan qiymat chegarasidan qimmat mulk: bino, mashina, uskuna, kompyuter, mebel.</p>
+<p>Guruhlar: 0110 yer, 0120 binolar, 0130 mashina va uskunalar, 0140 mebel, 0150 transport, 0160 kompyuter texnikasi.</p>
+<p>Kirim ikki bosqichda bo'ladi — <b>0820</b> (sotib olish) orqali:<br>
+<span class="pv">Dt 0820 — Kt 6010</span> uskuna sotib olindi<br>
+<span class="pv">Dt 4410 — Kt 6010</span> QQS<br>
+<span class="pv">Dt 0820 — Kt 6010</span> yetkazish va o'rnatish xarajati<br>
+<span class="pv">Dt 0130 — Kt 0820</span> foydalanishga topshirildi (dalolatnoma bilan)</p>
+<p>Nega ikki bosqich? Chunki uskuna ishga tushgunicha xarajatlar yig'iladi. Boshlang'ich qiymat = narx + transport + o'rnatish + sozlash.</p>
+<p>Foydalanishga topshirish <b>OS-1 dalolatnomasi</b> bilan rasmiylashtiriladi. Shu sanadan amortizatsiya boshlanadi (aniqrog'i — keyingi oydan).</p>`,
+acc:[["0820","Asosiy vositalarni sotib olish"],["0130","Mashina va uskunalar"],["0200","Eskirish"]],
+q:[
+{q:"Uskuna sotib olindi, hali o'rnatilmagan.",o:["Dt 0820 — Kt 6010","Dt 0130 — Kt 6010","Dt 1010 — Kt 6010","Dt 2910 — Kt 6010"],c:0,w:"Avval 0820 (kapital qo'yilma) da yig'iladi, ishga tushgach 0130 ga o'tadi."},
+{q:"Uskuna foydalanishga topshirildi.",o:["Dt 0130 — Kt 0820","Dt 0820 — Kt 0130","Dt 0130 — Kt 6010","Dt 0820 — Kt 5110"],c:0,w:"Yig'ilgan qiymat 0820 dan asosiy vosita schyotiga o'tkaziladi."},
+{q:"Uskunani o'rnatish xarajati qayerga yoziladi?",o:["0820 ga — boshlang'ich qiymatga","9420 — ma'muriy xarajatga","9410 — sotish xarajatiga","1010 — materialga"],c:0,w:"Ishga tushirishgacha bo'lgan barcha xarajatlar boshlang'ich qiymatga kiradi."},
+{q:"Asosiy vositaning belgisi nima?",o:["Bir yildan ortiq ishlatiladi va qiymat chegarasidan qimmat","Har qanday qimmat narsa","Faqat bino va transport","Sotish uchun olingan"],c:0,w:"Muddat va qiymat — ikkala mezon ham bo'lishi kerak."},
+{q:"Foydalanishga topshirish qaysi hujjat bilan?",o:["OS-1 dalolatnomasi","Faktura","To'lov topshiriqnomasi","Shartnoma"],c:0,w:"OS-1 — qabul-topshirish dalolatnomasi. Amortizatsiya shu asosda boshlanadi."},
+{q:"Kompyuter texnikasi qaysi schyotda?",o:["0160","0130","0140","1010"],c:0,w:"0160 — kompyuter texnikasi va hisoblash uskunalari."}
+]},
 
-function check(){
-  const r=run,t=r.queue[r.i]; if(r.answered)return; r.answered=true;
-  let ok=false,right="";
-  const body=document.getElementById("body");
-  if(t.t==="mc"){ ok=r.pick===r.ans;
-    body.querySelectorAll(".opt").forEach((b,k)=>{ if(k===r.ans)b.classList.add("right"); else if(k===r.pick)b.classList.add("wrong"); }); }
-  if(t.t==="pv"){ ok=r.slots.dt===t.dt&&r.slots.kt===t.kt;
-    body.querySelectorAll(".slot").forEach(s=>{const side=s.dataset.side; s.classList.remove("active");
-      s.classList.add(r.slots[side]===t[side]?"right":"wrong");});
-    right=`To'g'ri provodka: <b style="display:inline">Dt ${t.dt} — Kt ${t.kt}</b><br>`; }
-  if(t.t==="calc"){ const v=+document.getElementById("num").value.replace(/\D/g,""); ok=v===t.a;
-    document.getElementById("num").disabled=true;
-    right=`To'g'ri javob: <b style="display:inline">${fmt(t.a)} ${t.unit||"so'm"}</b><br>`; }
-  const card=document.getElementById("card"), st=document.createElement("div");
-  st.className="stamp "+(ok?"ok":"bad"); st.textContent=ok?"TO'G'RI":"XATO"; card.appendChild(st);
-  if(ok){
-    r.combo++;
-    let g=(r.i>=r.total?5:(r.mode==="daily"?8:10)); if(r.combo>=3)g+=5; if(r.combo>=7)g+=5;
-    r.earned+=g; if(r.marks[t.k]!=="bad")r.marks[t.k]="ok";
-    if(r.combo===3)toast("🔥 3 ketma-ket! +5 bonus");
-    if(r.combo===5){toast("🚀 5 ketma-ket!");award("combo5");}
-    if(r.combo===7)toast("💎 7 ketma-ket! +10 bonus");
-    if(r.combo===10)award("combo10");
-    dailyTick(true);
-    if(r.mode==="blitz") r.right++;
-    if(t.id&&S.errs[t.id]&&(r.mode==="errs"||r.mode==="daily")){ delete S.errs[t.id]; persist(); }
-    const p=["Barakalla!","Aniq hisob!","Balans joyida!","Zo'r!","Professional daraja!","Inspektor ham rozi!"];
-    document.getElementById("fb").innerHTML=`<div class="explain ok"><b>${p[Math.floor(Math.random()*p.length)]} +${g} XP</b>${t.e}</div>`;
-  } else {
-    r.combo=0; if(r.mode!=="blitz") r.lives--; r.mistakes++; r.marks[t.k]="bad";
-    if(t.id){ S.errs[t.id]=true; persist(); }
-    if(!r.retried.has(t.k)){r.retried.add(t.k); r.queue.push(t);}
-    if(navigator.vibrate)try{navigator.vibrate(120);}catch(e){}
-    document.getElementById("fb").innerHTML=`<div class="explain bad"><b>Unchalik emas — keling, tushunib olamiz</b>${right}${t.e}</div>`;
-  }
-  const last=r.i>=r.queue.length-1;
-  if(r.mode==="gift"){
-    setDock(`<button class="btn" id="nx">🎁 Sovg'ani ochish</button>`);
-    document.getElementById("nx").onclick=()=>giftReward(ok);
-  } else if(r.mode==="blitz"){
-    setDock(`<button class="btn" id="nx">Keyingi savol</button>`);
-    const go=()=>{ if(Date.now()>=r.end) return; if(last) return finish(true); r.i++; task(); };
-    document.getElementById("nx").onclick=go;
-    setTimeout(()=>{ if(run===r&&r.answered) go(); },1100);
-  } else {
-  setDock(`<button class="btn" id="nx">${r.lives<=0?"Natijani ko'rish":(last?"Yakunlash":"Davom etish")}</button>`);
-  document.getElementById("nx").onclick=()=>{ if(r.lives<=0)return finish(false); if(last)return finish(true); r.i++; task(); };
-  }
-  document.getElementById("fb").scrollIntoView({behavior:"smooth",block:"nearest"});
-}
+{n:19,t:"Amortizatsiya — eskirish (0200)",
+th:`<p>Asosiy vosita bir yo'la xarajatga yozilmaydi. Uning qiymati foydali xizmat muddati davomida <b>bo'lib-bo'lib</b> xarajatga o'tkaziladi. Bu — amortizatsiya (eskirish).</p>
+<p><b>0200 guruhi</b> — eskirish schyotlari, passiv. Ular asosiy vosita qiymatini kamaytirib turadi (kontraktiv schyot). 0230 — mashina va uskunalar eskirishi, 0220 — binolar, 0250 — transport.</p>
+<p>Provodka — <b>yo'nalishga qarab</b>:<br>
+<span class="pv">Dt 2010 — Kt 0230</span> ishlab chiqarish uskunasi<br>
+<span class="pv">Dt 9420 — Kt 0230</span> ofis jihozi<br>
+<span class="pv">Dt 9410 — Kt 0250</span> savdo transporti</p>
+<p><b>To'g'ri chiziqli usul</b> (eng keng tarqalgani):<br>
+Yillik amortizatsiya = Boshlang'ich qiymat ÷ Foydali muddat<br>
+Oylik = Yillik ÷ 12</p>
+<p>Misol: 60 mln uskuna, 5 yil. Yillik = 12 mln, oylik = 1 mln.</p>
+<p><b>Qoldiq qiymat</b> = Boshlang'ich qiymat − Yig'ilgan eskirish. Balansda aynan shu ko'rsatiladi.</p>`,
+acc:[["0230","Uskunalar eskirishi"],["9420","Ma'muriy xarajatlar"],["2010","Asosiy ishlab chiqarish"]],
+q:[
+{q:"Ofis kompyuteriga amortizatsiya hisoblandi.",o:["Dt 9420 — Kt 0260","Dt 0260 — Kt 9420","Dt 2010 — Kt 0260","Dt 9420 — Kt 0160"],c:0,w:"Xarajat ma'muriy (9420 debet), eskirish to'planadi (0260 kredit)."},
+{q:"48 mln uskuna, 4 yil muddat. Oylik amortizatsiya?",o:["1 000 000","12 000 000","4 000 000","480 000"],c:0,w:"48 ÷ 4 = 12 mln yillik. 12 ÷ 12 = 1 mln oylik."},
+{q:"0230 qanday schyot?",o:["Passiv (aktiv qiymatini kamaytiradi)","Aktiv","Daromad","Xarajat"],c:0,w:"Eskirish schyotlari passiv. Ular 0100 qiymatini to'g'ridan-to'g'ri kamaytirmay, alohida to'planadi."},
+{q:"Qoldiq qiymat qanday hisoblanadi?",o:["Boshlang'ich qiymat − yig'ilgan eskirish","Boshlang'ich qiymat + eskirish","Sotuv narxi − tannarx","Faqat boshlang'ich qiymat"],c:0,w:"Balansda asosiy vosita qoldiq qiymatda ko'rsatiladi."},
+{q:"Ishlab chiqarish stanogiga amortizatsiya.",o:["Dt 2010 — Kt 0230","Dt 9420 — Kt 0230","Dt 9410 — Kt 0230","Dt 0230 — Kt 2010"],c:0,w:"Ishlab chiqarishda ishlatilsa, xarajat mahsulot tannarxiga kiradi."},
+{q:"Nega asosiy vosita bir yo'la xarajatga yozilmaydi?",o:["U bir necha yil daromad keltiradi","Soliq ruxsat bermaydi","Summa katta","Bank talab qiladi"],c:0,w:"Xarajat u keltiradigan daromad bilan bir davrga to'g'ri kelishi kerak — moslik prinsipi."}
+]},
 
-function finish(passed){
-  const r=run; clearInterval(r.tick);
-  if(r.mode==="blitz"){
-    const rec=r.right>(S.blitz||0); if(rec) S.blitz=r.right;
-    addXP(r.earned); markDay(); persist();
-    app.innerHTML=`<section class="sheet result"><div style="font-size:60px">⚡</div>
-      <h2>Blits yakunlandi!</h2>
-      <div class="stats"><span class="pill">✅ ${r.right} to'g'ri</span><span class="pill">⚡ +${r.earned} XP</span>
-      <span class="pill">🏅 rekord: ${S.blitz}</span></div>
-      ${rec?`<p class="story">Yangi rekord! 🎉</p>`:`<p class="small">Rekordni yangilash uchun ${S.blitz-r.right+1} ta ko'proq javob kerak.</p>`}</section>`;
-    if(rec) coins();
-    setDock(`<div class="two"><button class="btn" id="a">Yana blits</button><button class="btn ghost" id="b">Asosiy</button></div>`);
-    document.getElementById("a").onclick=()=>startBlitz(STAGES.map((x,i)=>i).filter(unlocked));
-    document.getElementById("b").onclick=home; window.scrollTo(0,0); return;
-  }
-  const posBefore=place();
-  if(passed){
-    const stars=r.mistakes===0?3:(r.mistakes===1?2:1);
-    let bonus=r.mode==="stage"?stars*30:70;
-    addXP(r.earned+bonus);
-    if(r.mode==="stage"){
-      const prev=S.stars[r.si]||0; S.stars[r.si]=Math.max(prev,stars);
-      award("first"); if(stars===3)award("perfect");
-      if(Object.keys(S.stars).length>=4)award("half");
-      if(Object.keys(S.stars).length>=STAGES.length)award("all");
-      if(S.failed[r.si])award("comeback");
-    } else { S.dailyRuns=(S.dailyRuns||0)+1; if(S.dailyRuns>=5)award("daily5"); }
-    const dayBonus=markDay();
-    persist(); sync();
-    if(place()===1)award("lead");
-    const posAfter=place(), moved=posBefore-posAfter;
-    const b=board(), me=b[posAfter-1], above=posAfter>1?b[posAfter-2]:null;
-    app.innerHTML=`<section class="sheet result">
-      <div class="big-stars">${r.mode==="stage"?starStr(stars):"🎯"}</div>
-      <h2>${r.mode==="daily"?"Kunlik mashq bajarildi!":(r.si===STAGES.length-1?"Tekshiruvdan o'tdingiz!":"Bosqich yakunlandi!")}</h2>
-      <div class="stats"><span class="pill">⚡ +${r.earned+bonus+dayBonus} XP</span>
-        <span class="pill">❌ ${r.mistakes} xato</span><span class="pill">🔥 ${S.streak} kun</span></div>
-      ${dayBonus?`<p class="small">Kunlik seriya bonusi: +${dayBonus} XP</p>`:""}
-      <div class="card" style="margin:14px 0 0"><h3>Reyting</h3><div class="lb">
-        ${b.map((x,k)=>`<div class="row ${x.me?"me":""}"><span class="pos">${["🥇","🥈","🥉","4"][k]}</span>
-        <span class="who">${x.emoji} ${x.name}</span><span class="xp">${x.xp} XP</span></div>`).join("")}</div>
-        <div class="gap ${moved>0?"up":(above?"down":"up")}">${moved>0?`${moved} pog'ona ko'tarildingiz! 🎉`:(above?`${above.name}gacha ${above.xp-me.xp} XP qoldi.`:"Siz yetakchisiz — ushlab turing!")}</div></div>
-    </section>`;
-    coins();
-    const nx=r.mode==="stage"&&r.si+1<STAGES.length&&unlocked(r.si+1);
-    setDock(`<div class="two"><button class="btn" id="a">${nx?"Keyingi bosqich":"Xaritaga"}</button><button class="btn ghost" id="b">Xaritaga</button></div>`);
-    document.getElementById("a").onclick=()=>nx?intro(r.si+1):home();
-    document.getElementById("b").onclick=home;
-  } else {
-    if(r.mode==="stage"){S.failed[r.si]=true; persist();}
-    const b=board();
-    app.innerHTML=`<section class="sheet result"><div class="big-stars">🤍🤍🤍</div>
-      <h2>Jonlar tugadi</h2><p>Har bir bosh buxgalter ham shu yerdan o'tgan. Nazariyani ko'rib, qayta urinib ko'ring.</p>
-      <div class="stats"><span class="pill">✅ ${r.marks.filter(m=>m==="ok").length} to'g'ri</span><span class="pill">❌ ${r.mistakes} xato</span></div>
-      <p class="small">${b[0].me?"Siz hali yetakchisiz.":b[0].name+" hozir 1-o'rinda ("+b[0].xp+" XP)."}</p></section>`;
-    setDock(`<div class="two"><button class="btn" id="a">Qayta boshlash</button><button class="btn ghost" id="b">Xaritaga</button></div>`);
-    document.getElementById("a").onclick=()=>r.mode==="stage"?intro(r.si):home();
-    document.getElementById("b").onclick=home;
-  }
-  window.scrollTo(0,0);
-}
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+{n:20,t:"Asosiy vositani sotish va hisobdan chiqarish",
+th:`<p>Asosiy vositani chiqarishda uchta narsani yopish kerak: <b>boshlang'ich qiymat</b>, <b>yig'ilgan eskirish</b> va <b>natija</b>.</p>
+<p>Misol: 60 mln uskuna, eskirishi 45 mln (qoldiq qiymat 15 mln), 20 mln + QQS 2.4 mln ga sotildi.</p>
+<p><span class="pv">Dt 4010 — Kt 9210</span> 22 400 000 — sotuvdan tushum<br>
+<span class="pv">Dt 9210 — Kt 6410</span> 2 400 000 — QQS<br>
+<span class="pv">Dt 0230 — Kt 0130</span> 45 000 000 — eskirish hisobdan chiqarildi<br>
+<span class="pv">Dt 9210 — Kt 0130</span> 15 000 000 — qoldiq qiymat hisobdan chiqarildi</p>
+<p>Natija: 20 000 000 − 15 000 000 = <b>5 000 000 foyda</b>. Bu 9210 schyotida qoladi va moliyaviy natijaga o'tadi.</p>
+<p>Agar sotuv narxi qoldiq qiymatdan past bo'lsa — zarar. Bu ham normal, faqat hujjat bilan asoslanishi kerak.</p>
+<p>To'liq eskirgan (qoldiq qiymati nol) vosita hisobdan chiqarilsa: <span class="pv">Dt 0230 — Kt 0130</span> — bitta provodka bilan yopiladi.</p>`,
+acc:[["9210","Asosiy vositalar chiqishi"],["0130","Uskunalar"],["0230","Uskunalar eskirishi"]],
+q:[
+{q:"Asosiy vositani sotishda yig'ilgan eskirish qanday yopiladi?",o:["Dt 0230 — Kt 0130","Dt 0130 — Kt 0230","Dt 9210 — Kt 0230","Dt 0230 — Kt 9210"],c:0,w:"Eskirish passiv edi, uni yopish uchun debetga yoziladi va asosiy vosita qiymatini kamaytiradi."},
+{q:"Boshlang'ich 40 mln, eskirish 30 mln. Qoldiq qiymat?",o:["10 000 000","70 000 000","30 000 000","40 000 000"],c:0,w:"40 − 30 = 10 mln."},
+{q:"Qoldiq qiymat hisobdan chiqarilganda?",o:["Dt 9210 — Kt 0130","Dt 0130 — Kt 9210","Dt 9420 — Kt 0130","Dt 0230 — Kt 0130"],c:0,w:"Qoldiq qiymat chiqish xarajati sifatida 9210 debetiga o'tadi."},
+{q:"Qoldiq qiymat 15 mln, sotildi 20 mln (QQSsiz). Natija?",o:["5 mln foyda","5 mln zarar","20 mln foyda","15 mln foyda"],c:0,w:"20 − 15 = 5 mln foyda."},
+{q:"To'liq eskirgan vosita hisobdan chiqarilsa?",o:["Dt 0230 — Kt 0130","Dt 9210 — Kt 0130","Dt 0130 — Kt 0230","Provodka kerak emas"],c:0,w:"Eskirish qiymatga teng bo'lgani uchun bitta provodka bilan schyot yopiladi."},
+{q:"Sotuv narxi qoldiq qiymatdan past bo'lsa?",o:["Zarar bo'ladi, hujjat bilan asoslanadi","Sotib bo'lmaydi","Farq xarajatga yozilmaydi","Qoldiq qiymat o'zgartiriladi"],c:0,w:"Zarar normal hodisa. Muhimi — sotuv hujjatlari to'g'ri rasmiylashtirilgan bo'lsin."}
+]},
 
-/* ---------------- ishga tushirish ---------------- */
-overtake=simulate();
-checkWeek();
-if(S.user.first&&!S.pid) joinServer().then(()=>pullPlayers(true)); else pullPlayers(true);
-if(S.pending) leagueResult(); else home();
-scheduleReminder();
-scheduleLeague();
-if(S.last!==today()&&S.xp>0) setTimeout(()=>toast("Bugungi mashq hali bajarilmagan 🔥"),900);
+{n:21,t:"TAKROR — 3-hafta",
+th:`<p>Uchinchi hafta zaxiralar va asosiy vositalar haqida edi:</p>
+<p>• 2910 — tovar, tannarxda kirim qilinadi (transport ham qo'shiladi)<br>
+• Sotuvda uchta provodka: daromad, QQS, tannarx<br>
+• Qoldiq formulasi: boshlang'ich + kirim − chiqim<br>
+• 0820 → 0100 — asosiy vosita ikki bosqichda kirim qilinadi<br>
+• Amortizatsiya: Dt xarajat — Kt 0200<br>
+• Chiqishda: eskirish + qoldiq qiymat + natija</p>
+<p>Bu haftaning eng muhim ko'nikmasi — tannarxni unutmaslik. Sotuv bor joyda tannarx ham bo'lishi shart.</p>`,
+acc:[],
+q:[
+{q:"Tovar sotildi. Nechta provodka kerak (QQS bilan)?",o:["Uchta: daromad, QQS, tannarx","Bitta","Ikkita","To'rtta"],c:0,w:"Daromad, undan QQS ajratish, va tannarxni hisobdan chiqarish."},
+{q:"Uskuna sotib olindi va o'rnatildi. Yakuniy provodka?",o:["Dt 0130 — Kt 0820","Dt 0820 — Kt 6010","Dt 0130 — Kt 6010","Dt 0820 — Kt 0130"],c:0,w:"Yig'ilgan qiymat kapital qo'yilmadan asosiy vositaga o'tkaziladi."},
+{q:"Ofis printeriga amortizatsiya hisoblandi.",o:["Dt 9420 — Kt 0260","Dt 2010 — Kt 0260","Dt 0260 — Kt 9420","Dt 9410 — Kt 0160"],c:0,w:"Ma'muriy maqsad → 9420 debetga, eskirish → 0260 kreditga."},
+{q:"Boshlang'ich qoldiq 500, kirim 1200, chiqim 900. Oxirgi?",o:["800","2600","300","1700"],c:0,w:"500 + 1200 − 900 = 800."},
+{q:"Tovarni keltirish transporti qayerga?",o:["2910 — tannarxga","9410 — sotish xarajatiga","9420 — ma'muriy","9430 — boshqa xarajat"],c:0,w:"Kirim transporti tovar tannarxining qismi."},
+{q:"Inventarizatsiyada ortiqcha topildi.",o:["Dt 2910 — Kt 9390","Dt 5910 — Kt 2910","Dt 2910 — Kt 6010","Dt 9390 — Kt 2910"],c:0,w:"Ortiqcha kirim qilinadi va boshqa daromadga yoziladi."},
+{q:"Sotilgan asosiy vositaning eskirishi qanday yopiladi?",o:["Dt 0230 — Kt 0130","Dt 0130 — Kt 0230","Dt 9210 — Kt 0130","Dt 0230 — Kt 9210"],c:0,w:"Eskirish debetga yoziladi va asosiy vosita qiymatidan chegiriladi."},
+{q:"90 mln uskuna, 5 yil. Oylik amortizatsiya?",o:["1 500 000","18 000 000","900 000","450 000"],c:0,w:"90 ÷ 5 = 18 mln yillik. 18 ÷ 12 = 1.5 mln oylik."}
+]},
+
+{n:22,t:"Ish haqi hisoblash (6710)",
+th:`<p><b>6710 — Mehnatga haq to'lash bo'yicha xodimlar bilan hisob-kitob</b>, passiv.</p>
+<p>Hisoblash — <b>yalpi (brutto) summa</b> bo'yicha, ya'ni ushlanmalardan oldingi summa. Provodka xodim qaysi bo'limda ishlashiga qarab:</p>
+<p><span class="pv">Dt 2010 — Kt 6710</span> ishlab chiqarish ishchisi<br>
+<span class="pv">Dt 9420 — Kt 6710</span> ma'muriyat, buxgalteriya, direktor<br>
+<span class="pv">Dt 9410 — Kt 6710</span> sotuvchi, marketolog</p>
+<p>Nega bo'lish muhim? Chunki ishlab chiqarish ishchisining ish haqi mahsulot tannarxiga kiradi, direktorniki esa — yo'q.</p>
+<p>Ish haqi bilan bir vaqtda uchta narsa yuz beradi:<br>
+1. Xodimga qarz paydo bo'ladi (6710 kredit)<br>
+2. Undan JShDS ushlanadi (kamayadi)<br>
+3. Korxona ustiga ijtimoiy soliq qo'shiladi (qo'shimcha xarajat)</p>
+<p>3-punkt muhim: ijtimoiy soliq xodimdan ushlanmaydi, u <b>korxonaning qo'shimcha xarajati</b>.</p>`,
+acc:[["6710","Ish haqi"],["9420","Ma'muriy xarajatlar"],["2010","Ishlab chiqarish"]],
+q:[
+{q:"Buxgalterga ish haqi hisoblandi.",o:["Dt 9420 — Kt 6710","Dt 2010 — Kt 6710","Dt 6710 — Kt 9420","Dt 9410 — Kt 6710"],c:0,w:"Buxgalteriya — ma'muriy bo'lim, xarajat 9420 ga."},
+{q:"Ishlab chiqarish ishchisiga ish haqi.",o:["Dt 2010 — Kt 6710","Dt 9420 — Kt 6710","Dt 9410 — Kt 6710","Dt 6710 — Kt 2010"],c:0,w:"Ishchi haqi mahsulot tannarxiga kiradi → 2010."},
+{q:"Ish haqi qaysi summada hisoblanadi?",o:["Yalpi (ushlanmalardan oldin)","Qo'lga tegadigan summada","JShDSsiz","Ijtimoiy soliq bilan"],c:0,w:"Avval to'liq summa hisoblanadi, keyin undan ushlanmalar chiqariladi."},
+{q:"6710 kredit qoldig'i nimani bildiradi?",o:["Xodimlarga to'lanmagan ish haqi","Xodimlar qarzdor","Ish haqi ortiqcha to'langan","Xarajat"],c:0,w:"Passiv schyotning kredit qoldig'i — to'lanmagan majburiyat."},
+{q:"Ijtimoiy soliq kimdan olinadi?",o:["Korxonadan — qo'shimcha xarajat","Xodim ish haqidan ushlanadi","Ikkalasidan teng","Byudjetdan"],c:0,w:"JShDS xodimdan ushlanadi, ijtimoiy soliq esa ish beruvchi zimmasida."},
+{q:"Sotuvchining ish haqi qaysi schyotga?",o:["9410 — sotish xarajatlari","9420 — ma'muriy","2010 — ishlab chiqarish","9430 — boshqa"],c:0,w:"Sotuv bilan bog'liq xodimlar — 9410."}
+]},
+
+{n:23,t:"JShDS va ish haqidan ushlanmalar",
+th:`<p><b>JShDS</b> — jismoniy shaxslardan olinadigan daromad solig'i. Uni <b>xodim</b> to'laydi, korxona esa faqat ushlab qolib byudjetga o'tkazadi (soliq agenti sifatida).</p>
+<p><span class="pv">Dt 6710 — Kt 6410</span> JShDS ushlandi</p>
+<p>Diqqat: bu provodka <b>xarajat emas</b>. Xodimga qarz kamayadi, byudjetga qarz paydo bo'ladi. Korxonaning umumiy xarajati o'zgarmaydi.</p>
+<p>Boshqa ushlanmalar ham shu tarzda 6710 debetiga yoziladi:<br>
+<span class="pv">Dt 6710 — Kt 6410</span> INPS badali<br>
+<span class="pv">Dt 6710 — Kt 6970</span> aliment<br>
+<span class="pv">Dt 6710 — Kt 4220</span> yopilmagan podotchet ushlandi</p>
+<p><b>Hisoblash misoli</b> (JShDS 12%):<br>
+Hisoblangan: 5 000 000<br>
+JShDS: 5 000 000 × 12% = 600 000<br>
+Qo'lga tegadi: 4 400 000</p>
+<p>Nazorat: 6710 dagi kredit oborot — hisoblangan yalpi summa; debet oborot — ushlanmalar + to'langan pul.</p>`,
+acc:[["6710","Ish haqi"],["6410","Byudjetga qarz (JShDS)"]],
+q:[
+{q:"Ish haqidan JShDS ushlandi.",o:["Dt 6710 — Kt 6410","Dt 6410 — Kt 6710","Dt 9420 — Kt 6410","Dt 6710 — Kt 5110"],c:0,w:"Xodimga qarz kamaydi (debet), byudjetga qarz paydo bo'ldi (kredit)."},
+{q:"JShDS ni kim to'laydi?",o:["Xodim, korxona ushlab qoladi","Korxona","Byudjet","Bank"],c:0,w:"Korxona bu yerda soliq agenti — faqat ushlab, o'tkazib beradi."},
+{q:"JShDS ushlanishi korxona xarajatini oshiradimi?",o:["Yo'q, xarajat o'zgarmaydi","Ha, oshiradi","Kamaytiradi","Foydaga bog'liq"],
+c:0,w:"Xarajat allaqachon yalpi ish haqi hisoblanganda yozilgan. Ushlanma faqat qarzni qayta taqsimlaydi."},
+{q:"Hisoblangan 8 mln, JShDS 12%. Qo'lga tegadigan summa?",o:["7 040 000","8 960 000","960 000","6 400 000"],c:0,w:"8 000 000 × 12% = 960 000. 8 000 000 − 960 000 = 7 040 000."},
+{q:"Yopilmagan podotchet ish haqidan ushlandi.",o:["Dt 6710 — Kt 4220","Dt 4220 — Kt 6710","Dt 6710 — Kt 5010","Dt 9420 — Kt 4220"],c:0,w:"Xodimga qarz kamayadi, uning podotchet qarzi yopiladi."},
+{q:"JShDS byudjetga o'tkazildi.",o:["Dt 6410 — Kt 5110","Dt 6710 — Kt 5110","Dt 5110 — Kt 6410","Dt 9420 — Kt 5110"],c:0,w:"Byudjetga qarz yopildi (6410 debet), bankdan pul chiqdi."}
+]},
+
+{n:24,t:"Ijtimoiy soliq",
+th:`<p>Ijtimoiy soliq — ish beruvchining <b>qo'shimcha</b> majburiyati. Xodimning ish haqidan ushlanmaydi, ustiga qo'shiladi.</p>
+<p>Baza — hisoblangan yalpi ish haqi fondi. Stavka faoliyat turiga va korxona toifasiga qarab farq qiladi.</p>
+<p>Provodka — ish haqi qaysi schyotga yozilgan bo'lsa, o'sha yerga:<br>
+<span class="pv">Dt 9420 — Kt 6410</span> ma'muriy xodimlar bo'yicha<br>
+<span class="pv">Dt 2010 — Kt 6410</span> ishlab chiqarish ishchilari bo'yicha<br>
+<span class="pv">Dt 9410 — Kt 6410</span> sotuv xodimlari bo'yicha</p>
+<p>To'lash: <span class="pv">Dt 6410 — Kt 5110</span></p>
+<p><b>Farqni yaxshi tushunib oling:</b><br>
+JShDS: <span class="pv">Dt 6710 — Kt 6410</span> — xodimning pulidan, xarajat emas<br>
+Ijtimoiy soliq: <span class="pv">Dt 9420 — Kt 6410</span> — korxonaning pulidan, xarajat</p>
+<p>Shuning uchun bir xodimning korxonaga haqiqiy narxi ish haqidan yuqori bo'ladi.</p>`,
+acc:[["6410","Byudjetga qarz"],["9420","Ma'muriy xarajatlar"]],
+q:[
+{q:"Ma'muriy xodimlar bo'yicha ijtimoiy soliq hisoblandi.",o:["Dt 9420 — Kt 6410","Dt 6710 — Kt 6410","Dt 6410 — Kt 9420","Dt 9420 — Kt 6710"],c:0,w:"Bu korxona xarajati → 9420 debetga, byudjetga qarz → 6410 kreditga."},
+{q:"JShDS va ijtimoiy soliq provodkalari farqi nimada?",o:["JShDS: Dt 6710, ijtimoiy: Dt xarajat schyoti","Ikkalasi bir xil","JShDS xarajat, ijtimoiy emas","Farqi yo'q"],c:0,w:"JShDS xodimdan ushlanadi (6710 debet), ijtimoiy soliq korxona xarajati."},
+{q:"Ijtimoiy soliq bazasi nima?",o:["Hisoblangan yalpi ish haqi fondi","Qo'lga tegadigan summa","Foyda","Sotuv hajmi"],c:0,w:"Baza — ushlanmalardan oldingi to'liq ish haqi."},
+{q:"Ijtimoiy soliq korxona xarajatini oshiradimi?",o:["Ha, qo'shimcha xarajat","Yo'q","Faqat ishlab chiqarishda","Foydaga bog'liq"],c:0,w:"Xodimga to'lanadigan summadan tashqari, korxona qo'shimcha to'laydi."},
+{q:"Ishlab chiqarish ishchilari bo'yicha ijtimoiy soliq.",o:["Dt 2010 — Kt 6410","Dt 9420 — Kt 6410","Dt 6710 — Kt 6410","Dt 2010 — Kt 6710"],c:0,w:"Ish haqi 2010 ga yozilgan bo'lsa, ijtimoiy soliq ham o'sha yerga."},
+{q:"Ijtimoiy soliq byudjetga to'landi.",o:["Dt 6410 — Kt 5110","Dt 5110 — Kt 6410","Dt 9420 — Kt 5110","Dt 6710 — Kt 5110"],c:0,w:"Byudjet qarzi yopiladi, bankdan pul chiqadi."}
+]},
+
+{n:25,t:"Ish haqini to'lash — to'liq sikl",
+th:`<p>Endi hammasini birlashtiramiz. Ma'muriy xodimga 6 000 000 hisoblandi, JShDS 12%, ijtimoiy soliq shartli 12%.</p>
+<p><b>1. Hisoblash</b><br>
+<span class="pv">Dt 9420 — Kt 6710</span> 6 000 000</p>
+<p><b>2. JShDS ushlash</b><br>
+<span class="pv">Dt 6710 — Kt 6410</span> 720 000</p>
+<p><b>3. Ijtimoiy soliq</b><br>
+<span class="pv">Dt 9420 — Kt 6410</span> 720 000</p>
+<p><b>4. To'lash</b><br>
+<span class="pv">Dt 6710 — Kt 5110</span> 5 280 000</p>
+<p><b>5. Soliqlarni o'tkazish</b><br>
+<span class="pv">Dt 6410 — Kt 5110</span> 1 440 000</p>
+<p>Yakuniy hisob:<br>
+Xodim qo'lga oladi: <b>5 280 000</b><br>
+Korxona jami sarflaydi: 6 000 000 + 720 000 = <b>6 720 000</b><br>
+Byudjetga tushadi: <b>1 440 000</b></p>
+<p>6710 schyoti to'liq yopiladi: kredit 6 000 000, debet 720 000 + 5 280 000 = 6 000 000. Qoldiq nol.</p>`,
+acc:[["6710","Ish haqi"],["6410","Byudjetga qarz"],["9420","Ma'muriy xarajatlar"]],
+q:[
+{q:"Hisoblangan 6 mln, JShDS 720 ming. Xodimga qancha to'lanadi?",o:["5 280 000","6 000 000","6 720 000","4 560 000"],c:0,w:"6 000 000 − 720 000 = 5 280 000."},
+{q:"Ish haqi bankka o'tkazildi.",o:["Dt 6710 — Kt 5110","Dt 5110 — Kt 6710","Dt 9420 — Kt 5110","Dt 6410 — Kt 5110"],c:0,w:"Xodimga qarz yopildi (6710 debet), bankdan pul chiqdi."},
+{q:"Ish haqi 6 mln, ijtimoiy soliq 720 ming. Korxonaning jami xarajati?",o:["6 720 000","6 000 000","5 280 000","1 440 000"],c:0,w:"Ish haqi + ijtimoiy soliq. JShDS qo'shilmaydi — u ish haqi ichida."},
+{q:"To'liq sikldan keyin 6710 qoldig'i qanday bo'lishi kerak?",o:["Nol","Kredit qoldiq","Debet qoldiq","Ahamiyati yo'q"],c:0,w:"Hammasi to'langan bo'lsa, kredit va debet oborotlari tenglashadi."},
+{q:"Qaysi provodka korxona xarajatini oshirmaydi?",o:["Dt 6710 — Kt 6410 (JShDS)","Dt 9420 — Kt 6710","Dt 9420 — Kt 6410 (ijtimoiy)","Dt 2010 — Kt 6710"],c:0,w:"JShDS ushlanishi faqat qarzni qayta taqsimlaydi, yangi xarajat yaratmaydi."},
+{q:"Byudjetga JShDS va ijtimoiy soliq o'tkazildi.",o:["Dt 6410 — Kt 5110","Dt 5110 — Kt 6410","Dt 6710 — Kt 5110","Dt 9420 — Kt 6410"],c:0,w:"Ikkalasi ham 6410 da to'plangan, to'lovda debetga yoziladi."}
+]},
+
+{n:26,t:"Daromadlar (9000 guruhi)",
+th:`<p>9000 guruhi — <b>daromad</b> schyotlari, passiv xarakterda. Daromad kreditga yig'iladi, yil oxirida yopiladi.</p>
+<p><b>9010</b> — tayyor mahsulot sotishdan<br>
+<b>9020</b> — tovarlar sotishdan<br>
+<b>9030</b> — ishlar va xizmatlar ko'rsatishdan<br>
+<b>9210</b> — asosiy vositalar chiqishidan<br>
+<b>9390</b> — boshqa operatsion daromadlar (jarima, ortiqcha tovar, kurs farqi)</p>
+<p><span class="pv">Dt 4010 — Kt 9030</span> xizmat ko'rsatildi<br>
+<span class="pv">Dt 9030 — Kt 6410</span> QQS ajratildi</p>
+<p><b>Sof daromad</b> = Jami sotuv − QQS − qaytarilgan tovar − chegirmalar</p>
+<p>Aynan sof daromad hisobotda ko'rsatiladi va foyda hisobiga kiradi.</p>
+<p>Tovar qaytarilsa (storno): <span class="pv">Dt 9020 — Kt 4010</span> — daromad kamayadi. Bir vaqtda tannarx ham qaytariladi: <span class="pv">Dt 2910 — Kt 9120</span>.</p>`,
+acc:[["9020","Tovar sotishdan daromad"],["9030","Xizmatlardan daromad"],["9390","Boshqa daromadlar"]],
+q:[
+{q:"Xizmat ko'rsatildi, akt imzolandi.",o:["Dt 4010 — Kt 9030","Dt 9030 — Kt 4010","Dt 5110 — Kt 9030","Dt 4010 — Kt 9020"],c:0,w:"Xizmatlar — 9030. Xaridor qarzdor bo'ldi."},
+{q:"Sof daromad qanday hisoblanadi?",o:["Jami sotuv − QQS − qaytarish − chegirma","Jami sotuv","Sotuv − tannarx","Sotuv + QQS"],c:0,w:"QQS daromad emas — u byudjetniki. Qaytarilgan tovar ham chegiriladi."},
+{q:"Xaridor tovarni qaytardi.",o:["Dt 9020 — Kt 4010","Dt 4010 — Kt 9020","Dt 2910 — Kt 4010","Dt 9120 — Kt 2910"],c:0,w:"Daromad kamayadi (9020 debet), xaridorning qarzi ham kamayadi."},
+{q:"Tovar qaytarilganda tannarx bilan nima qilinadi?",o:["Omborga qaytariladi: Dt 2910 — Kt 9120","Hech narsa","Xarajatda qoladi","Zararga yoziladi"],c:0,w:"Tovar jismonan qaytdi — hisobda ham qaytishi kerak."},
+{q:"Kontragentdan olingan jarima qaysi schyotga?",o:["9390 — boshqa daromad","9020 — tovar sotishdan","9030 — xizmatdan","8710 — foyda"],c:0,w:"Asosiy faoliyatga aloqasi yo'q daromadlar 9390 da."},
+{q:"9000 guruhidagi daromad schyotlari qaysi tomonga yig'iladi?",o:["Kreditga","Debetga","Ikkalasiga","Yig'ilmaydi"],c:0,w:"Daromad passiv xarakterda — kreditda o'sadi."}
+]},
+
+{n:27,t:"Xarajatlar (9400 guruhi)",
+th:`<p>Xarajat schyotlari — <b>9410</b>, <b>9420</b>, <b>9430</b>. Ular debetga yig'iladi.</p>
+<p><b>9410 — Sotish xarajatlari:</b> sotuvchilar ish haqi, reklama, qadoqlash, xaridorga yetkazish transporti, savdo do'koni ijarasi.</p>
+<p><b>9420 — Ma'muriy xarajatlar:</b> direktor va buxgalteriya ish haqi, ofis ijarasi, aloqa, audit, kantselyariya, ofis jihozlari amortizatsiyasi.</p>
+<p><b>9430 — Boshqa operatsion xarajatlar:</b> bank xizmati, jarima va penya, kurs farqi, umidsiz qarzlar.</p>
+<p><b>Chegara aniq bo'lishi kerak.</b> Tovarni <i>keltirish</i> transporti — tannarxga (2910). Tovarni <i>xaridorga yetkazish</i> transporti — sotish xarajatiga (9410). Bir xil transport, ikki xil schyot.</p>
+<p>Nega bu muhim? Tannarxga qo'shilgan xarajat tovar sotilgunicha kutadi. Sotish xarajati esa darhol joriy davr foydasini kamaytiradi.</p>
+<p><span class="pv">Dt 9420 — Kt 6010</span> ofis ijarasi hisoblandi<br>
+<span class="pv">Dt 9410 — Kt 6710</span> sotuvchi ish haqi<br>
+<span class="pv">Dt 9430 — Kt 5110</span> bank komissiyasi</p>`,
+acc:[["9410","Sotish xarajatlari"],["9420","Ma'muriy xarajatlar"],["9430","Boshqa operatsion xarajatlar"]],
+q:[
+{q:"Ofis ijarasi hisoblandi.",o:["Dt 9420 — Kt 6010","Dt 9410 — Kt 6010","Dt 9430 — Kt 6010","Dt 2010 — Kt 6010"],c:0,w:"Ofis — ma'muriy maqsad, 9420."},
+{q:"Tovarni xaridorga yetkazish transporti.",o:["Dt 9410 — Kt 6010","Dt 2910 — Kt 6010","Dt 9420 — Kt 6010","Dt 9120 — Kt 6010"],c:0,w:"Sotuv bilan bog'liq → 9410. Keltirish transporti esa tannarxga."},
+{q:"Reklama xarajati qaysi schyotga?",o:["9410","9420","9430","2010"],c:0,w:"Reklama sotuvni oshirishga qaratilgan → sotish xarajati."},
+{q:"Bank komissiyasi.",o:["Dt 9430 — Kt 5110","Dt 9420 — Kt 5110","Dt 9410 — Kt 5110","Dt 6410 — Kt 5110"],c:0,w:"Bank xizmati — boshqa operatsion xarajat."},
+{q:"Nega tannarx va sotish xarajatini ajratish muhim?",o:["Tannarx tovar sotilgunicha kutadi, xarajat darhol ta'sir qiladi","Farqi yo'q","Soliq talab qiladi","Bank so'raydi"],c:0,w:"Noto'g'ri ajratilsa, davr foydasi ham, ombor qiymati ham xato chiqadi."},
+{q:"Audit xizmati haqi.",o:["Dt 9420 — Kt 6010","Dt 9410 — Kt 6010","Dt 9430 — Kt 6010","Dt 2010 — Kt 6010"],c:0,w:"Boshqaruv bilan bog'liq professional xizmat — ma'muriy xarajat."}
+]},
+
+{n:28,t:"TAKROR — 4-hafta",
+th:`<p>To'rtinchi hafta ish haqi, soliqlar va xarajatlar:</p>
+<p>• 6710 — ish haqi yalpi summada hisoblanadi, bo'limga qarab har xil schyotdan<br>
+• JShDS: Dt 6710 — Kt 6410 (xodimdan, xarajat emas)<br>
+• Ijtimoiy soliq: Dt xarajat — Kt 6410 (korxonadan, xarajat)<br>
+• 9010–9390 — daromadlar (kredit)<br>
+• 9410 / 9420 / 9430 — xarajatlar (debet)</p>
+<p>Ertaga oxirgi mavzu — hamma narsa qanday qilib foydaga aylanishi.</p>`,
+acc:[],
+q:[
+{q:"Direktorga ish haqi hisoblandi.",o:["Dt 9420 — Kt 6710","Dt 2010 — Kt 6710","Dt 9410 — Kt 6710","Dt 6710 — Kt 9420"],c:0,w:"Boshqaruv — ma'muriy xarajat."},
+{q:"JShDS ushlandi.",o:["Dt 6710 — Kt 6410","Dt 9420 — Kt 6410","Dt 6410 — Kt 6710","Dt 6710 — Kt 5110"],c:0,w:"Xodimga qarz kamayadi, byudjetga qarz paydo bo'ladi."},
+{q:"Ijtimoiy soliq hisoblandi (ofis xodimlari).",o:["Dt 9420 — Kt 6410","Dt 6710 — Kt 6410","Dt 6410 — Kt 9420","Dt 9410 — Kt 6710"],c:0,w:"Korxona xarajati, ish haqi qayerga yozilgan bo'lsa o'sha yerga."},
+{q:"Reklama uchun to'landi.",o:["Dt 9410 — Kt 5110","Dt 9420 — Kt 5110","Dt 9430 — Kt 5110","Dt 2910 — Kt 5110"],c:0,w:"Sotish xarajati — 9410."},
+{q:"Xizmat ko'rsatildi, akt imzolandi.",o:["Dt 4010 — Kt 9030","Dt 4010 — Kt 9020","Dt 5110 — Kt 9030","Dt 9030 — Kt 4010"],c:0,w:"Xizmatdan daromad — 9030."},
+{q:"Hisoblangan 10 mln, JShDS 12%. Qo'lga?",o:["8 800 000","10 000 000","11 200 000","1 200 000"],c:0,w:"10 000 000 × 12% = 1 200 000. 10 000 000 − 1 200 000 = 8 800 000."},
+{q:"Kontragentdan jarima olindi.",o:["Dt 4010 — Kt 9390","Dt 4010 — Kt 9020","Dt 9430 — Kt 4010","Dt 5110 — Kt 8710"],c:0,w:"Asosiy faoliyatdan tashqari daromad — 9390."},
+{q:"Bank komissiyasi ushlandi.",o:["Dt 9430 — Kt 5110","Dt 9420 — Kt 5110","Dt 6410 — Kt 5110","Dt 5110 — Kt 9430"],c:0,w:"Boshqa operatsion xarajat — 9430."}
+]},
+
+{n:29,t:"Moliyaviy natija va foyda solig'i (9910)",
+th:`<p>Davr oxirida barcha 9000 schyotlari <b>9910 — Yakuniy moliyaviy natija</b> ga yopiladi.</p>
+<p><b>1. Daromadlarni yopish</b> (ular kreditda edi, debetga yozib yopamiz):<br>
+<span class="pv">Dt 9020 — Kt 9910</span><br>
+<span class="pv">Dt 9030 — Kt 9910</span></p>
+<p><b>2. Xarajatlarni yopish</b> (ular debetda edi, kreditga yozib yopamiz):<br>
+<span class="pv">Dt 9910 — Kt 9120</span><br>
+<span class="pv">Dt 9910 — Kt 9410</span><br>
+<span class="pv">Dt 9910 — Kt 9420</span></p>
+<p><b>3. Foyda solig'i:</b><br>
+<span class="pv">Dt 9810 — Kt 6410</span> hisoblandi<br>
+<span class="pv">Dt 9910 — Kt 9810</span> natijaga yopildi</p>
+<p><b>4. Sof foyda kapitalga:</b><br>
+<span class="pv">Dt 9910 — Kt 8710</span> — foyda bo'lsa<br>
+<span class="pv">Dt 8710 — Kt 9910</span> — zarar bo'lsa</p>
+<p>9910 dagi <b>kredit qoldiq</b> = foyda, <b>debet qoldiq</b> = zarar. Yopilgandan keyin 9910 va barcha 9000 schyotlari nolga tushadi.</p>
+<p><b>Dividend</b> — foyda taqsimlanganda:<br>
+<span class="pv">Dt 8710 — Kt 6610</span> e'lon qilindi<br>
+<span class="pv">Dt 6610 — Kt 6410</span> soliq ushlandi<br>
+<span class="pv">Dt 6610 — Kt 5110</span> to'landi</p>`,
+acc:[["9910","Yakuniy moliyaviy natija"],["8710","Taqsimlanmagan foyda"],["6610","Dividendlar"]],
+q:[
+{q:"Tovar sotishdan daromad yakuniy natijaga yopildi.",o:["Dt 9020 — Kt 9910","Dt 9910 — Kt 9020","Dt 9020 — Kt 8710","Dt 9910 — Kt 8710"],c:0,w:"Daromad kreditda yig'ilgan edi — yopish uchun debetga yoziladi."},
+{q:"Ma'muriy xarajatlar yopildi.",o:["Dt 9910 — Kt 9420","Dt 9420 — Kt 9910","Dt 8710 — Kt 9420","Dt 9910 — Kt 8710"],c:0,w:"Xarajat debetda yig'ilgan — yopish uchun kreditga."},
+{q:"9910 da kredit qoldiq. Bu nima?",o:["Foyda","Zarar","Xato","Daromad"],c:0,w:"Daromad xarajatdan ko'p bo'lsa, kredit qoldiq — ya'ni foyda."},
+{q:"Sof foyda kapitalga o'tkazildi.",o:["Dt 9910 — Kt 8710","Dt 8710 — Kt 9910","Dt 9910 — Kt 6610","Dt 8710 — Kt 6610"],c:0,w:"Foyda taqsimlanmagan foyda schyotiga o'tadi."},
+{q:"Dividend e'lon qilindi.",o:["Dt 8710 — Kt 6610","Dt 6610 — Kt 8710","Dt 9910 — Kt 6610","Dt 6610 — Kt 5110"],c:0,w:"Taqsimlanmagan foyda kamayadi, ta'sischilarga qarz paydo bo'ladi."},
+{q:"Foyda solig'i hisoblandi.",o:["Dt 9810 — Kt 6410","Dt 6410 — Kt 9810","Dt 9910 — Kt 6410","Dt 8710 — Kt 6410"],c:0,w:"9810 — foyda solig'i xarajati, keyin u ham 9910 ga yopiladi."},
+{q:"Yopish provodkalaridan keyin 9000 schyotlari qanday holatda bo'ladi?",o:["Nolga tushadi","Qoldiq saqlanadi","Balansga o'tadi","O'chiriladi"],c:0,w:"9000 guruhi davr schyotlari — har davr oxirida nolga tushadi va yangi davr toza boshlanadi."}
+]},
+
+{n:30,t:"YAKUNIY IMTIHON",
+th:`<p>Mana, 30 kun tugadi. Bu imtihonda kursning barcha mavzulari aralash keladi — xuddi haqiqiy ishdagidek, qaysi mavzu ekani oldindan aytilmaydi.</p>
+<p>Har bir savolda avval o'zingizga uchta savol bering:<br>
+<b>1.</b> Qaysi schyotlar ishtirok etadi?<br>
+<b>2.</b> Har biri aktivmi, passivmi?<br>
+<b>3.</b> Ko'paydimi, kamaydimi?</p>
+<p>Shu uchtasiga javob topsangiz, provodka o'z-o'zidan chiqadi.</p>
+<p>Omad.</p>`,
+acc:[],
+q:[
+{q:"Xaridordan bo'nak tushdi.",o:["Dt 5110 — Kt 6310","Dt 5110 — Kt 9020","Dt 5110 — Kt 4010","Dt 4310 — Kt 5110"],c:0,w:"Bo'nak — majburiyat, daromad emas."},
+{q:"Uskuna foydalanishga topshirildi.",o:["Dt 0130 — Kt 0820","Dt 0820 — Kt 0130","Dt 0130 — Kt 6010","Dt 0820 — Kt 6010"],c:0,w:"Yig'ilgan qiymat kapital qo'yilmadan asosiy vositaga o'tadi."},
+{q:"Sotilgan tovar tannarxi hisobdan chiqarildi.",o:["Dt 9120 — Kt 2910","Dt 2910 — Kt 9120","Dt 9020 — Kt 2910","Dt 9120 — Kt 9020"],c:0,w:"Tannarx xarajatga o'tadi, ombor kamayadi."},
+{q:"Ishlab chiqarish ishchisiga ish haqi.",o:["Dt 2010 — Kt 6710","Dt 9420 — Kt 6710","Dt 6710 — Kt 2010","Dt 9410 — Kt 6710"],c:0,w:"Ishchi haqi mahsulot tannarxiga kiradi."},
+{q:"Kirim QQS oy oxirida hisobga olindi.",o:["Dt 6410 — Kt 4410","Dt 4410 — Kt 6410","Dt 6410 — Kt 5110","Dt 9020 — Kt 6410"],c:0,w:"Chiqim QQS qarzi kamayadi, kirim QQS aktivi yopiladi."},
+{q:"Ofis printeriga amortizatsiya.",o:["Dt 9420 — Kt 0260","Dt 2010 — Kt 0260","Dt 0260 — Kt 9420","Dt 9410 — Kt 0160"],c:0,w:"Ma'muriy xarajat, eskirish to'planadi."},
+{q:"Xodim podotchet qoldig'ini kassaga qaytardi.",o:["Dt 5010 — Kt 4220","Dt 4220 — Kt 5010","Dt 5110 — Kt 4220","Dt 5010 — Kt 6710"],c:0,w:"Kassaga pul kirdi, xodimning qarzi yopildi."},
+{q:"Sof foyda taqsimlanmagan foydaga o'tkazildi.",o:["Dt 9910 — Kt 8710","Dt 8710 — Kt 9910","Dt 9910 — Kt 6610","Dt 8710 — Kt 6610"],c:0,w:"Yakuniy natija kapitalga qo'shiladi."},
+{q:"Inventarizatsiyada tovar kam chiqdi.",o:["Dt 5910 — Kt 2910","Dt 2910 — Kt 5910","Dt 9120 — Kt 2910","Dt 2910 — Kt 9390"],c:0,w:"Kamomad 5910 ga yig'iladi, keyin aybdorga yoki xarajatga."},
+{q:"Boshlang'ich 340, kirim 1 250, chiqim 1 410. Oxirgi qoldiq?",o:["180","3 000","−180","1 590"],c:0,w:"340 + 1 250 − 1 410 = 180."},
+{q:"Tovarni keltirish transporti qayerga?",o:["2910 — tovar tannarxiga","9410 — sotish xarajatiga","9420 — ma'muriy","9430 — boshqa xarajat"],c:0,w:"Kirim transporti tannarx tarkibiga kiradi. Chiqim transporti esa 9410 ga."},
+{q:"60 mln uskuna, 5 yil. Oylik amortizatsiya?",o:["1 000 000","12 000 000","5 000 000","600 000"],c:0,w:"60 ÷ 5 = 12 mln yillik, 12 ÷ 12 = 1 mln oylik."},
+{q:"Ijtimoiy soliq kimning xarajati?",o:["Korxonaning","Xodimning","Byudjetning","Ta'sischining"],c:0,w:"JShDS xodimdan ushlanadi, ijtimoiy soliqni ish beruvchi to'laydi."},
+{q:"9910 da debet qoldiq nimani bildiradi?",o:["Zarar","Foyda","Daromad","Xato"],c:0,w:"Xarajat daromaddan ko'p — debet qoldiq, ya'ni zarar."},
+{q:"Dividend to'lashda soliq ushlandi.",o:["Dt 6610 — Kt 6410","Dt 6410 — Kt 6610","Dt 8710 — Kt 6410","Dt 6610 — Kt 5110"],c:0,w:"Ta'sischiga qarz kamayadi, byudjetga qarz paydo bo'ladi."}
+]}
+];
+
 </script>
-</body>
-</html>
+<script>
+/* ---------- saqlash: artifact storage → localStorage → xotira ---------- */
+var mem={};
+var Store={
+  async get(k){
+    try{ if(window.storage&&window.storage.get){ var r=await window.storage.get(k); return r?r.value:null; } }catch(e){}
+    try{ return localStorage.getItem(k); }catch(e){ return mem[k]||null; }
+  },
+  async set(k,v){
+    try{ if(window.storage&&window.storage.set){ await window.storage.set(k,v); return; } }catch(e){}
+    try{ localStorage.setItem(k,v); }catch(e){ mem[k]=v; }
+  }
+};
+var KEY='provodka30';
+var state={done:[]};
+
+async function load(){
+  var raw=await Store.get(KEY);
+  if(raw){ try{ var p=JSON.parse(raw); if(p&&Array.isArray(p.done)) state=p; }catch(e){} }
+  renderHome();
+}
+async function save(){ await Store.set(KEY,JSON.stringify(state)); }
+
+/* ---------- bosh ekran ---------- */
+function unlocked(n){ return n===1 || state.done.indexOf(n-1)>-1 || state.done.indexOf(n)>-1; }
+
+function renderHome(){
+  document.getElementById('day').className='hide';
+  document.getElementById('home').className='';
+  var g=document.getElementById('grid'); g.innerHTML='';
+  var next=1; while(state.done.indexOf(next)>-1 && next<=30) next++;
+  DAYS.forEach(function(d){
+    var b=document.createElement('button');
+    b.className='d'+(state.done.indexOf(d.n)>-1?' done':'')+(unlocked(d.n)?'':' lock')+(d.n===next?' now':'');
+    b.textContent=d.n;
+    b.setAttribute('aria-label',d.n+'-kun: '+d.t);
+    if(unlocked(d.n)) b.onclick=function(){ openDay(d.n); };
+    else b.disabled=true;
+    g.appendChild(b);
+  });
+  var c=state.done.length;
+  document.getElementById('pd').textContent=c;
+  document.getElementById('pb').style.width=(c/30*100)+'%';
+  window.scrollTo(0,0);
+}
+
+/* ---------- kun ekrani ---------- */
+var cur=null,idx=0,right=0,answered=false;
+
+function openDay(n){
+  cur=DAYS[n-1]; idx=0; right=0; answered=false;
+  document.getElementById('home').className='hide';
+  document.getElementById('day').className='';
+  drawDay();
+}
+
+function accTable(a){
+  if(!a||!a.length) return '';
+  return '<table>'+a.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>';}).join('')+'</table>';
+}
+
+function drawDay(){
+  var m=document.getElementById('day');
+  m.innerHTML=
+    '<button class="back" id="bk">&larr; Kunlar ro\'yxati</button>'+
+    '<p class="daynum">'+cur.n+'-kun</p>'+
+    '<h2>'+cur.t+'</h2>'+
+    '<div class="card">'+cur.th+'</div>'+
+    accTable(cur.acc)+
+    '<div id="qz"></div>';
+  document.getElementById('bk').onclick=renderHome;
+  drawQ();
+  window.scrollTo(0,0);
+}
+
+function tCell(txt){
+  var m=txt.match(/^Dt\s+(\S+)\s+—\s+Kt\s+(\S+)$/);
+  if(!m) return '<div class="plain">'+txt+'</div>';
+  return '<div class="t"><div class="side"><span class="k">DT</span><span class="v">'+m[1]+'</span></div>'+
+         '<div class="side"><span class="k">KT</span><span class="v">'+m[2]+'</span></div></div>';
+}
+
+function drawQ(){
+  var z=document.getElementById('qz');
+  if(idx>=cur.q.length){ drawEnd(); return; }
+  var q=cur.q[idx]; answered=false;
+  z.innerHTML=
+    '<div class="qhead"><span class="lbl">Savol '+(idx+1)+' / '+cur.q.length+'</span>'+
+    '<span class="sc">to\'g\'ri: '+right+'</span></div>'+
+    '<p class="q">'+q.q+'</p>'+
+    '<div class="opts" id="op"></div><div id="wh"></div>';
+  var op=document.getElementById('op');
+  q.o.forEach(function(t,i){
+    var b=document.createElement('button');
+    b.className='o'; b.innerHTML=tCell(t);
+    b.onclick=function(){ pick(i,b); };
+    op.appendChild(b);
+  });
+}
+
+function pick(i,btn){
+  if(answered) return; answered=true;
+  var q=cur.q[idx], ok=(i===q.c);
+  if(ok) right++;
+  var all=document.querySelectorAll('#op .o');
+  all.forEach(function(b,j){
+    b.disabled=true;
+    if(j===q.c){ b.className='o ok'; b.insertAdjacentHTML('afterbegin','<span class="mark">✓</span>'); }
+    else if(j===i){ b.className='o no'; b.insertAdjacentHTML('afterbegin','<span class="mark">✕</span>'); }
+    else b.className='o dim';
+  });
+  document.getElementById('wh').innerHTML=
+    '<div class="why'+(ok?'':' no')+'"><b>'+(ok?'To\'g\'ri':'Xato')+'</b>'+q.w+'</div>'+
+    '<button class="btn" id="nx">'+(idx+1>=cur.q.length?'Kunni yakunlash':'Keyingi savol')+'</button>';
+  document.getElementById('nx').onclick=function(){ idx++; drawQ(); window.scrollTo(0,0); };
+}
+
+async function drawEnd(){
+  var total=cur.q.length, pass=right>=Math.ceil(total*0.7);
+  if(pass && state.done.indexOf(cur.n)<0){ state.done.push(cur.n); await save(); }
+  var z=document.getElementById('qz');
+  z.innerHTML=
+    '<div class="done-box" style="'+(pass?'':'border-color:var(--no);background:var(--no-bg)')+'">'+
+      '<div class="big">'+right+' / '+total+'</div>'+
+      '<div class="cap">'+(pass
+        ? (cur.n<30?'Kun yakunlandi. '+(cur.n+1)+'-kun ochildi.':'Kurs tugadi. Barakalla.')
+        : 'O\'tish uchun kamida '+Math.ceil(total*0.7)+' ta to\'g\'ri javob kerak. Qayta urinib ko\'ring.')+'</div>'+
+    '</div>'+
+    '<button class="btn" id="again">Kunni qaytadan ishlash</button>'+
+    '<button class="btn ghost" id="home2">Kunlar ro\'yxati</button>';
+  document.getElementById('again').onclick=function(){ idx=0; right=0; drawDay(); };
+  document.getElementById('home2').onclick=renderHome;
+  window.scrollTo(0,0);
+}
+
+load();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
+}
+</script>
