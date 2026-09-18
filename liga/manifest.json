@@ -1,0 +1,18 @@
+{
+  "id": "/provodka/liga/",
+  "name": "Buxgalterlar ligasi",
+  "short_name": "Buxgalterlar ligasi",
+  "description": "Buxgalterlar uchun haftalik liga: provodka, QQS, ish haqi va amortizatsiya mashqlari",
+  "start_url": "/provodka/liga/",
+  "scope": "/provodka/liga/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F2FF",
+  "theme_color": "#1A1348",
+  "lang": "uz",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
